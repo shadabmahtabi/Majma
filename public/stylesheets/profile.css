@@ -26,7 +26,7 @@
 
 #editBox .editForm {
     position: relative;
-    height: 80vh;
+    height: 80vmin;
     width: 450px;
     background-color: #fff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -71,7 +71,7 @@
 }
 
 #editBox .editForm form h3 {
-    margin-bottom: 3vh;
+    margin-bottom: 3vmin;
 }
 
 #editBox .editForm form input::-webkit-outer-spin-button,
@@ -90,9 +90,9 @@
 
 
 #editBox .editForm form input {
-    height: 7vh;
+    height: 7vmin;
     width: 100%;
-    border-radius: 1vh;
+    border-radius: 1vmin;
     outline: none;
     border: none;
     border: 3px solid var(--btnColor);
@@ -105,7 +105,7 @@
     color: var(--btnTextColor);
     /* background-image: linear-gradient(90deg, rgb(177, 209, 229), rgb(65, 137, 225)); */
     background-color: var(--btnColor);
-    border-radius: 1vh;
+    border-radius: 1vmin;
     font-size: 1rem;
     border: none;
     outline: none;
@@ -132,7 +132,7 @@
 
 #editProfileBox .editForm {
     position: relative;
-    height: 80vh;
+    height: 80vmin;
     width: 450px;
     background-color: #fff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -192,7 +192,7 @@
 }
 
 #editProfileBox .editForm form h1 {
-    margin-bottom: 1vh;
+    margin-bottom: 1vmin;
 }
 
 #editProfileBox .editForm form input {
@@ -228,7 +228,7 @@
     color: var(--btnTextColor);
     /* background-image: linear-gradient(90deg, rgb(177, 209, 229), rgb(65, 137, 225)); */
     background-color: var(--btnColor);
-    border-radius: 1vh;
+    border-radius: 1vmin;
     font-size: 1rem;
     border: none;
     outline: none;
@@ -255,7 +255,7 @@
 
 #showFollowBox .followMain {
     position: relative;
-    height: 80vh;
+    height: 80vmin;
     width: 450px;
     background-color: #fff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -287,7 +287,7 @@
 }
 
 #showFollowBox .followMain .followNav{
-    height: 8vh;
+    height: 8vmin;
     width: 100%;
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
     /* box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px; */
@@ -429,14 +429,14 @@
 }
 
 .profileContents {
-    height: 100vh;
-    width: 80%;
+    height: 100vmin;
+    width: 80vmax;
     /* background-color: red; */
     color: var(--textColor);
 }
 
 .profileContents .userDetailsSection {
-    height: 50vh;
+    height: 50vmin;
     width: 100%;
     /* background-color: turquoise; */
     background-image: var(--background);
@@ -452,7 +452,7 @@
     background-color: #fff;
     /* background-color: rgb(177, 217, 213); */
     /* background-image: linear-gradient(  90deg,#fbf8f8, #eee8f0, #e3dae8); */
-    border-radius: 1vh;
+    border-radius: 1vmin;
     /* overflow: hidden; */
 }
 
@@ -462,7 +462,7 @@
     height: 30%;
     width: 100%;
     background-image: linear-gradient(30deg, #4b4b4b, #373737, #232323, #000);
-    border-radius: 1vh 1vh 0 0;
+    border-radius: 1vmin 1vmin 0 0;
 }
 
 .userDetails .bg .profilePic {
@@ -471,7 +471,7 @@
     left: 2%;
     height: 250px;
     width: 250px;
-    border-radius: 1vh;
+    border-radius: 1vmin;
     /* background-color: #fff; */
     background-image: var(--background);
     display: flex;
@@ -501,7 +501,7 @@
     width: 74%;
     /* background-color: rgb(141, 141, 141); */
     background-image: var(--background);
-    border-radius: 1vh;
+    border-radius: 1vmin;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -513,12 +513,12 @@
     height: 90%;
     width: 40%;
     /* background-color: rgb(255, 152, 152); */
-    border-radius: 1vh;
+    border-radius: 1vmin;
     display: flex;
     flex-direction: column;
-    padding: 1vh 1vw;
+    padding: 1vmin 1vw;
     overflow: hidden;
-    gap: 1vh;
+    gap: 1vmin;
 }
 
 .userDetails .userDetailsBox .userData h2 {
@@ -555,20 +555,20 @@
 }
 
 .userDetailsBox h3 a:hover {
-    transform: translateY(1vh);
+    transform: translateY(1vmin);
 }
 
 .userDetails .userDetailsBox .followBox {
     height: 90%;
     width: 28%;
     /* background-color: rgb(255, 191, 191); */
-    border-radius: 1vh;
+    border-radius: 1vmin;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: .5vh;
-    padding: 1vh;
+    gap: .5vmin;
+    padding: 1vmin;
 }
 
 .userDetails .userDetailsBox .followBox h3 {
@@ -589,9 +589,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1vh;
+    gap: 1vmin;
     /* border: 1px solid #000; */
-    border-radius: 1vh;
+    border-radius: 1vmin;
     transition: .3s;
     cursor: pointer;
 }
@@ -601,7 +601,7 @@
 } */
 
 .userDetails .userDetailsBox .followBox .parts:hover i {
-    transform: translateY(.5vh);
+    transform: translateY(.5vmin);
 }
 
 .userDetails .userDetailsBox .followBox .parts h3 {
@@ -627,15 +627,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1vh;
-    border-radius: 1vh;
+    gap: 1vmin;
+    border-radius: 1vmin;
 }
 
 .userDetails .userDetailsBox .btns button {
     height: 25%;
     width: 90%;
     background-color: var(--btnColor);
-    border-radius: 1vh;
+    border-radius: 1vmin;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -656,7 +656,7 @@
     text-decoration: none;
     height: 25%;
     width: 90%;
-    border-radius: 1vh;
+    border-radius: 1vmin;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -687,19 +687,19 @@
 }
 
 .profileContents .userPostsSection {
-    height: 50vh;
+    height: 50vmin;
     width: 100%;
     /* background-color: rgb(205, 222, 96); */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2vh;
-    padding-top: 1vh;
+    gap: 2vmin;
+    padding-top: 1vmin;
     overflow: auto;
 }
 
 .profileContents .userPostsSection .postNav {
-    min-height: 6vh;
+    min-height: 6vmin;
     width: 65%;
     /* background-color: rgb(132, 133, 125); */
     border-bottom: .15vw solid #000;
@@ -714,23 +714,23 @@
 }
 
 .profileContents .userPostsSection .postDiv {
-    min-height: 3vh;
+    min-height: 3vmin;
     width: 85.1%;
     /* background-color: bisque; */
     display: flex;
     flex-wrap: wrap;
     gap: 1vw;
     overflow: auto;
-    padding-bottom: 2vh;
+    padding-bottom: 2vmin;
 }
 
 .postDiv .post {
     position: relative;
-    height: 35vh;
-    width: 35vh;
+    height: 35vmin;
+    width: 35vmin;
     background-color: #fff;
     border: 1px solid #000;
-    border-radius: 1vh;
+    border-radius: 1vmin;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -786,7 +786,7 @@
     /* height: 100%; */
     width: 100%;
     object-fit: cover;
-    border-radius: 1vh;
+    border-radius: 1vmin;
 }
 
 .postDiv .post a .postDetails {

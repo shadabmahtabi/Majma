@@ -437,7 +437,7 @@
 
 .profileContents {
     height: 100vmin;
-    width: 80%;
+    width: 80vmax;
     /* background-color: red; */
     color: var(--textColor);
 }
