@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Caudex&display=swap");
+
+::selection {
+    color: var(--btnTextColor);
+    background: #42decc;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+:root {
+    /* --textColor: #000000ba; */
+    --textColor: #000000ca;
+    --background: linear-gradient(90deg, rgb(240, 240, 240), rgb(238, 238, 238), rgb(236, 236, 236));
+    --btnTextColor: rgb(239, 240, 245);
+    --btnColor: #2BC5B4;
+    --darkBackground: #2A2D36;
+    /* --background: #ffdada; */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: gilroy; */
+    font-family: "Caudex", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#main #loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    z-index: 999999999999999999999999999;
+    display: flex;
+    justify-content: center;
+}
+
+#main #loader img {
+    height: 100%;
+}

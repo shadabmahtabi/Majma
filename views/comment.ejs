@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <% if ( loggedInUser.isDark === "1" ) { %>
+        <link rel="stylesheet" href="/stylesheets/darkTheme/darktheme.css">
+        <link rel="stylesheet" href="/stylesheets/darkTheme/darkComment.css">
+    <% } else { %>
+        <link rel="stylesheet" href="/stylesheets/boilerPlate.css">
+        <link rel="stylesheet" href="/stylesheets/comment.css">
+    <% } %>
+</head>
+
+<body>
+    <div id="main">
+        <div id="loader">
+            <img src="/images/loader1.gif" alt="loader">
+        </div>
+        <div id="optionDiv">
+            <ul class="optionBox">
+                <% if(loggedInUser.username === post.user.username){ %>
+                    <!-- <li><a href="#">Add to favourites</a></li> -->
+                    <!-- <li><a href="#" class="reportBtn">Block</a></li> -->
+                    <li><a href="/delete/<%= post.id %>" class="reportBtn">Delete</a></li>
+                    <li id="cancelBtn">Cancel</li>
+                <% }else{ %>
+                    <% if(loggedInUser.following.indexOf(post.user.id) !== -1){ %>
+                        <li><a href="/follow/<%= post.user.id %>" class="reportBtn">Unfollow</a></li>
+                    <% }else{ %>
+                        <li><a href="/follow/<%= post.user.id %>">Follow</a></li>
+                    <% } %>
+                    <li id="cancelBtn">Cancel</li>
+                <% } %>
+            </ul>
+        </div>
+        <div id="commentBox" class="commentBox">
+            <div id="commentCrossBtn">
+                <!-- <i class="ri-arrow-left-line"></i> -->
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </div>
+            <div class="commentForm">
+                <div class="postImg">
+                    <% if( post.blog ){ %>
+                        <p class="blog"><%= post.blog %></p>
+                    <% }else{ %>
+                        <img src="/images/<%= post.image %>" alt="">
+                    <% } %>
+                </div>
+                <div class="postComments">
+                    <nav class="commentNav">
+                        <a href="/profile/<%= post.user.id %>"><%= post.user.username %></a>
+                        <div class="options">
+                            <!-- <i class="ri-more-fill"></i> -->
+                            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                        </div>
+                    </nav>
+                    <div class="postDesc">
+                        <%= post.desc %>
+                    </div>
+                    <div class="showComment">
+                        <ul class="commentList">
+                            <% comments.forEach( comment => { %>
+                                <% if( post.id === comment.postId.id){ %>
+                                    <li><a href="/profile/<%= comment.userId.id %>" class="userComment"><%= comment.userId.username %></a> <p><%= comment.data %></p></li>
+                                <%}%>
+                            <% }) %>
+                        </ul>
+                    </div>
+                    <div class="inputCommentField">
+                        <form action="/comment/<%= post.id %>" method="post">
+                            <input type="text" name="comment" placeholder="Comment..." autocomplete="off" required>
+                            <button id="commentBtn">Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascripts/loader.js"></script>
+    <script src="/javascripts/comment.js"></script>
+</body>
+
+</html>

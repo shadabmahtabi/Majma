@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Check</title>
+    <style>
+        .image-upload>input {
+            display: none;
+        }
+
+        .upload-icon {
+            width: 100px;
+            height: 97px;
+            border: 2px solid #5642BE;
+            border-style: dotted;
+            border-radius: 18px;
+        }
+
+        .upload-icon img {
+            width: 60px;
+            height: 60px;
+            margin: 19px;
+            cursor: pointer;
+        }
+
+        /* .upload-icon.has-img {
+            width: 100px;
+            height: 97px;
+            border: none;
+        } */
+
+        .upload-icon.has-img img {
+            width: 100%;
+            height: auto;
+            border-radius: 18px;
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div class="image-upload">
+            <label for="file-input">
+                <div class="upload-icon">
+                    <img class="icon" src="https://image.flaticon.com/icons/png/128/61/61112.png">
+                </div>
+            </label>
+            <input id="file-input" type="file" />
+        </div>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $('#file-input').change(function (event) {
+            $("img.icon").attr('src', URL.createObjectURL(event.target.files[0]));
+            // $("img.icon").parents('.upload-icon').addClass('has-img');
+        });
+    </script>
+</body>
+
+</html>

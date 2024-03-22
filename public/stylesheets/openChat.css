@@ -1,0 +1,169 @@
+#main{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    /* background-image: var(--background); */
+    display: flex;
+}
+
+#main .chatSection {
+    height: 100vh;
+    width: 80%;
+    /* background-color: red; */
+    color: var(--textColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    padding: 2.5vh 0;
+}
+
+.chatSection .chatNav{
+    height: 7vh;
+    width: 95%;
+    background: var(--background);
+    border-radius: 1vh;
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5vw;
+}
+
+.chatSection .chatNav a{
+    text-decoration: none;
+    color: var(--textColor);
+}
+
+.chatSection .chatNav a h3{
+    font-weight: 100;
+    display: flex;
+    align-items: center;
+    gap: .3vw;
+}
+
+.chatSection .chatBox{
+    position: relative;
+    height: 90vh;
+    width: 95%;
+    background: var(--background);
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 1vh;
+}
+
+.chatSection .chatBox .chatList{
+    height: 89%;
+    width: 100%;
+    background: var(--background);
+    border-radius: 1vh;
+    overflow: auto;
+    padding: 1vw 1vw;
+    list-style: none;
+}
+
+.chatSection .chatBox .chatList .incomingMsg, 
+.chatSection .chatBox .chatList .outgoingMsg{
+    min-height: 6vh;
+    width: fit-content;
+    max-width: 60%;
+    /* max-width: 60%; */
+    border-radius: 1vh;
+}
+
+.chatSection .chatBox .chatList .outgoingMsg{
+    margin-left: auto;
+    /* background-color: var(--btnColor); */
+    border-radius: 1vh;
+}
+
+.chatSection .chatBox .chatList .outgoingMsg h3{
+    background-color: var(--btnColor);
+    border-radius: 1vh;
+    padding: .5vw;
+    color: var(--btnTextColor);
+    font-weight: 100;
+}
+
+.chatSection .chatBox .chatList .outgoingMsg h5, .chatSection .chatBox .chatList .incomingMsg h5{
+    padding: .3vw 0 .1vw .5vw;
+}
+
+.chatSection .chatBox .chatList .incomingMsg{
+    /* background-color: #e6e6e6; */
+    /* padding: .5vw; */
+    border-radius: 1vh;
+}
+
+.chatSection .chatBox .chatList .incomingMsg h3{
+    background-color: #98e9e1;
+    padding: .5vw;
+    border-radius: 1vh;
+    color: rgba(62, 62, 62, 0.924);
+    font-weight: 100;
+}
+
+/* .chatSection .chatBox .chatList .incomingMsg h5{
+    padding: 0 0 .1vw .5vw;
+} */
+
+.chatSection .chatBox .chatInput{
+    height: 11%;
+    width: 100%;
+    /* background: var(--background); */
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    /* border-radius: 1vh; */
+    /* box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px; */
+    border-top: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatSection .chatBox .chatInput .chatInpField{
+    height: 75%;
+    width: 95%;
+    /* background-color: rgb(200, 200, 200); */
+    border-radius: 1vh;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+/* .chatSection .chatBox .chatInput .chatInpField form{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+} */
+
+.chatSection .chatBox .chatInput .chatInpField #chatMsg{
+    height: 100%;
+    width: 93%;
+    resize: none;
+    border-radius: 1vh;
+    padding: 1vh 1.5vh;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+}
+
+.chatSection .chatBox .chatInput .chatInpField .chatBtn{
+    height: 100%;
+    width: 6%;
+    font-size: 1.4rem;
+    border-radius: 1vh;
+    background-color: var(--btnColor);
+    color: var(--btnTextColor);
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+}

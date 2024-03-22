@@ -1,0 +1,290 @@
+#main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    /* background-image: var(--background); */
+}
+
+#main .commentBox {
+    height: 100%;
+    width: 100%;
+    /* background-color: rgb(255, 255, 255); */
+    background-image: var(--darkBackground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* user-select: none; */
+}
+
+.commentBox .commentForm {
+    height: 80vh;
+    width: 60%;
+    background-image: var(--background);
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    border-radius: 1vh;
+    overflow: hidden;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.commentBox #commentCrossBtn {
+    text-decoration: none;
+    position: absolute;
+    top: 3%;
+    left: 2%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 1vh; */
+    /* border: 2px solid #000; */
+    color: var(--inputBackground);
+    font-size: 2rem;
+    transition: .3s;
+}
+
+/* .commentBox #commentCrossBtn:hover {
+    background-color: red;
+    color: #fff;
+} */
+
+.commentBox .commentForm .postImg {
+    height: 100%;
+    width: 55%;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--darkBackground);
+    overflow: hidden;
+}
+
+.postImg .blog {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--textColor);
+    /* background-color: red; */
+}
+
+.commentBox .commentForm .postImg img {
+    width: 100%;
+    /* height: 100%; */
+    /* object-fit: cover; */
+    filter: brightness(90%);
+    border-radius: 1vh;
+}
+
+.commentBox .commentForm .postComments {
+    position: relative;
+    height: 100%;
+    width: 45%;
+    /* background-color: rgb(255, 171, 171); */
+    color: var(--inputBackground);
+    overflow: hidden;
+}
+
+.commentBox .commentForm .postComments .commentNav {
+    height: 8%;
+    width: 100%;
+    /* background-color: blue; */
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 1vw 5px 1vw;
+    font-size: 1.1rem;
+    font-weight: 600;
+    /* border-bottom: 1px solid #000; */
+    background-color: var(--darkBackground);
+}
+
+.commentBox .commentForm .postComments .commentNav a{
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--inputBackground);
+}
+
+.commentBox .commentForm .postComments .commentNav .options {
+    height: 100%;
+    width: 10%;
+    /* background-color: red; */
+    display: flex;
+    align-items: flex-end;
+    font-weight: 600;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+
+#optionDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 999999;
+    background-color: #00000062;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* box-shadow: rgba(0, 0, 0, 0.017) 0px 4px 12px; */
+    opacity: 0;
+    pointer-events: none;
+}
+
+#optionDiv .optionBox {
+    max-height: 50vh;
+    width: 300px;
+    background-color: var(--inputBackground);
+    /* background-image: var(--background); */
+    border-radius: 1vh;
+    list-style: none;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#optionDiv .optionBox li {
+    height: 7vh;
+    width: 100%;
+    /* background-color: rgb(255, 255, 255); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #000;
+    color: var(--darkBackground);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#optionDiv .optionBox li a {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--darkBackground);
+}
+
+#optionDiv .optionBox li .reportBtn {
+    color: rgb(220, 0, 0);
+}
+
+#optionDiv .optionBox li:last-child {
+    border: none;
+}
+
+.commentBox .commentForm .postComments .postDesc {
+    max-height: 20%;
+    width: 100%;
+    /* background-color: rgb(225, 225, 255); */
+    background-color: var(--darkBackground);
+    display: flex;
+    padding: 5px 1vw;
+    font-size: .9rem;
+    /* font-weight: 600; */
+    overflow: auto;
+    border-bottom: 1px solid var(--textColor);
+}
+
+.commentBox .commentForm .postComments .showComment {
+    height: 60vh;
+    max-height: 68vh;
+    width: 100%;
+    overflow: auto;
+    padding-bottom: 50px;
+    background-color: var(--inputBackground);
+}
+
+.commentBox .commentForm .postComments .commentList {
+    width: 100%;
+    /* background-color: rgb(225, 225, 255); */
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: .9rem;
+    /* border-bottom: 1px solid #000; */
+    overflow: auto;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.commentBox .commentForm .postComments .commentList li {
+    min-height: 0vh;
+    max-width: 90%;
+    /* background-color: rgb(212, 212, 255); */
+    /* background-image: var(--background); */
+    border-radius: 1vh;
+    padding-bottom: 6px;
+}
+
+.commentBox .commentForm .postComments .commentList li .userComment {
+    /* font-weight: 800; */
+    font-size: .8rem;
+    color: var(--darkBackground);
+    text-decoration: none;
+}
+
+.commentBox .commentForm .postComments .commentList li .userComment:hover {
+    color: #000;
+}
+
+.commentBox .commentForm .postComments .commentList li p {
+    font-size: 1rem;
+    background-color: var(--darkBackground);
+    border-radius: 1vh;
+    padding: 10px 15px;
+}
+
+.commentBox .commentForm .inputCommentField {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 12%;
+    width: 100%;
+    /* padding: 10px; */
+    /* border-top: 1px solid #000; */
+}
+
+.commentBox .commentForm .inputCommentField form {
+    height: 100%;
+    width: 100%;
+    /* background-color: #fff; */
+    /* background-color: var(--inputBackground); */
+    background-color: var(--darkBackground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.commentBox .commentForm .inputCommentField form input {
+    width: 75%;
+    height: 65%;
+    background-image: var(--inputBackground);
+    border: none;
+    outline: none;
+    padding: 0 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+.commentBox .commentForm .inputCommentField form #commentBtn {
+    width: 15%;
+    height: 65%;
+    background-color: var(--btnColor);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: var(--btnTextColor);
+}

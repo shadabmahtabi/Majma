@@ -1,0 +1,104 @@
+#main{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-image: var(--background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+form{
+    position: relative;
+    height: 60vh;
+    width: 450px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    border: 2px solid #000;
+    border-radius: 1vh;
+}
+
+form .inputField{
+    min-height: 0%;
+    width: 90%;
+    /* background-color: teal; */
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+    gap: 1vh;
+    /* justify-content: center; */
+}
+
+form input{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 20%;
+    /* display: none; */
+    opacity: 0;
+}
+
+.btns{
+    height: 7vh;
+    width: 90%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+}
+
+form .btn, button{
+    height: 100%;
+    width: 49%;
+    color: rgb(230, 232, 239);
+    background-image: linear-gradient(90deg,rgb(177, 209, 229), rgb(65, 137, 225));
+    border-radius: 1vh;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    /* display: none; */
+}
+
+form .imgName{
+    height: 5vh;
+    width: 90%;
+    border: .1vw solid #000;
+    border-radius: 1vh;
+    display: flex;
+    align-items: center;
+    padding-left: 1vw;
+}
+
+form #desc{
+    height: 15vh;
+    width: 90%;
+    border: .15vw solid #000;
+    resize: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 1vh;
+}
+
+.btnBack{
+    position: absolute;
+    top: 5vh;
+    left: 5vh;
+    text-decoration: none;
+    background-color: #fff;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-radius: 1vh;
+    border: .15vh solid #000;
+    color: #000;
+    padding: 1vh;
+    font-size: 1.5rem;
+}

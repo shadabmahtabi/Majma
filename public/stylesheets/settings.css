@@ -1,0 +1,232 @@
+#main{
+    height: 100%;
+    width: 100%;
+    /* background-color: yellow; */
+    display: flex;
+}
+
+#main .settingsSection{
+    height: 100vmin;
+    width: 80vmax;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    gap: 20px;
+    overflow: hidden;
+}
+
+#main .settingsSection .setNav{
+    height: 10%;
+    width: 95%;
+    /* background-color: red; */
+    background-image: var(--background);
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    border-radius: 1vmin;
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+}
+
+.setNav h2{
+    color: var(--textColor);
+}
+
+#main .settingsSection .formSection {
+    position: relative;
+    height: 85%;
+    width: 95%;
+}
+.settingsSection .formSection .profileForm{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    background-image: var(--background);
+    display: flex;
+    justify-content: space-between;
+    padding: 2vmax;
+    border-radius: 1vmin;
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+
+.profileForm form{
+    height: 100%;
+    width: 49%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5vmax;
+    border-radius: 1vmin;
+}
+
+.profileForm form h2{
+    font-size: 1.5vmax;
+    color: var(--textColor);
+    margin-bottom: 1vmax;
+}
+
+.profileForm form input{
+    height: 10%;
+    width: 65%;
+    border-radius: 2vmax;
+    padding: 0 1.5vw;
+    background-image: var(--background);
+    font-size: 1rem;
+    outline: none;
+    border: none;
+}
+
+.profileForm form button{
+    padding: .8vmax 2.4vmax;
+    border-radius: 2vmax;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: var(--btnColor);
+    color: var(--btnTextColor);
+}
+
+#main .settingsSection .formSection .passwordForm{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    /* background-color: red; */
+    background-image: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    border-radius: 1vmin;
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+
+.passwordForm form{
+    height: 70%;
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vmax;
+    border-radius: 1vmin;
+}
+
+.passwordForm form h2{
+    /* font-size: 1.2rem; */
+    color: var(--textColor);
+    margin-bottom: 1vmax;
+}
+
+.passwordForm form input{
+    height: 13%;
+    width: 65%;
+    border-radius: 2vmax;
+    padding: 0 1.5vw;
+    background-image: var(--background);
+    font-size: 1rem;
+    outline: none;
+    border: none;
+}
+
+.passwordForm form button{
+    padding: .8vmax 2.4vmax;
+    border-radius: 30px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: var(--btnColor);
+    color: var(--btnTextColor);
+    cursor: pointer;
+}
+
+#main .settingsSection .formSection .deleteForm{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    /* background-color: red; */
+    background-image: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2vmax 0;
+    border-radius: 1vmin;
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+
+.deleteForm form{
+    height: 35%;
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vmax;
+    border-radius: 1vmin;
+    padding: 0 2vmax 2vmax 2vmax;
+}
+.deleteForm form:first-child{
+    padding: 2vmax 2vmax 0 2vmax;
+    height: 45%;
+    /* background-color: red; */
+}
+
+.deleteForm form h2{
+    /* font-size: 1.2rem; */
+    color: var(--textColor);
+    margin-bottom: 1vmax;
+}
+
+.deleteForm form input{
+    height: 3vmax;
+    width: 65%;
+    border-radius: 2vmax;
+    padding: 0 1.5vw;
+    background-image: var(--background);
+    font-size: 1rem;
+    outline: none;
+    border: none;
+}
+
+.deleteForm form #otp {
+    padding: .5vmax 1.5vmax;
+    border-radius: 30px;
+    font-size: .8vmax;
+    border: none;
+    outline: none;
+    background-color: var(--btnColor);
+    color: var(--btnTextColor);
+    cursor: pointer;
+}
+
+.deleteForm form button{
+    padding: .8vmax 2.4vmax;
+    border-radius: 30px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: var(--btnColor);
+    color: var(--btnTextColor);
+    cursor: pointer;
+}

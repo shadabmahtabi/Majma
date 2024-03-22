@@ -1,0 +1,395 @@
+#main #uploadBox {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  z-index: 99999999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+#uploadBox .uploadForm {
+  position: relative;
+  height: 60vmin;
+  width: 60vmin;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#uploadBox .uploadForm #uploadCrossBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 4vmax;
+  width: 4vmax;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5vmax;
+  /* background-color: rgb(255, 218, 218); */
+  cursor: pointer;
+}
+
+#uploadBox .uploadForm form {
+  position: relative;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3vmin;
+  border-radius: 1vmin;
+  padding: 15px 0;
+  /* background-color: rgb(216, 146, 146); */
+}
+
+#uploadBox .uploadForm form .inputField {
+  min-height: 0%;
+  width: 90%;
+  /* background-color: teal; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vmin;
+  /* justify-content: center; */
+}
+
+#uploadBox .uploadForm form input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 20%;
+  /* display: none; */
+  opacity: 0;
+}
+
+#uploadBox .uploadForm .formBtns {
+  height: 7vmin;
+  width: 90%;
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
+}
+
+#uploadBox .uploadForm form .browseBtn,
+#uploadBox .uploadForm form button {
+  height: 100%;
+  width: 49%;
+  color: var(--btnTextColor);
+  /* background-image: linear-gradient(90deg,rgb(177, 209, 229), rgb(65, 137, 225)); */
+  background-color: var(--btnColor);
+  border-radius: 1vmin;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  /* display: none; */
+}
+
+#uploadBox .uploadForm form .imgName {
+  height: 5vmin;
+  width: 90%;
+  border: 0.1vw solid #000;
+  border-radius: 1vmin;
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+}
+
+#uploadBox .uploadForm form #desc {
+  height: 15vmin;
+  width: 90%;
+  border: 2px solid var(--btnColor);
+  resize: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 1vmin;
+  outline: none;
+}
+
+#sideBar {
+  height: 100vmin;
+  width: 20vmax;
+  /* background-color: wheat; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  gap: 2vmin;
+  padding: 2.5vmin 0 2vw 1vw;
+  border-right: 2px solid rgb(8, 8, 8);
+  z-index: 999999;
+}
+
+#sideBar .logoBox {
+  height: 9vmin;
+  width: 95%;
+  background-image: var(--background);
+  border-radius: 1vmin;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+}
+
+#sideBar .logo {
+  height: 7vmin;
+  width: 100%;
+  /* padding-left: 1vw; */
+}
+
+#sideBar .logo a {
+  height: 100%;
+  width: 100%;
+  /* background-color: rgb(247, 209, 57); */
+  font-size: 2rem;
+  text-decoration: none;
+  /* color: var(--textColor); */
+  font-weight: 600;
+  letter-spacing: 0.1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sideBar .logo a svg {
+  height: 90%;
+  width: 90%;
+}
+
+#sideBar .links {
+  min-height: 0;
+  max-height: 72vmin;
+  width: 95%;
+  /* background-color: thistle; */
+  background-image: var(--background);
+  border-radius: 1vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2vmin 0;
+  box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+}
+
+#sideBar .links .link {
+  height: 9vmin;
+  width: 100%;
+  /* background-color: rgb(212, 192, 63); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sideBar .links .link .alink,
+#sideBar .more .moreDiv,
+#sideBar .links .link .linkDiv {
+  position: relative;
+  height: 90%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--textColor);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 1vmin;
+  padding-left: 1rem;
+  user-select: none;
+  cursor: pointer;
+  /* background-color: antiquewhite; */
+}
+
+#sideBar .links .alink:hover,
+#sideBar .links .link .linkDiv:hover {
+  background-color: rgb(231, 231, 231);
+  /* color: #000; */
+  /* font-weight: 600; */
+}
+
+#sideBar .links .active {
+  background-color: rgb(231, 231, 231);
+  /* color: #000; */
+  /* font-weight: 600; */
+}
+
+#sideBar a .icon {
+  position: relative;
+}
+
+#forSearch,
+#forUpload {
+  position: relative;
+}
+
+#searchBox {
+  position: absolute;
+  top: -15vmin;
+  left: 112%;
+  max-height: 80vmin;
+  width: 0vmax;
+  background-image: var(--background);
+  z-index: 999;
+  border-radius: 1vmin;
+  overflow: hidden;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s;
+  padding: 6vmin 0 2vmin 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vmin;
+}
+
+#searchBox #searchCrossBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 4vmax;
+  width: 4vmax;
+  /* background-color: rgb(255, 206, 206); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5vmax;
+  cursor: pointer;
+}
+
+#searchBox h2 {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+#searchBox .inputField {
+  height: 6.5vmin;
+  width: 95%;
+  border-radius: 1vmin;
+  border: none;
+  outline: none;
+  /* padding-left: 1vw; */
+  background-color: #fff;
+  display: flex;
+}
+
+#searchBox .inputField .icon {
+  height: 100%;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+}
+
+#searchBox .inputField input {
+  height: 100%;
+  width: 85%;
+  border-radius: 1vmin;
+  border: none;
+  outline: none;
+  /* padding-left: 1vw; */
+  font-size: 1.1rem;
+  background-color: #fff;
+  display: flex;
+}
+
+#searchBox .searchList {
+  height: 85%;
+  width: 95%;
+  /* background-color: red; */
+  /* background-image: linear-gradient(90deg, rgb(240, 231, 240) ,rgb(230, 212, 230) , rgb(220, 206, 220)); */
+  list-style: none;
+  overflow: auto;
+}
+
+.searchList li {
+  height: 8vmin;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 1vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1vmin;
+}
+
+.searchList li #userLink {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--textColor);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 1vmin;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+  user-select: none;
+  cursor: pointer;
+  /* background-color: antiquewhite; */
+}
+
+.searchList li #userLink .userProfilePic {
+  height: 80%;
+  width: 45px;
+  /* background-color: red; */
+  border-radius: 50%;
+}
+
+.searchList li #userLink .userProfilePic img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+#sideBar .count {
+  position: absolute;
+  top: -5%;
+  left: 60%;
+  height: 1rem;
+  width: 1rem;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.8rem;
+  z-index: 999;
+}
+
+#sideBar .links .link a .profilePic {
+  height: 1.7rem;
+  width: 1.7rem;
+  background-color: #000;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#sideBar .links .link a .profilePic img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+#sideBar .icon i,
+#sideBar .icon ion-icon {
+  font-size: 1.6rem;
+  transition: 0.2s;
+}

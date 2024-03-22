@@ -1,0 +1,12 @@
+.env
+/node_modules
+package-lock.json
+errors.txt
+extra.txt
+loginExtra.txt
+logoSvg.txt
+newLogoSVG.txt
+slide.txt
+svg.txt
+workstodo.txt
+/public/extra_images
