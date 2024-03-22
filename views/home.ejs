@@ -147,14 +147,14 @@
                           <div class="postUserPic"><a href="/profile/<%= post.user._id %>"><img src="/images/<%= post.user.profilePic %>" alt="Proflie Pic"></a></div>
                           <div class="postUserName"><a href="/profile/<%= post.user._id %>"><h3><%= post.user.name %></h3></a></div>
                         </div>
-                        <!-- <div class="options"><i class="ri-more-fill"></i></div>
+                        <div class="options"><i class="ri-more-fill"></i></div>
                         <div class="optionDiv">
                           <ul class="optionBox">
                             <li><a href="#">Follow</a></li>
                             <li><a href="#" class="reportBtn">Report</a></li>
-                            <li>Cancel</li>
+                            <li id="closeOption">Cancel</li>
                           </ul>
-                        </div> -->
+                        </div>
                       </nav>
                       <div class="descBox"><%= post.desc %></div>
                       <div class="postPic">

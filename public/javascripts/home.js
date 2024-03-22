@@ -66,6 +66,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  let options = document.querySelector('.options');
+  let optionDiv = document.querySelector('.optionDiv');
+  let closeOption = document.querySelector('#closeOption');
+
+  options.addEventListener('click', () => {
+    optionDiv.style.opacity = "1"
+    optionDiv.style.pointerEvents = "initial"
+  })
+  
+  closeOption.addEventListener('click', () => {
+    optionDiv.style.opacity = "0"
+    optionDiv.style.pointerEvents = "none"
+  })
+
   // let commentBtns = document.querySelectorAll('#comments');
   // for(let i = 0; i < commentBtns.length; i++){
   //     commentBtns[i].addEventListener('click', ()=>{
