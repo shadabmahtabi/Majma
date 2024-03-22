@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.onunload = () => void 0;
   
   let flag = 0;
+
+  const searchBtn = document.querySelector('#searchBtn')
   if (searchBtn) {
     searchBtn.addEventListener("click", (e) => {
       console.log(e.target)
