@@ -67,10 +67,10 @@ var localStrategy = require("passport-local");
 passport.use(new localStrategy(userModel.authenticate()));
 
 router.get("/login", function (req, res, next) {
-  if(!req.user){
+  if (!req.user) {
     res.render("login", { title: "Majma | Login Page" });
   }
-  res.redirect('back')
+  res.redirect("back");
 });
 
 router.post(
@@ -362,30 +362,43 @@ router.get("/settings", isLoggedIn, (req, res) => {
   res.render("settings", { loggedInUser: req.user });
 });
 
+// Delete a post by ID
 router.get("/delete/:id", isLoggedIn, async (req, res) => {
   let postId = req.params.id;
-  let user = req.user;
+  let user = req.user; // Get the current logged-in user
+
+  // Find the post by ID and populate the user field
   let post = await postModel.findOne({ _id: postId }).populate("user");
-  // console.log(post);
+
+  // Iterate through the comments of the post and delete each one
   post.comments.map(async (item) => {
     await commnentModel.findOneAndDelete({ _id: item });
   });
+
+  // Clear the comments array of the post and save it
   post.comments = [];
   await post.save();
+
+  // Find the index of the post in the user's posts array and remove it
   user.posts.splice(user.posts.indexOf(post._id), 1);
   await user.save();
 
+  // If the post is not a blog, check if the user's profile picture is the same as the post's image
   if (!post.blog) {
     if (user.profilePic === post.image) {
+      // If so, set the user's profile picture to the default avatar and save
       user.profilePic = "default-avatar.png";
       await user.save();
     }
+
+    // Delete the image from GridFS and delete the post
     await gridFsBucket.delete(new mongoose.Types.ObjectId(post.imageId));
     await postModel.findOneAndDelete({ _id: postId }, { new: true });
-    res.redirect(`/profile/${user._id}`);
+    return res.redirect(`/profile/${user._id}`);
   }
 
-  res.redirect(`/profile/${user._id}`);
+  // res.redirect(`/profile/${user._id}`);
+  res.redirect("back");
 });
 
 router.get("/files", isLoggedIn, async (req, res) => {
@@ -473,13 +486,13 @@ router.get("/profile/:id", isLoggedIn, async function (req, res, next) {
     .populate("posts")
     .populate({
       path: "following",
-      model: 'User',
-      select: ['name', '_id', 'profilePic']
+      model: "User",
+      select: ["name", "_id", "profilePic"],
     })
     .populate({
       path: "followers",
       model: "User",
-      select: ['name', '_id', 'profilePic']
+      select: ["name", "_id", "profilePic"],
     });
   // var {following} = await userModel.findOne({ _id: req.params.id }).populate("following");
   // var user = await userModel.findOne({ _id: req.params.id }).populate("posts");
