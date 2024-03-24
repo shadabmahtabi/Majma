@@ -114,6 +114,22 @@
         </div>
       </div>
       <div id="contentsSection">
+        <!-- <div class="bottomNav">
+          <div class="link">
+            <a href="/settings" class="alink">
+              <ion-icon name="settings-outline"></ion-icon>
+            </a>
+          </div>
+          <div class="link">
+            <a href="/profile/<%= loggedInUser._id %>" class="alink">
+              <div class="icon">
+                <div class="profilePic">
+                  <img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic">
+                </div>
+              </div>
+            </a>
+          </div>
+        </div> -->
         <div id="nav">
           <div class="navLogo">
             <!-- <a href="/"><img src="https://cdn3.iconfinder.com/data/icons/islamic-worship/512/Islamic-13-512.png" alt="">مجمع</a> -->
@@ -171,7 +187,7 @@
                         <div class="optionDiv">
                           <ul class="optionBox">
                             <% if( loggedInUser.following.indexOf(post.user._id) != -1 ){ %>
-                              <li><a href="/follow/<%= post.user._id %>" class="followBtn" style="color: rgb(206, 0, 0);"><div>Unfollow</div></a></li>
+                              <li><a href="/follow/<%= post.user._id %>" class="followBtn"><div>Unfollow</div></a></li>
                             <% } else { %>
                               <li><a href="/follow/<%= post.user._id %>">Follow</a></li>
                             <% } %>

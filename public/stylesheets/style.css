@@ -10,8 +10,13 @@
   display: none;
 }
 
+.bottomNav {
+  display: none;
+}
+
 /* ----------------------------------------------------------------------- */
 #contentsSection {
+  position: relative;
   height: 100vh;
   width: 50%;
   /* background-color: rgb(116, 213, 249); */
@@ -279,6 +284,7 @@ button {
   white-space: nowrap;
 }
 
+/* ---------------------- option div ---------------------- */
 .optionDiv {
   position: absolute;
   top: 0;
@@ -329,6 +335,10 @@ button {
 }
 
 .optionDiv .optionBox li .reportBtn {
+  color: rgb(206, 0, 0);
+}
+
+.optionDiv .optionBox li .followBtn {
   color: rgb(206, 0, 0);
 }
 
@@ -435,7 +445,7 @@ button {
   display: flex;
   /* align-items: center; */
   justify-content: center;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .copyright {
@@ -718,6 +728,8 @@ button {
     padding: 0 0 0 0;
   }
 
+  /* ----------------------------------------------------------------------- */
+  /* Top navigation bar */
   #nav {
     display: initial;
     height: 10%;
@@ -761,6 +773,19 @@ button {
     font-size: 2.5vmax;
   }
 
+  /* ----------------------------------------------------------------------- */
+  /* Bottom navigation for mobile view  */
+  .bottomNav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: initial;
+    height: 9vmax;
+    width: 100%;
+    background-color: red;
+  }
+  
+  /* ----------------------------------------------------------------------- */
   #uploadSection {
     display: none;
   }

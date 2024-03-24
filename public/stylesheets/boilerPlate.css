@@ -49,6 +49,8 @@ body {
     height: 100%;
 }
 
+/* ---------------------- Responsive ---------------------- */
+
 @media only screen and (max-width: 500px) {
     
     #main #loader {
@@ -56,7 +58,7 @@ body {
     }
     
     #main #loader img {
-        height: 80%;
+        height: 50%;
     }
 
 }
