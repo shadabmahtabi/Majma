@@ -1,143 +1,241 @@
 #main {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    /* background-color: wheat; */
-    display: flex;
-    gap: 1vw;
-    overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  /* background-color: wheat; */
+  display: flex;
+  gap: 1vmax;
+  overflow: hidden;
 }
 
 #main #hider {
-    position: absolute;
-    top: 0;
-    right: -20%;
-    height: 100%;
-    width: 80%;
-    background-color: var(--btnColor);
-    clip-path: circle(50% at 50% 50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
-    transform: translate(0);
+  position: absolute;
+  top: 0;
+  right: -20%;
+  height: 100%;
+  width: 80%;
+  background-color: var(--btnColor);
+  clip-path: circle(50% at 50% 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
+  transform: translate(0);
 }
 
 #main #hider .tDiv {
-    height: 40%;
-    width: 40%;
-    /* background-color: antiquewhite; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2vh;
+  height: 40%;
+  width: 40%;
+  /* background-color: antiquewhite; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1vmax;
 }
 
-#text{
-    font-weight: 500;
+#text {
+  font-weight: 500;
 }
 
 #hider .tDiv .btn2 {
-    height: 7vh;
-    padding: 0 3.5vw;
-    max-width: 80%;
-    border: 2px solid #fff;
-    text-transform: uppercase;
-    background-image: var(--background);
-    color: var(--textColor);
-    border-radius: 10vh;
-    font-weight: 700;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+  height: 3.5vmax;
+  padding: 0 2.5vmax;
+  max-width: 80%;
+  border: 2px solid #fff;
+  text-transform: uppercase;
+  background-image: var(--background);
+  color: var(--textColor);
+  border-radius: 3vmax;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 #main .parts {
-    height: 100%;
-    width: 50%;
-    /* background-color: red; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  width: 50%;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .parts form {
-    min-height: 60%;
-    width: 70%;
-    /* background-color: turquoise; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3vh;
-    /* justify-content: center; */
+  min-height: 60%;
+  width: 70%;
+  /* background-color: turquoise; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vmax;
+  /* justify-content: center; */
 }
 
 .parts form h1 {
-    font-size: 3rem;
-    color: #000000ba;
+  font-size: 3rem;
+  color: #000000ba;
 }
 
 .parts form .field {
-    height: 7vh;
-    width: 80%;
-    background-image: var(--background);
-    display: flex;
-    border-radius: 10vh;
-    overflow: hidden;
+  height: 4vmax;
+  width: 80%;
+  background-image: var(--background);
+  display: flex;
+  border-radius: 3vmax;
+  overflow: hidden;
 }
 
 .field .icon {
-    height: 100%;
-    width: 15%;
-    /* background-color: #fff; */
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: .5vw;
-    font-size: 1.1rem;
-    color: gray;
+  height: 100%;
+  width: 15%;
+  /* background-color: #fff; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.5vmax;
+  font-size: 1.1rem;
+  color: gray;
 }
 
 .field input {
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    font-size: 1.1rem;
-    padding: 0 .5vw;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0 0.5vmax;
 }
 
 .field input:-webkit-autofill,
 .field input:-webkit-autofill:hover,
 .field input:-webkit-autofill:focus {
-    /* -webkit-text-fill-color: green; */
-    -webkit-box-shadow: 0 0 0 1000px rgb(240, 240, 240) inset !important;
+  /* -webkit-text-fill-color: green; */
+  -webkit-box-shadow: 0 0 0 1000px rgb(240, 240, 240) inset !important;
 }
 
 .parts form .btn {
-    height: 7vh;
-    padding: 0 3.5vw;
-    max-width: 80%;
-    background-color: var(--btnColor);
-    text-transform: uppercase;
-    color: #fff;
-    border-radius: 10vh;
-    outline: none;
-    border: none;
-    font-weight: 700;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+  height: 4vmax;
+  padding: 0 3.5vmax;
+  max-width: 80%;
+  background-color: var(--btnColor);
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 3vmax;
+  outline: none;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 form h3 {
-    font-weight: 600;
+  font-weight: 600;
+  color: #000000ba;
+}
+
+/* ------------------------- Responsive ------------------------- */
+
+@media only screen and (max-width: 500px) {
+  #main {
+    flex-direction: column;
+    justify-content: space-between;
+    /* gap: 1vmax; */
+    overflow: hidden;
+  }
+
+  #main #hider {
+    position: absolute;
+    top: 52%;
+    right: 0%;
+    z-index: 5;
+    width: 100%;
+    height: 90%;
+    align-items: initial;
+    padding-top: 15vmax;
+    padding-bottom: 10vmax;
+  }
+
+  #main #hider .tDiv {
+    height: 40%;
+    width: 80%;
+    /* background-color: antiquewhite; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #hider .tDiv .btn2 {
+    height: 6vmax;
+    padding: 0 3.5vmax;
+  }
+
+  #main .parts {
+    height: 45%;
+    width: 100%;
+    background-color: #fff;
+  }
+
+  .parts form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-height: 0%;
+    height: 50%;
+    width: 100%;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    gap: 1.5vmax;
+}
+
+.parts .loginForm {
+    z-index: 2;
+    transform: translate(-50%, -80%);
+    /* opacity: 0; */
+}
+
+.parts .registerForm {
+    z-index: 1;
+    transform: translate(-50%, -20%);
+    opacity: 0;
+}
+
+  .parts form h1 {
+    font-size: 2.5rem;
     color: #000000ba;
+  }
+
+  .parts form .field {
+    height: 6vmax;
+    width: 80%;
+    /* border-radius: 3vmax; */
+  }
+
+  .field .icon {
+    height: 100%;
+    width: 20%;
+    /* background-color: #fff; */
+    padding-right: 1.5vmax;
+    /* font-size: 1.1rem; */
+  }
+
+  .parts form .btn {
+    height: 6vmax;
+    padding: 0 4vmax;
+    max-width: 80%;
+  }
+
+  form h3 {
+    font-weight: 100;
+    color: #000000ba;
+  }
 }

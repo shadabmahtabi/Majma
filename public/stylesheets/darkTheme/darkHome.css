@@ -18,7 +18,7 @@
 }
 
 #nav {
-    display: none;
+  display: none;
 }
 
 #uploadSection {
@@ -271,7 +271,7 @@ button {
 .postUser .postUserName {
   height: 100%;
   /* width: 150; */
-  background-color: var(--darkBackground);
+  /* background-color: var(--darkBackground); */
   border-radius: 1vh;
   padding: 0 1vmax;
   display: flex;
@@ -287,7 +287,7 @@ button {
 /* ---------------------- option div ---------------------- */
 
 .options {
-    color: var(--textColor);
+  color: var(--textColor);
 }
 .optionDiv {
   position: absolute;
@@ -329,21 +329,21 @@ button {
 }
 
 .optionDiv .optionBox li a {
-    height: 100%;
-    width: 100%;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--textColor);
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--textColor);
 }
 
 .optionDiv .optionBox li .reportBtn {
-    color: rgb(255, 37, 37);
+  color: rgb(255, 37, 37);
 }
 
 .optionDiv .optionBox li .followBtn {
-    color: rgb(255, 37, 37);
+  color: rgb(255, 37, 37);
 }
 
 .optionDiv .optionBox li:last-child {
@@ -727,7 +727,6 @@ button {
 /* ----------------------- Responsive ----------------------- */
 
 @media only screen and (max-width: 500px) {
-    
   /* ----------------------------------------------------------------------- */
   #contentsSection {
     width: 100%;
@@ -749,39 +748,39 @@ button {
     /* box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px; */
     border-bottom: 1px solid var(--textColor);
     background-image: var(--background);
-}
+  }
 
-#nav .navLogo {
+  #nav .navLogo {
     /* background-color: green; */
     height: 100%;
-}
+  }
 
-#nav .navLogo a {
+  #nav .navLogo a {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
+  }
 
-#nav .navLogo a svg {
+  #nav .navLogo a svg {
     height: 70%;
     width: 70%;
-}
+  }
 
-#nav .navItems {
+  #nav .navItems {
     height: 100%;
     /* background-color: red; */
     display: flex;
     align-items: center;
     gap: 2vmax;
-}
+  }
 
-#nav a {
+  #nav a {
     text-decoration: none;
     color: #000;
-    font-size: 2.5vmax;
+    font-size: 2.7vmax;
     color: var(--textColor);
-}
+  }
 
   /* ----------------------------------------------------------------------- */
   /* Bottom navigation for mobile view  */
@@ -867,6 +866,10 @@ button {
     /* background-color: yellow; */
     gap: 1.5vmax;
     padding: 0 1vmax;
+  }
+
+  .post .likesCommentDiv h4 {
+    font-weight: 100;
   }
 
   .copyright {

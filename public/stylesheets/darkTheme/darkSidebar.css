@@ -136,6 +136,7 @@
   padding: 2.5vmin 0 2vw 1vw;
   border-right: 2px solid var(--textColor);
   z-index: 999999;
+  background-image: var(--background);
 }
 
 #sideBar .logoBox {
@@ -234,9 +235,14 @@
   position: relative;
 }
 
+#searchBox2 {
+  display: none;
+}
+
 #searchBox {
   position: absolute;
-  top: -15vmin;
+  top: -170%;
+  bottom: auto;
   left: 112%;
   max-height: 80vmin;
   width: 0vmax;
@@ -400,8 +406,346 @@
 
 /* ----------------------- Responsive ----------------------- */
 
+/* ----------------------- Responsive ----------------------- */
+
 @media only screen and (max-width: 500px) {
-  #sideBar {
+  #main #uploadBox {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    background-color: #00000046 transparent;
+    backdrop-filter: blur(5px);
+    z-index: 99999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
     display: none;
+  }
+
+  #uploadBox .uploadForm {
+    position: relative;
+    height: 60vmin;
+    width: 60vmin;
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #uploadBox .uploadForm #uploadCrossBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 4vmax;
+    width: 4vmax;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5vmax;
+    /* background-color: rgb(255, 218, 218); */
+    cursor: pointer;
+  }
+
+  #uploadBox .uploadForm form {
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+    border-radius: 1vmin;
+    padding: 15px 0;
+    /* background-color: rgb(216, 146, 146); */
+  }
+
+  #uploadBox .uploadForm form .inputField {
+    min-height: 0%;
+    width: 90%;
+    /* background-color: teal; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vmin;
+    /* justify-content: center; */
+  }
+
+  #uploadBox .uploadForm form input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 20%;
+    /* display: none; */
+    opacity: 0;
+  }
+
+  #uploadBox .uploadForm .formBtns {
+    height: 7vmin;
+    width: 90%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #uploadBox .uploadForm form .browseBtn,
+  #uploadBox .uploadForm form button {
+    height: 100%;
+    width: 49%;
+    color: var(--btnTextColor);
+    /* background-image: linear-gradient(90deg,rgb(177, 209, 229), rgb(65, 137, 225)); */
+    background-color: var(--btnColor);
+    border-radius: 1vmin;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    /* display: none; */
+  }
+
+  #uploadBox .uploadForm form .imgName {
+    height: 5vmin;
+    width: 90%;
+    border: 0.1vw solid #000;
+    border-radius: 1vmin;
+    display: flex;
+    align-items: center;
+    padding-left: 1vw;
+  }
+
+  #uploadBox .uploadForm form #desc {
+    height: 15vmin;
+    width: 90%;
+    border: 2px solid var(--btnColor);
+    resize: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 1vmin;
+    outline: none;
+  }
+
+  #sideBar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 9vmax;
+    width: 100%;
+    /* background-color: #fff; */
+    
+    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+    border: none;
+    gap: 0vmin;
+    padding: 0;
+    /* overflow: hidden; */
+  }
+
+  #sideBar .logoBox {
+    display: none;
+  }
+
+  #sideBar .links {
+    position: relative;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    background-image: none;
+    border-radius: 0;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    box-shadow: 0;
+  }
+
+  #sideBar .links .link {
+    height: 100%;
+    width: 100%;
+    /* background-color: rgb(212, 192, 63); */
+  }
+
+  #sideBar .links .link .alink,
+  #sideBar .links .link .linkDiv {
+    height: 100%;
+    width: 100%;
+    gap: 0px;
+    border-radius: 0;
+    padding-left: 0;
+    justify-content: center;
+    /* background-color: rgb(102, 58, 0); */
+  }
+
+  #sideBar .links .link .alink span,
+  #sideBar .links .link .linkDiv span {
+    display: none;
+  }
+
+  #sideBar .links .chat {
+    display: none;
+  }
+
+  #sideBar .links .alink:hover,
+  #sideBar .links .link .linkDiv:hover {
+    background-color: inherit;
+  }
+
+  #sideBar .links .active {
+    background-color: inherit;
+  }
+
+  #sideBar a .icon {
+    position: initial;
+  }
+
+  #forSearch,
+  #forUpload {
+    position: initial;
+  }
+
+  #searchBox {
+    display: none;
+  }
+
+  /* ---------------------------------------------------- */
+  #searchBox2 {
+    position: absolute;
+    bottom: 100%;
+    left: 0%;
+    max-height: 80vmax;
+    min-height: 0vmax;
+    width: 100%;
+    background-image: var(--background);
+    z-index: 999;
+    overflow: hidden;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1) .5s;
+    padding: 6vmax 0 2vmax 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vmax;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #searchBox2 #searchCrossBtn2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 6vmax;
+    width: 6vmax;
+    /* background-color: rgb(255, 206, 206); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vmax;
+    cursor: pointer;
+  }
+
+  #searchBox2 h2 {
+    font-size: 2.7vmax;
+    text-align: center;
+  }
+
+  #searchBox2 .inputField {
+    height: 50px;
+    width: 90%;
+    border-radius: 1vmax;
+    border: none;
+    outline: none;
+    /* padding-left: 1vw; */
+    background-color: var(--inputBackground);
+    display: flex;
+  }
+  
+  #searchBox2 .inputField .icon {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+  }
+  
+  #searchBox2 .inputField input {
+    height: 100%;
+    width: 85%;
+    border-radius: 1vmax;
+    border: none;
+    outline: none;
+    font-size: 2.4vmax;
+    background-color: var(--inputBackground);
+    display: flex;
+    padding: 1vmax 0.5vmax;
+  }
+  
+  #searchBox2 .searchList2 {
+    height: 85%;
+    width: 90%;
+    list-style: none;
+    overflow: auto;
+  }
+  
+  #searchBox2 .searchList2 li {
+    height: 7vmax;
+    width: 100%;
+    /* background-color: #fff; */
+    background-color: var(--inputBackground);
+    border-radius: 1vmax;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1vmax;
+  }
+
+  #searchBox2 .searchList2 li #userLink {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--darkBackground);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 1vmin;
+    padding-left: 1rem;
+    font-size: 1.2rem;
+    user-select: none;
+    cursor: pointer;
+    /* background-color: antiquewhite; */
+  }
+
+  #searchBox2 .searchList2 li #userLink .userProfilePic {
+    height: 45px;
+    width: 45px;
+    /* background-color: red; */
+    border-radius: 50%;
+  }
+
+  #searchBox2 .searchList2 li #userLink .userProfilePic img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  /* ---------------------------------------------------- */
+
+  #sideBar .links .link a .profilePic {
+    height: 1.7rem;
+    width: 1.7rem;
+  }
+
+  #sideBar .icon i,
+  #sideBar .icon ion-icon {
+    font-size: 1.6rem;
+    transition: 0.2s;
   }
 }
