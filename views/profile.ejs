@@ -70,6 +70,11 @@
                     </a>
                 </div>
                 <div class="link">
+                    <a href="/settings" class="alink"><div class="icon">
+                      <ion-icon name="settings-outline"></ion-icon>
+                    </div><span>  Settings</span></a>
+                </div>
+                <div class="link">
                     <div class="linkDiv" id="upload">
                         <div class="icon">
                             <!-- <ion-icon name="compass-outline"></ion-icon> -->
@@ -90,9 +95,9 @@
                     </a>
                 </div> -->
                 <div class="link">
-                    <a href="/settings" class="alink"><div class="icon">
-                      <ion-icon name="settings-outline"></ion-icon>
-                    </div><span>  Settings</span></a>
+                    <a href="/profile/<%= loggedInUser._id %>" class="alink">
+                        <div class="icon">
+                      <div class="profilePic"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></div></div><span> Profile</span></a>
                 </div>
                 <div class="link">
                     <a href="/logout" class="alink">
@@ -259,6 +264,45 @@
                                 <% } %>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="userDetailsForMobile">
+                    <div class="username"><%= user.username %></div>
+                    <div class="profileData">
+                        <div class="profilePic">
+                            <img src="/images/<%= user.profilePic %>" alt="Profile Pic">
+                        </div>
+                        <div class="followDiv">
+                            <div class="followParts">
+                                <div><%= user.following.length %></div>
+                                <div>Following</div>
+                            </div>
+                            <div class="followParts">
+                                <div><%= user.followers.length %></div>
+                                <div>Followers</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="nameAndBio">
+                        <div class="name"><%= user.name %></div>
+                        <div class="bio"><p><%= user.bio %></p></div>
+                    </div>
+                    <div class="btns">
+                        <% if(user.email===loggedInUser.email ){ %>
+                            <button id="editBtn"><i class="ri-edit-line"></i> Edit</button>
+                            <!-- <button id="settingBtn">
+                                <i class="ri-settings-4-line"></i>Settings</button> -->
+                        <% }else{ %>
+                            <!-- <button id="msgBtn"><i class="ri-chat-3-line"></i> Message</button> -->
+                            <% if( loggedInUser.following.indexOf(user.id) !== -1 ){ %>
+                                <a href="/follow/<%= user.id %>" id="followBtn" class="unfollow" style="background-color: rgba(228, 49, 49, 0.931);"><i class="ri-user-unfollow-line"></i>
+                                    Unfollow</a>
+                            <% }else{ %>
+                                <a href="/follow/<%= user.id %>" id="followBtn" class="follow"><i class="ri-user-follow-line"></i>
+                                Follow</a>
+                            <% } %>
+                        <% } %>
                     </div>
                 </div>
             </div>

@@ -445,6 +445,10 @@
     justify-content: center;
 }
 
+.profileContents .userDetailsSection .userDetailsForMobile {
+    display: none;
+}
+
 .profileContents .userDetailsSection .userDetails {
     position: relative;
     height: 90%;
@@ -815,4 +819,644 @@
     align-items: center;
     justify-content: center;
     gap: .5vw;
+}
+
+/* ------------------------ Responsive ------------------------ */
+
+@media only screen and (max-width: 500px) {
+
+    /* ----------------------------------------------------------------- */
+    
+    #main #editBox {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+        backdrop-filter: blur(5px);
+        z-index: 99999999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s;
+        display: none;
+    }
+    
+    #editBox .editForm {
+        position: relative;
+        height: 80vmin;
+        width: 450px;
+        background-color: #fff;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #editBox .editForm #crossBtn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 45px;
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: red;
+        transition: .3s;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    
+    #editBox .editForm #crossBtn:hover {
+        background-color: red;
+        color: #fff;
+    }
+    
+    #editBox .editForm form {
+        min-height: 0;
+        width: 90%;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    #editBox .editForm form h1 {
+        margin-bottom: -10px;
+    }
+    
+    #editBox .editForm form h3 {
+        margin-bottom: 3vmin;
+    }
+    
+    #editBox .editForm form input::-webkit-outer-spin-button,
+    #editBox .editForm form input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    
+    #editBox .editForm form input:-webkit-autofill,
+    #editBox .editForm form input:-webkit-autofill:hover,
+    #editBox .editForm form input:-webkit-autofill:focus {
+        /* -webkit-text-fill-color: green; */
+        -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+    }
+    
+    
+    #editBox .editForm form input {
+        height: 7vmin;
+        width: 100%;
+        border-radius: 1vmin;
+        outline: none;
+        border: none;
+        border: 3px solid var(--btnColor);
+        padding-left: 10px;
+        font-size: 1rem;
+    }
+    
+    #editBox .editForm form button {
+        padding: 13px 40px;
+        color: var(--btnTextColor);
+        /* background-image: linear-gradient(90deg, rgb(177, 209, 229), rgb(65, 137, 225)); */
+        background-color: var(--btnColor);
+        border-radius: 1vmin;
+        font-size: 1rem;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    /* ----------------------------------------------------------------- */
+    
+    #main #editProfileBox {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+        backdrop-filter: blur(5px);
+        z-index: 99999999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s;
+    }
+    
+    #editProfileBox .editForm {
+        position: relative;
+        height: 80vmin;
+        width: 450px;
+        background-color: #fff;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #editProfileBox .editForm #closeProfileBtn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 45px;
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: red;
+        transition: .3s;
+    }
+    
+    #editProfileBox .editForm #closeProfileBtn:hover {
+        background-color: red;
+        color: #fff;
+    }
+    
+    #editProfileBox .editForm form {
+        min-height: 0;
+        width: 90%;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 20px;
+    }
+    
+    #editProfileBox .editForm form .profilePic {
+        position: relative;
+        height: 250px;
+        width: 250px;
+        border-radius: 50%;
+        /* background-color: #fff; */
+        background-image: var(--background);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* overflow: hidden; */
+    }
+    
+    #editProfileBox .editForm form .profilePic img {
+        height: 90%;
+        width: 90%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    
+    #editProfileBox .editForm form h1 {
+        margin-bottom: 1vmin;
+    }
+    
+    #editProfileBox .editForm form input {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-35%, -50%);
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    #editProfileBox .editForm form .cam {
+        position: absolute;
+        bottom: 8%;
+        right: 5%;
+        height: 50px;
+        width: 50px;
+        font-size: 1.5rem;
+        /* background-color: #fff; */
+        background-image: var(--background);
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        color: #000000b0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        /* border: 2px solid #000; */
+        cursor: pointer;
+    }
+    
+    #editProfileBox .editForm form button {
+        padding: 13px 40px;
+        color: var(--btnTextColor);
+        /* background-image: linear-gradient(90deg, rgb(177, 209, 229), rgb(65, 137, 225)); */
+        background-color: var(--btnColor);
+        border-radius: 1vmin;
+        font-size: 1rem;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    /* ----------------------------------------------------------------- */
+    
+    #main #showFollowBox {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+        backdrop-filter: blur(5px);
+        z-index: 99999999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s;
+    }
+    
+    #showFollowBox .followMain {
+        position: relative;
+        height: 80vmin;
+        width: 450px;
+        background-color: #fff;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        /* justify-content: center; */
+        padding-top: 30px;
+    }
+    
+    #showFollowBox .followMain #closeFollowBtn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 45px;
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: rgb(255, 43, 43);;
+        transition: .3s;
+        cursor: pointer;
+    }
+    
+    #showFollowBox .followMain #closeFollowBtn:hover{
+        background-color: red;
+        color: #fff;
+    }
+    
+    #showFollowBox .followMain .followNav{
+        height: 8vmin;
+        width: 100%;
+        /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+        /* box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 25%;
+        /* color: var(--textColor); */
+    }
+    
+    #showFollowBox .followMain .followNav .showF{
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        opacity: .4;
+        position: relative;
+        padding: 6px 10px;
+        transition:all ease 0.2s;
+    }
+    
+    #showFollowBox .followMain .followNav .showF:hover{
+        opacity: .6;
+    }
+    
+    #showFollowBox .followMain .followNav .showF {
+        text-decoration: none;
+        color: #000;
+    }
+    
+    #showFollowBox .followMain .followNav .showF:after{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3.5px;
+        width: 0%;
+        border-radius: 10px;
+        background-color: #000;
+        transition: all ease 0.4s;
+    }
+    
+    #showFollowBox .followMain .followNav .showF:hover:after{
+        width: 40%;
+    }
+    
+    #showFollowBox .followMain .followNav .showF.active{
+        opacity: 1;
+    }
+    
+    #showFollowBox .followMain .followNav .showF.active:after{
+        width: 100%;
+    }
+    
+    #showFollowBox .followMain .followListBox{
+        position: relative;
+        width: 100%;
+        height: 90%;
+        /* background-color: red; */
+        overflow: hidden;
+    }
+    
+    #showFollowBox .followMain .followListBox .inputField{
+        height: 13%;
+        width: 100%;
+        /* background-color: rgb(235, 235, 243); */
+        background-image: var(--background);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #showFollowBox .followMain .followListBox .inputField input{
+        height: 60%;
+        width: 90%;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        padding: 0 20px;
+        font-size: 1rem;
+    }
+    
+    #showFollowBox .followMain .followListBox .followList{
+        position: absolute;
+        bottom: 0;
+        height: 87%;
+        width: 100%;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        list-style: none;
+        padding: 10px 0;
+        gap: 10px;
+        overflow-y: scroll;
+        transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    
+    #showFollowBox .followMain .followListBox #following {
+        left: 0;
+    }
+    
+    #showFollowBox .followMain .followListBox #followers {
+        left: 100%;
+    }
+    
+    #showFollowBox .followMain .followListBox li{
+        width: 90%;
+        height: 70px;
+        background-image: var(--background);
+        display: flex;
+        align-items: center;
+    }
+    
+    #showFollowBox .followMain .followListBox li a{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+        color: var(--textColor);
+        font-size: 1.3rem;
+        padding: 15px;
+    }
+    
+    
+    #showFollowBox .followMain .followListBox li a .followProfilePic{
+        height: 50px;
+        width: 50px;
+        background-color: red;
+        border-radius: 50%;
+    }
+    
+    #showFollowBox .followMain .followListBox li a .followProfilePic img{
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    /* ----------------------------------------------------------------- */
+
+    .profileContents {
+        height: 100vmax;
+        width: 100%;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .profileContents .userDetailsSection {
+        /* max-height: 60vmax; */
+        height: 36vmax;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: initial;
+    }
+    
+    .profileContents .userDetailsSection .userDetails {
+        display: none;
+    }
+    
+    .profileContents .userDetailsSection .userDetailsForMobile {
+        display: initial;
+        height: fit-content;
+        width: 100%;
+        background-image: var(--background);
+
+        .username {
+            height: 5vmax;
+            width: 100%;
+            font-size: 2.2vmax;
+            display: flex;
+            align-items: flex-end;
+            padding-left: 2vmax;
+        }
+
+        .profileData {
+            height: 16vmax;
+            width: 100%;
+            /* background-color: black; */
+            display: flex;
+            /* align-items: center; */
+            justify-content: center;
+            gap: 5vmax;
+            padding: 0 2vmax;
+
+            .profilePic {
+                height: 13vmax;
+                width: 15vmax;
+                background-image: var(--background);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 2vmax;
+                
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+            
+            .followDiv {
+                height: 5vmax;
+                width: 65%;
+                /* background-color: #0e77ef; */
+                display: flex;
+                margin-top: 4vmax;
+                
+                .followParts {
+                    height: 100%;
+                    width: 50%;
+                    /* background-color: red; */
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--textColor);
+                    font-size: 2vmax;
+                }
+            }
+        }
+
+        .nameAndBio {
+            height: 7vmax;
+            width: 100%;
+            /* background-color: salmon; */
+            padding-bottom: .5vmax;
+
+            .name {
+                height: 3vmax;
+                width: 100%;
+                /* background-color: rgb(190, 190, 255); */
+                font-size: 2.2vmax;
+                display: flex;
+                align-items: flex-end;
+                padding-left: 2vmax;
+            }
+
+            .bio {
+                max-height: 4vmax;
+                padding-left: 2vmax;
+            }
+        }
+
+        .btns {
+            height: 8vmax;
+            width: 100%;
+            /* background-color: rgb(247, 100, 100); */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 1vmax;
+
+            #editBtn {
+                width: 90%;
+                height: 70%;
+                background-color: var(--btnColor);
+                color: var(--btnTextColor);
+                font-size: 2.3vmax;
+                border-radius: 5vmax;
+                border: none;
+                outline: none;
+            }
+            
+            #followBtn {
+                text-decoration: none;
+                width: 90%;
+                height: 70%;
+                background-color: var(--btnColor);
+                color: var(--btnTextColor);
+                font-size: 2.3vmax;
+                border-radius: 5vmax;
+                border: none;
+                outline: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1vmax;
+            }
+        }
+
+    }
+    
+    .profileContents .userPostsSection {
+        height: 60vmax;
+        /* background-color: rgb(205, 222, 96); */
+        gap: 1vmax;
+        padding-top: 1vmax;
+        overflow: auto;
+    }
+    
+    .profileContents .userPostsSection .postNav {
+        min-height: 5vmax;
+        width: 95%;
+        /* background-color: rgb(132, 133, 125); */
+        border-bottom: .1vmax solid var(--textColor);
+        gap: 5vmax;
+        color: var(--textColor);
+        font-size: 1.5vmax;
+        font-weight: 100;
+    }
+    
+    .postNav h3:hover {
+        color: var(--textColor);
+    }
+    
+    .profileContents .userPostsSection .postDiv {
+        min-height: 3vmax;
+        width: 100%;
+        /* background-color: bisque; */
+        gap: .32vmax;
+        padding-bottom: 6vmax;
+    }
+    
+    .postDiv .post {
+        position: relative;
+        height: 15.2vmax;
+        width: 15.2vmax;
+        border: .1vmax solid var(--textColor);
+        border-radius: 0;
+    }
+    
+    .postDiv .post #delBtn{
+        display: none;
+    }
+    
+    .post a .blog {
+        font-weight: 100;
+        font-size: .5rem;
+    }
+    
+    .postDiv .post a img {
+        border-radius: 0;
+    }
+    
+    .postDiv .post a .postDetails {
+        display: none;
+    }
+
 }
