@@ -4,7 +4,7 @@
   left: 0%;
   height: 100%;
   width: 100%;
-  background-color: transparent;
+  background-color: #00000046 transparent;
   backdrop-filter: blur(5px);
   z-index: 99999999999;
   display: flex;

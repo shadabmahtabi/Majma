@@ -156,7 +156,7 @@
             </div> -->
           </form>
         </div>
-        <div id="postSection">
+        <div id="postSection">  
           <div class="posts">
             <% if(posts.length > 0){ %>
               <% posts.forEach( (post, index)=>{ %>
@@ -170,7 +170,11 @@
                         <div class="options"><i class="ri-more-fill"></i></div>
                         <div class="optionDiv">
                           <ul class="optionBox">
-                            <li><a href="#">Follow</a></li>
+                            <% if( loggedInUser.following.indexOf(post.user._id) != -1 ){ %>
+                              <li><a href="/follow/<%= post.user._id %>" class="followBtn" style="color: rgb(206, 0, 0);"><div>Unfollow</div></a></li>
+                            <% } else { %>
+                              <li><a href="/follow/<%= post.user._id %>">Follow</a></li>
+                            <% } %>
                             <li><a href="#" class="reportBtn">Report</a></li>
                             <li id="closeOption">Cancel</li>
                           </ul>
@@ -236,7 +240,7 @@
             <% }else{ %>
               <div class="post">
                 <div class="postPic">
-                  <h1>upload post to see something</h1>
+                  <h1>Welcome to Majma. 😍😍</h1>
                 </div>
               </div>
             <% } %>

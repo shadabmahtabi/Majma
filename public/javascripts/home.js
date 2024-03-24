@@ -66,13 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  let options = document.querySelector('.options');
+  let options = document.querySelectorAll('.options');
   let optionDiv = document.querySelector('.optionDiv');
   let closeOption = document.querySelector('#closeOption');
 
-  options.addEventListener('click', () => {
-    optionDiv.style.opacity = "1"
-    optionDiv.style.pointerEvents = "initial"
+  options.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      optionDiv.style.opacity = "1"
+      optionDiv.style.pointerEvents = "initial"
+    })
   })
   
   closeOption.addEventListener('click', () => {

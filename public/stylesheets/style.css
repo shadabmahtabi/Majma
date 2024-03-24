@@ -286,7 +286,8 @@ button {
   height: 100%;
   width: 100%;
   z-index: 999999;
-  background-color: #00000009;
+  background-color: #00000077;
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -710,7 +711,6 @@ button {
 /* ----------------------- Responsive ----------------------- */
 
 @media only screen and (max-width: 500px) {
-
   /* ----------------------------------------------------------------------- */
   #contentsSection {
     width: 100%;
@@ -734,14 +734,14 @@ button {
     /* background-color: green; */
     height: 100%;
   }
-  
+
   #nav .navLogo a {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   #nav .navLogo a svg {
     height: 70%;
     width: 70%;
@@ -755,12 +755,12 @@ button {
     gap: 2vmax;
   }
 
-  #nav a{
+  #nav a {
     text-decoration: none;
     color: #000;
     font-size: 2.5vmax;
   }
-  
+
   #uploadSection {
     display: none;
   }
@@ -802,70 +802,14 @@ button {
   .postUser .postUserName {
     height: fit-content;
     border-radius: 0;
-    padding: 0 .5vmax;
-  }
-
-  .optionDiv {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 999999;
-    background-color: #00000009;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: rgba(0, 0, 0, 0.017) 0px 4px 12px;
-    /* display: none; */
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .optionDiv .optionBox {
-    max-height: 50vh;
-    width: 300px;
-    background-color: #fff;
-    border-radius: 1vh;
-    list-style: none;
-    overflow: hidden;
-  }
-
-  .optionDiv .optionBox li {
-    height: 7vh;
-    width: 100%;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #000;
-    color: var(--textColor);
-    cursor: pointer;
-  }
-
-  .optionDiv .optionBox li a {
-    height: 100%;
-    width: 100%;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--textColor);
-  }
-
-  .optionDiv .optionBox li .reportBtn {
-    color: rgb(206, 0, 0);
-  }
-
-  .optionDiv .optionBox li:last-child {
-    border: none;
+    padding: 0 0.5vmax;
   }
 
   .post .descBox {
     max-height: 15vmax;
     padding: 0 2vmax;
     padding-bottom: 1vmax;
-    }
+  }
 
   .post .postPic {
     border: none;
@@ -885,7 +829,7 @@ button {
 
   .postReaction .icons {
     /* background-color: yellow; */
-    gap: 1.5vmax; 
+    gap: 1.5vmax;
     padding: 0 1vmax;
   }
 

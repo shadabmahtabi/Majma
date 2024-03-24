@@ -48,3 +48,15 @@ body {
 #main #loader img {
     height: 100%;
 }
+
+@media only screen and (max-width: 500px) {
+    
+    #main #loader {
+        align-items: center;
+    }
+    
+    #main #loader img {
+        height: 80%;
+    }
+
+}
