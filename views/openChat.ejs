@@ -62,66 +62,18 @@
                 <!-- <ion-icon name="home-outline"></ion-icon> -->
                 <!-- <i class="ri-home-2-line"></i> -->
                 <i class="ri-restart-line"></i>
-              </div> Refresh</a>
+              </div><span> Refresh</span></a>
             </div>
             <div class="link">
               <a href="/" class="alink"><div class="icon">
                 <!-- <ion-icon name="home-outline"></ion-icon> -->
                 <i class="ri-home-2-line"></i>
-              </div> Home</a>
+              </div><span> Home</span></a>
             </div>
-            <!-- <div class="link" id="forSearch">
-              <div id="searchBox">
-                <h2>Search Box</h2>
-                <div class="inputField">
-                  <div class="icon">
-                    <i class="ri-search-2-line"></i>
-                  </div>
-                  <input type="text" placeholder="Search" onkeyup="sendData(this,'<%= loggedInUser.id %>')">
-                </div>
-                <ul class="searchList"></ul>
-              </div>
-              <div class="linkDiv" id="searchBtn">
-                <div class="icon">
-                  <i class="ri-search-2-line"></i>
-                </div> Search
-              </div>
-            </div> -->
-            <!-- <div class="link">
-              <div class="linkDiv" id="upload">
-                <div class="icon">
-                  <i class="ri-compass-4-line"></i>
-                </div> Upload Photos
-              </div>
-            </div> -->
-            <!-- <div class="link">
-              <a href="/progress" class="alink"><div class="icon">
-                <i class="ri-notification-3-line"></i>
-                <div class="count"></div></div> Notifications</a>
-            </div> -->
-            <!-- <div class="link">
-              <a href="/progress" class="alink"><div class="icon">
-                <i class="ri-wallet-line"></i>
-              </div> Premium Services</a>
-            </div> -->
             <div class="link">
               <a href="/profile/<%= loggedInUser._id %>" class="alink"><div class="icon">
-                <div class="profilePic"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></div></div> Profile</a>
+                <div class="profilePic"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></div></div><span> Profile</span></a>
               </div>
-          </div>
-          <div class="more">
-            <div class="moreBox">
-              <ul class="moreList">
-                <li class="moreItems"><a href="/settings" class="moreItemDiv"><ion-icon name="settings-outline"></ion-icon> Settings</a></li>
-                <% if( loggedInUser.isDark === "0"){ %>
-                  <li class="moreItems"><a href="/modeChanger/1" class="moreItemDiv"><ion-icon name="sunny-outline"></ion-icon> Dark Mode</a></li>
-                <% }else{ %>
-                    <li class="moreItems"><a href="/modeChanger/0" class="moreItemDiv"><ion-icon name="moon-outline"></ion-icon> Light Mode</a></li>
-                <% } %>
-                <li class="moreItems"><a href="/logout" class="moreItemDiv"> <ion-icon name="log-out-outline"></ion-icon>Logout <!--<i class="ri-logout-box-r-line"></i> --></a></li>
-              </ul>
-            </div>
-            <div class="moreDiv"><ion-icon name="menu-outline"></ion-icon> More</div>
           </div>
         </div>
         <div class="chatSection">

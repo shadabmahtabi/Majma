@@ -49,7 +49,7 @@
                         <div class="icon">
                             <!-- <ion-icon name="home-outline"></ion-icon> -->
                             <i class="ri-home-2-line"></i>
-                        </div> Home
+                        </div><span> Home</span>
                     </a>
                 </div>
                 <div class="link">
@@ -57,7 +57,7 @@
                         <div class="icon">
                             <i class="ri-user-settings-line"></i>
                         </div>
-                        <div>Profile Settings</div>
+                        <div><span> Profile Settings</span></div>
                     </div>
                 </div>
                 <div class="link">
@@ -65,7 +65,7 @@
                         <div class="icon">
                             <i class="ri-lock-unlock-line"></i>
                         </div>
-                        <div>Change Password</div>
+                        <div><span> Change Password</span></div>
                     </div>
                 </div>
                 <!-- <div class="link">
@@ -73,7 +73,7 @@
                         <div class="icon">
                             <i class="ri-notification-3-line"></i>
                         </div>
-                        <div>Notifications</div>
+                        <div><span> Notifications</span></div>
                     </div>
                 </div> -->
                 <div class="link">
@@ -81,7 +81,7 @@
                         <div class="icon">
                             <i class="ri-user-unfollow-line"></i>
                         </div>
-                        <div>Delete Account</div>
+                        <div><span> Delete Account</span></div>
                     </div>
                 </div>
                 <% if( loggedInUser.isDark === "0"){ %>
@@ -89,7 +89,7 @@
                         <a href="/modeChanger/1" class="alink">
                             <div class="icon">
                                 <i class="ri-sun-line"></i>
-                            </div> Dark Mode
+                            </div><span>  Dark Mode</span>
                         </a>
                     </div>
                 <% }else{ %>
@@ -97,20 +97,20 @@
                         <a href="/modeChanger/0" class="alink">
                             <div class="icon">
                                 <i class="ri-moon-line"></i>
-                            </div> Light Mode
+                            </div><span> Light Mode</span>
                         </a>
                     </div>
                 <% } %>
                 <div class="link">
                     <a href="/profile/<%= loggedInUser._id %>" class="alink">
                         <div class="icon">
-                      <div class="profilePic"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></div></div> Profile</a>
+                      <div class="profilePic"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></div></div><span> Profile</span></a>
                 </div>
                 <div class="link">
                     <a href="/logout" class="alink">
                         <div class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
-                        </div> Logout
+                        </div><span> Logout</span>
                     </a>
                 </div>
             </div>

@@ -9,36 +9,73 @@ document.addEventListener("DOMContentLoaded", () => {
   // };
   // window.onunload = () => void 0;
   
+  
   let flag = 0;
-
   const searchBtn = document.querySelector('#searchBtn')
   if (searchBtn) {
     searchBtn.addEventListener("click", (e) => {
-      console.log(e.target)
-      if (flag === 0) {
-        searchBox.style.width = "25vmax";
-        document.querySelector("h2").style.opacity = "1";
-        document.querySelector(".inputField").style.opacity = "1";
-        document.querySelector(".searchList").style.opacity = "1";
-        document.querySelector("#searchCrossBtn").style.opacity = '1'
-        flag = 1;
+      // console.log(window.innerWidth)
+
+      if (window.innerWidth > 500) {
+        if (flag === 0) {
+          searchBox.style.width = "25vmax";
+          document.querySelector("h2").style.opacity = "1";
+          document.querySelector(".inputField").style.opacity = "1";
+          document.querySelector(".searchList").style.opacity = "1";
+          document.querySelector("#searchCrossBtn").style.opacity = '1'
+          flag = 1;
+        } else {
+          document.querySelector("h2").style.opacity = "0";
+          document.querySelector(".inputField").style.opacity = "0";
+          document.querySelector(".searchList").style.opacity = "0";
+          searchBox.style.width = "0vmax";
+          flag = 0;
+        }
+
+        document.querySelector("#searchCrossBtn").addEventListener("click", () => {
+          document.querySelector("h2").style.opacity = "0";
+          document.querySelector(".inputField").style.opacity = "0";
+          document.querySelector(".searchList").style.opacity = "0";
+          document.querySelector("#searchCrossBtn").style.opacity = '0'
+          searchBox.style.width = "0vmax";
+          flag = 0;
+        });
+        
       } else {
-        document.querySelector("h2").style.opacity = "0";
-        document.querySelector(".inputField").style.opacity = "0";
-        document.querySelector(".searchList").style.opacity = "0";
-        searchBox.style.width = "0vmax";
-        flag = 0;
+        console.log(window.innerWidth)
+
+        // if (flag === 0) {
+        //   searchBox.style.opacity = '1';
+        //   searchBox.style.height = "17vmax";
+        //   searchBox.style.minHeight = "17vmax";
+        //   document.querySelector("h2").style.opacity = "1";
+        //   document.querySelector(".inputField").style.opacity = "1";
+        //   document.querySelector(".searchList").style.opacity = "1";
+        //   document.querySelector("#searchCrossBtn").style.opacity = '1'
+        //   flag = 1;
+        // } else {
+        //   document.querySelector("h2").style.opacity = "0";
+        //   document.querySelector(".inputField").style.opacity = "0";
+        //   document.querySelector(".searchList").style.opacity = "0";
+        //   searchBox.style.minHeight = "0vmax";
+        //   searchBox.style.height = "0vmax";
+        //   searchBox.style.opacity = '0';
+        //   flag = 0;
+        // }
+
+        // document.querySelector("#searchCrossBtn").addEventListener("click", () => {
+        //   document.querySelector("h2").style.opacity = "0";
+        //   document.querySelector(".inputField").style.opacity = "0";
+        //   document.querySelector(".searchList").style.opacity = "0";
+        //   document.querySelector("#searchCrossBtn").style.opacity = '0'
+        //   searchBox.style.height = "0vmax";
+        //   searchBox.style.minHeight = "0vmax";
+        //   searchBox.style.opacity = '0';
+        //   flag = 0;
+        // });
       }
     });
 
-    document.querySelector("#searchCrossBtn").addEventListener("click", () => {
-      document.querySelector("h2").style.opacity = "0";
-      document.querySelector(".inputField").style.opacity = "0";
-      document.querySelector(".searchList").style.opacity = "0";
-      document.querySelector("#searchCrossBtn").style.opacity = '0'
-      searchBox.style.width = "0vmax";
-      flag = 0;
-    });
   }
 
   // const formatter = Intl.NumberFormat('en', { notation: 'compact' });

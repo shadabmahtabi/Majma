@@ -66,7 +66,7 @@
                         <div class="icon">
                             <!-- <ion-icon name="home-outline"></ion-icon> -->
                             <i class="ri-home-2-line"></i>
-                        </div> Home
+                        </div><span> Home</span>
                     </a>
                 </div>
                 <div class="link">
@@ -74,22 +74,14 @@
                         <div class="icon">
                             <!-- <ion-icon name="compass-outline"></ion-icon> -->
                             <i class="ri-upload-cloud-2-line"></i>
-                        </div> Posts
+                        </div><span> Posts</span>
                     </div>
                 </div>
-                <div class="link">
+                <div class="link chat">
                     <a href="/openChat/<%= loggedInUser.username %>" class="alink"><div class="icon">
                       <i class="ri-chat-3-line"></i>
-                      <!-- <div class="count">5</div> --></div> Open Chat</a>
+                      <!-- <div class="count">5</div> --></div><span> Open Chat</span></a>
                 </div>
-                <!-- <div class="link">
-                    <a href="/progress" class="alink">
-                        <div class="icon">
-                            <i class="ri-notification-3-line"></i>
-                            <div class="count"></div>
-                        </div> Notifications
-                    </a>
-                </div> -->
                 <!-- <div class="link">
                     <a href="/progress" class="alink">
                         <div class="icon">
@@ -100,22 +92,15 @@
                 <div class="link">
                     <a href="/settings" class="alink"><div class="icon">
                       <ion-icon name="settings-outline"></ion-icon>
-                    </div>  Settings</a>
+                    </div><span>  Settings</span></a>
                 </div>
-                <!-- <div class="link">
-                    <a href="/settings" class="alink"><div class="icon">
-                        <ion-icon name="log-out-outline"></ion-icon>
-                    </div> Logout</a>
-                </div> -->
-                <!-- <div class="link">
-                    <a href="/profile/<%= loggedInUser.id %>" class="alink">
+                <div class="link">
+                    <a href="/logout" class="alink">
                         <div class="icon">
-                            <div class="profilePic"><img src="/images/<%= loggedInUser.profilePic %>"
-                                    alt="Proflie Pic">
-                            </div>
-                        </div> Profile
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </div><span> Logout</span>
                     </a>
-                </div> -->
+                </div>
             </div>
         </div>
         <div id="editBox">
