@@ -24,24 +24,28 @@ sign_up_btn.addEventListener("click", () => {
   } else {
     console.log(window.innerWidth)
     if (flag === 0) {
-      hider.style.transform = "translate(0, -110%)";
-      hider.style.alignItems = "flex-end";
+      hider.style.transform = "translate(0)";
+      hider.style.alignItems = "initial";
       document.querySelector("#heading").innerHTML = "One of Us ?";
       document.querySelector("#text").innerHTML =
       "Click the Sign In button to login yourself";
       sign_up_btn.innerHTML = "Sign In";
       loginForm.style.opacity = "0";
+      loginForm.style.pointerEvents = "none";
       registerForm.style.opacity = "1";
+      registerForm.style.pointerEvents = "initial";
       flag = 1;
     } else {
-      hider.style.transform = "translate(0)";
-      hider.style.alignItems = "initial";
+      hider.style.transform = "translate(0, -105%)";
+      hider.style.alignItems = "flex-end";
       document.querySelector("#heading").innerHTML = "New to Majma ?";
       document.querySelector("#text").innerHTML =
       "Click the Sign Up button to register yourself";
       sign_up_btn.innerHTML = "Sign Up";
       registerForm.style.opacity = "0";
+      registerForm.style.pointerEvents = "none";
       loginForm.style.opacity = "1";
+      loginForm.style.pointerEvents = "initial";
       flag = 0;
     }
   }
