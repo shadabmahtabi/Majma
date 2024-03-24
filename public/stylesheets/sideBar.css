@@ -234,6 +234,9 @@
   position: relative;
 }
 
+#searchBox2 {
+  display: none;
+}
 #searchBox {
   position: absolute;
   top: -170%;
@@ -397,7 +400,6 @@
 /* ----------------------- Responsive ----------------------- */
 
 @media only screen and (max-width: 500px) {
-
   #main #uploadBox {
     position: absolute;
     top: 0%;
@@ -500,7 +502,7 @@
     border: none;
     /* display: none; */
   }
-  
+
   #uploadBox .uploadForm form .imgName {
     height: 5vmin;
     width: 90%;
@@ -510,7 +512,7 @@
     align-items: center;
     padding-left: 1vw;
   }
-  
+
   #uploadBox .uploadForm form #desc {
     height: 15vmin;
     width: 90%;
@@ -521,7 +523,7 @@
     border-radius: 1vmin;
     outline: none;
   }
-  
+
   #sideBar {
     position: absolute;
     left: 0;
@@ -535,11 +537,11 @@
     padding: 0;
     /* overflow: hidden; */
   }
-  
+
   #sideBar .logoBox {
     display: none;
   }
-  
+
   #sideBar .links {
     position: relative;
     max-height: 100%;
@@ -552,13 +554,13 @@
     padding: 0;
     box-shadow: 0;
   }
-  
+
   #sideBar .links .link {
     height: 100%;
     width: 100%;
     /* background-color: rgb(212, 192, 63); */
   }
-  
+
   #sideBar .links .link .alink,
   #sideBar .links .link .linkDiv {
     height: 100%;
@@ -598,57 +600,132 @@
   }
 
   #searchBox {
+    display: none;
+  }
+
+  /* ---------------------------------------------------- */
+  #searchBox2 {
     position: absolute;
-    top: auto;
     bottom: 100%;
     left: 0%;
     max-height: 80vmax;
-    min-height: 17vmax;
-    /* opacity: 0; */
+    min-height: 0vmax;
     width: 100%;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 6vmin 0 1vmin 0;
+    background-image: var(--background);
+    z-index: 999;
+    overflow: hidden;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1) .5s;
+    padding: 6vmax 0 2vmax 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 2vmax;
+    opacity: 0;
+    pointer-events: none;
   }
 
-  #searchBox #searchCrossBtn {
+  #searchBox2 #searchCrossBtn2 {
+    position: absolute;
+    top: 0;
+    right: 0;
     height: 6vmax;
     width: 6vmax;
+    /* background-color: rgb(255, 206, 206); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 2vmax;
-    /* display: none; */
+    cursor: pointer;
   }
 
-  #searchBox h2 {
+  #searchBox2 h2 {
     font-size: 2.7vmax;
     text-align: center;
   }
 
-  #searchBox .inputField {
+  #searchBox2 .inputField {
     height: 50px;
     width: 90%;
     border-radius: 1vmax;
+    border: none;
+    outline: none;
+    /* padding-left: 1vw; */
+    background-color: #fff;
+    display: flex;
   }
 
-  #searchBox .inputField input {
+  #searchBox2 .inputField .icon {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+  }
+
+  #searchBox2 .inputField input {
+    height: 100%;
+    width: 85%;
     border-radius: 1vmax;
-    padding: 1.3vmax .5vmax;
+    border: none;
+    outline: none;
     font-size: 2.4vmax;
+    background-color: #fff;
+    display: flex;
+    padding: 1.3vmax 0.5vmax;
   }
 
-  #searchBox .searchList {
+  #searchBox2 .searchList2 {
+    height: 85%;
     width: 90%;
+    list-style: none;
+    overflow: auto;
   }
 
-  .searchList li {
+   #searchBox2 .searchList2 li {
     height: 7vmax;
+    width: 100%;
+    background-color: #fff;
     border-radius: 1vmax;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1vmax;
   }
 
-  .searchList li #userLink .userProfilePic {
-    height: 45px;
+  #searchBox2 .searchList2 li #userLink {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--textColor);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 1vmin;
+    padding-left: 1rem;
+    font-size: 1.2rem;
+    user-select: none;
+    cursor: pointer;
+    /* background-color: antiquewhite; */
   }
+
+  #searchBox2 .searchList2 li #userLink .userProfilePic {
+    height: 45px;
+    width: 45px;
+    /* background-color: red; */
+    border-radius: 50%;
+  }
+
+  #searchBox2 .searchList2 li #userLink .userProfilePic img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  /* ---------------------------------------------------- */
 
   #sideBar .links .link a .profilePic {
     height: 1.7rem;

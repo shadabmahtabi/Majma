@@ -73,6 +73,17 @@
               </div>
               <ul class="searchList"></ul>
             </div>
+            <div id="searchBox2">
+              <div id="searchCrossBtn2">❌</div>
+              <h2>Search Box</h2>
+              <div class="inputField">
+                <div class="icon">
+                  <i class="ri-search-2-line"></i>
+                </div>
+                <input type="text" placeholder="Search" onkeyup="sendData(this,'<%= loggedInUser.id %>')">
+              </div>
+              <ul class="searchList2"></ul>
+            </div>
             <div class="linkDiv" id="searchBtn">
               <div class="icon">
                 <!-- <ion-icon name="search-outline"></ion-icon> -->
@@ -146,7 +157,7 @@
             <a href="#">
               <div><i class="ri-notification-3-line"></i></div>
             </a>
-            <a href="#">
+            <a href="/openChat/<%= loggedInUser.username %>">
               <div><i class="ri-chat-3-line"></i></div>
             </a>
           </div>
