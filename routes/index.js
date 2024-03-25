@@ -68,9 +68,10 @@ passport.use(new localStrategy(userModel.authenticate()));
 
 router.get("/login", function (req, res, next) {
   if (!req.user) {
-    res.render("login", { title: "Majma | Login Page" });
+    return res.render("login", { title: "Majma | Login Page" });
   }
-  res.redirect("back");
+  res.render("login", { title: "Majma | Login Page" });
+  // res.redirect("back");
 });
 
 router.post(
