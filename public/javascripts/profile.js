@@ -1,31 +1,68 @@
 const editBtn = document.querySelector("#editBtn");
+const editBtn2 = document.querySelector("#editBtn2");
 
 // ------------------------- Edit profile details  -------------------------
 
-if (editBtn) {
-  editBtn.addEventListener("click", () => {
+if (window.innerWidth > 500) {
+  if (editBtn) {
+    editBtn.addEventListener("click", () => {
+      // console.log('click');
+      document.querySelector("#editBox").style.opacity = 1;
+      document.querySelector("#editBox").style.pointerEvents = "initial";
+    });
+  }
+
+  document.querySelector("#crossBtn").addEventListener("click", () => {
     // console.log('click');
-    document.querySelector("#editBox").style.opacity = 1;
-    document.querySelector("#editBox").style.pointerEvents = "initial";
+    document.querySelector("#editBox").style.pointerEvents = "none";
+    document.querySelector("#editBox").style.opacity = 0;
+  });
+} else {
+  if (editBtn2) {
+    editBtn2.addEventListener("click", () => {
+      // console.log('click');
+      document.querySelector("#editBox").style.opacity = 1;
+      document.querySelector("#editBox").style.pointerEvents = "initial";
+    });
+  }
+
+  document.querySelector("#crossBtn").addEventListener("click", () => {
+    // console.log('click');
+    document.querySelector("#editBox").style.pointerEvents = "none";
+    document.querySelector("#editBox").style.opacity = 0;
   });
 }
 
-document.querySelector("#crossBtn").addEventListener("click", () => {
-  // console.log('click');
-  document.querySelector("#editBox").style.pointerEvents = "none";
-  document.querySelector("#editBox").style.opacity = 0;
-});
-
 //  ------------------------- Edit profile picture  -------------------------
-document.querySelector("#editProfileDiv").addEventListener("click", () => {
-  document.querySelector("#editProfileBox").style.opacity = 1;
-  document.querySelector("#editProfileBox").style.pointerEvents = "initial";
-});
 
-document.querySelector("#closeProfileBtn").addEventListener("click", () => {
-  document.querySelector("#editProfileBox").style.pointerEvents = "none";
-  document.querySelector("#editProfileBox").style.opacity = 0;
-});
+let editProfileDiv = document.querySelector("#editProfileDiv");
+let editProfileDiv2 = document.querySelector("#editProfileDiv2");
+
+if (window.innerWidth > 500) {
+  if (editProfileDiv) {
+    editProfileDiv.addEventListener("click", () => {
+      document.querySelector("#editProfileBox").style.opacity = 1;
+      document.querySelector("#editProfileBox").style.pointerEvents = "initial";
+    });
+    
+    document.querySelector("#closeProfileBtn").addEventListener("click", () => {
+      document.querySelector("#editProfileBox").style.pointerEvents = "none";
+      document.querySelector("#editProfileBox").style.opacity = 0;
+    });
+  }
+} else {
+  if (editProfileDiv2) {
+    editProfileDiv2.addEventListener("click", () => {
+      document.querySelector("#editProfileBox").style.opacity = 1;
+      document.querySelector("#editProfileBox").style.pointerEvents = "initial";
+    });
+    
+    document.querySelector("#closeProfileBtn").addEventListener("click", () => {
+      document.querySelector("#editProfileBox").style.pointerEvents = "none";
+      document.querySelector("#editProfileBox").style.opacity = 0;
+    });
+  }
+}
 
 document.querySelector("#editProfilePic").addEventListener("click", () => {
   document.querySelector("#imgInput").click();
@@ -74,17 +111,17 @@ $(".showF").click(function () {
   $(this).addClass("active").siblings().removeClass("active");
 });
 
-let following = document.querySelector('#following');
-let followers = document.querySelector('#followers');
+let following = document.querySelector("#following");
+let followers = document.querySelector("#followers");
 
-document.querySelectorAll('.showF').forEach(itm => {
-  itm.addEventListener('click', e => {
-    if (e.target.innerHTML.toLowerCase() === 'followers') {
-      following.style.left = '-100%';
-      followers.style.left = '0';
+document.querySelectorAll(".showF").forEach((itm) => {
+  itm.addEventListener("click", (e) => {
+    if (e.target.innerHTML.toLowerCase() === "followers") {
+      following.style.left = "-100%";
+      followers.style.left = "0";
     } else {
-      followers.style.left = '100%';
-      following.style.left = '0';
+      followers.style.left = "100%";
+      following.style.left = "0";
     }
   });
 });

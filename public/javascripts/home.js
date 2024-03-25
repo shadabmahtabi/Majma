@@ -8,12 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
   //   if (event.persisted) disableBackBtn();
   // };
   // window.onunload = () => void 0;
-  
-  
+
   let flag = 0;
-  const searchBtn = document.querySelector('#searchBtn')
-  const searchBox = document.querySelector('#searchBox')
-  const searchBox2 = document.querySelector('#searchBox2')
+  const searchBtn = document.querySelector("#searchBtn");
+  const searchBox = document.querySelector("#searchBox");
+  const searchBox2 = document.querySelector("#searchBox2");
   if (searchBtn) {
     searchBtn.addEventListener("click", (e) => {
       // console.log(window.innerWidth)
@@ -24,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
           document.querySelector("h2").style.opacity = "1";
           document.querySelector(".inputField").style.opacity = "1";
           document.querySelector(".searchList").style.opacity = "1";
-          document.querySelector("#searchCrossBtn").style.opacity = '1'
+          document.querySelector("#searchCrossBtn").style.opacity = "1";
           flag = 1;
         } else {
           document.querySelector("h2").style.opacity = "0";
@@ -34,24 +33,25 @@ document.addEventListener("DOMContentLoaded", () => {
           flag = 0;
         }
 
-        document.querySelector("#searchCrossBtn").addEventListener("click", () => {
-          document.querySelector("h2").style.opacity = "0";
-          document.querySelector(".inputField").style.opacity = "0";
-          document.querySelector(".searchList").style.opacity = "0";
-          document.querySelector("#searchCrossBtn").style.opacity = '0'
-          searchBox.style.width = "0vmax";
-          flag = 0;
-        });
-        
+        document
+          .querySelector("#searchCrossBtn")
+          .addEventListener("click", () => {
+            document.querySelector("h2").style.opacity = "0";
+            document.querySelector(".inputField").style.opacity = "0";
+            document.querySelector(".searchList").style.opacity = "0";
+            document.querySelector("#searchCrossBtn").style.opacity = "0";
+            searchBox.style.width = "0vmax";
+            flag = 0;
+          });
       } else {
         // console.log(window.innerWidth)
         if (flag === 0) {
-          searchBox2.style.opacity = '1';
+          searchBox2.style.opacity = "1";
           searchBox2.style.minHeight = "17vmax";
           document.querySelector("h2").style.opacity = "1";
           document.querySelector(".inputField").style.opacity = "1";
           document.querySelector(".searchList").style.opacity = "1";
-          document.querySelector("#searchCrossBtn2").style.opacity = '1'
+          document.querySelector("#searchCrossBtn2").style.opacity = "1";
           searchBox2.style.pointerEvents = "initial";
           flag = 1;
         } else {
@@ -61,23 +61,24 @@ document.addEventListener("DOMContentLoaded", () => {
           document.querySelector(".searchList").style.opacity = "0";
           document.querySelector("h2").style.opacity = "0";
           searchBox2.style.minHeight = "0vmax";
-          searchBox2.style.opacity = '0';
+          searchBox2.style.opacity = "0";
           flag = 0;
         }
-        
-        document.querySelector("#searchCrossBtn2").addEventListener("click", () => {
-          searchBox2.style.pointerEvents = "none";
-          document.querySelector("h2").style.opacity = "0";
-          document.querySelector(".inputField").style.opacity = "0";
-          document.querySelector(".searchList").style.opacity = "0";
-          document.querySelector("#searchCrossBtn2").style.opacity = '0'
-          searchBox2.style.minHeight = "0vmax";
-          searchBox2.style.opacity = '0';
-          flag = 0;
-        });
+
+        document
+          .querySelector("#searchCrossBtn2")
+          .addEventListener("click", () => {
+            searchBox2.style.pointerEvents = "none";
+            document.querySelector("h2").style.opacity = "0";
+            document.querySelector(".inputField").style.opacity = "0";
+            document.querySelector(".searchList").style.opacity = "0";
+            document.querySelector("#searchCrossBtn2").style.opacity = "0";
+            searchBox2.style.minHeight = "0vmax";
+            searchBox2.style.opacity = "0";
+            flag = 0;
+          });
       }
     });
-
   }
 
   // const formatter = Intl.NumberFormat('en', { notation: 'compact' });
@@ -105,21 +106,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  let options = document.querySelectorAll('.options');
-  let optionDiv = document.querySelector('.optionDiv');
-  let closeOption = document.querySelector('#closeOption');
+  let options = document.querySelectorAll(".options");
+  let optionDiv = document.querySelector(".optionDiv");
+  let closeOption = document.querySelector("#closeOption");
 
   options.forEach((item, index) => {
-    item.addEventListener('click', () => {
-      optionDiv.style.opacity = "1"
-      optionDiv.style.pointerEvents = "initial"
-    })
-  })
-  
-  closeOption.addEventListener('click', () => {
-    optionDiv.style.opacity = "0"
-    optionDiv.style.pointerEvents = "none"
-  })
+    item.addEventListener("click", () => {
+      optionDiv.style.opacity = "1";
+      optionDiv.style.pointerEvents = "initial";
+    });
+  });
+
+  if (closeOption) {
+    closeOption.addEventListener("click", () => {
+      optionDiv.style.opacity = "0";
+      optionDiv.style.pointerEvents = "none";
+    });
+  }
 
   // let commentBtns = document.querySelectorAll('#comments');
   // for(let i = 0; i < commentBtns.length; i++){

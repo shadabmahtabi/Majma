@@ -849,6 +849,16 @@ button {
   .post .postPic {
     border: none;
   }
+  
+  .post .postPic h1 {
+    height: 50vmax;
+    font-size: 3vmax;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--textColor);
+  }
 
   .post .postPic .blog {
     height: 30vmax;

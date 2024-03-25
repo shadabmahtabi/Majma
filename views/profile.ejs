@@ -110,7 +110,7 @@
         </div>
         <div id="editBox">
             <div class="editForm">
-                <div id="crossBtn">X</div>
+                <div id="crossBtn">❌</div>
                 <form action="/edit" method="post">
                     <h1>Edit Your Details</h1>
                     <h3>Fill any of the following to edit details</h3>
@@ -124,7 +124,7 @@
         </div>
         <div id="editProfileBox">
             <div class="editForm">
-                <div id="closeProfileBtn">X</div>
+                <div id="closeProfileBtn">❌</div>
                 <form action="/editProfile" method="post" enctype="multipart/form-data">
                     <h1>Upload Profile Image</h1>
                     <div class="profilePic" id="editProfilePic">
@@ -269,7 +269,7 @@
                 <div class="userDetailsForMobile">
                     <div class="username"><%= user.username %></div>
                     <div class="profileData">
-                        <div class="profilePic">
+                        <div class="profilePic" id="editProfileDiv2">
                             <img src="/images/<%= user.profilePic %>" alt="Profile Pic">
                         </div>
                         <div class="followDiv">
@@ -290,7 +290,7 @@
                     </div>
                     <div class="btns">
                         <% if(user.email===loggedInUser.email ){ %>
-                            <button id="editBtn"><i class="ri-edit-line"></i> Edit</button>
+                            <button id="editBtn2"><i class="ri-edit-line"></i> Edit</button>
                             <!-- <button id="settingBtn">
                                 <i class="ri-settings-4-line"></i>Settings</button> -->
                         <% }else{ %>
