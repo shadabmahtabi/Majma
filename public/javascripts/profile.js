@@ -44,7 +44,7 @@ if (window.innerWidth > 500) {
       document.querySelector("#editProfileBox").style.opacity = 1;
       document.querySelector("#editProfileBox").style.pointerEvents = "initial";
     });
-    
+
     document.querySelector("#closeProfileBtn").addEventListener("click", () => {
       document.querySelector("#editProfileBox").style.pointerEvents = "none";
       document.querySelector("#editProfileBox").style.opacity = 0;
@@ -56,7 +56,7 @@ if (window.innerWidth > 500) {
       document.querySelector("#editProfileBox").style.opacity = 1;
       document.querySelector("#editProfileBox").style.pointerEvents = "initial";
     });
-    
+
     document.querySelector("#closeProfileBtn").addEventListener("click", () => {
       document.querySelector("#editProfileBox").style.pointerEvents = "none";
       document.querySelector("#editProfileBox").style.opacity = 0;
@@ -94,12 +94,29 @@ document.querySelector("#imgInput").addEventListener("change", (e) => {
 //     }
 // })
 
-document.querySelectorAll(".parts").forEach((part) => {
-  part.addEventListener("click", (dets) => {
-    document.querySelector("#showFollowBox").style.opacity = 1;
-    document.querySelector("#showFollowBox").style.pointerEvents = "initial";
-  });
-});
+//  ------------------------- Follow Div -------------------------
+
+let followDivMobile = document.querySelector("#followDivMobile");
+let followParts = document.querySelectorAll(".parts");
+
+if (window.innerWidth > 500) {
+  if (followParts) {
+    followParts.forEach((part) => {
+      part.addEventListener("click", (dets) => {
+        document.querySelector("#showFollowBox").style.opacity = 1;
+        document.querySelector("#showFollowBox").style.pointerEvents =
+          "initial";
+      });
+    });
+  }
+} else {
+  if (followDivMobile) {
+    followDivMobile.addEventListener("click", (dets) => {
+      document.querySelector("#showFollowBox").style.opacity = 1;
+      document.querySelector("#showFollowBox").style.pointerEvents = "initial";
+    });
+  }
+}
 
 document.querySelector("#closeFollowBtn").addEventListener("click", (dets) => {
   // console.log("click");

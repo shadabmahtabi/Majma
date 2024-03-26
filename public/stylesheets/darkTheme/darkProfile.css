@@ -912,202 +912,55 @@
     }
     
     #editProfileBox .editForm form button {
-        padding: 1.5vmax 8vmax;
+        padding: 1.5vmax 9.5vmax;
+        border-radius: 3vmax;
+        font-size: 1.1rem;
     }
 
     /* ----------------------------------------------------------------- */
     
-    #main #showFollowBox {
-        position: absolute;
-        top: 0%;
-        left: 0%;
-        height: 100%;
-        width: 100%;
-        background-color: transparent;
-        backdrop-filter: blur(5px);
-        z-index: 99999999999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        user-select: none;
-        opacity: 0;
-        pointer-events: none;
-        transition: .3s;
-    }
-    
     #showFollowBox .followMain {
-        position: relative;
-        height: 80vmin;
-        width: 450px;
-        background-color: #fff;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        display: flex;
-        flex-direction: column;
-        /* align-items: center; */
-        /* justify-content: center; */
-        padding-top: 30px;
+        height: 60vmax;
+        width: 100%;
+        padding-top: 6vmax;
     }
     
     #showFollowBox .followMain #closeFollowBtn{
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 45px;
-        width: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        color: rgb(255, 43, 43);;
-        transition: .3s;
-        cursor: pointer;
-    }
-    
-    #showFollowBox .followMain #closeFollowBtn:hover{
-        background-color: red;
-        color: #fff;
+        height: 6vmax;
+        width: 6vmax;
+        font-size: 2.5vmax;
     }
     
     #showFollowBox .followMain .followNav{
-        height: 8vmin;
-        width: 100%;
-        /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
-        /* box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px; */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 25%;
-        /* color: var(--textColor); */
+        height: 7vmax;
+        /* background-color: red; */
     }
     
     #showFollowBox .followMain .followNav .showF{
-        font-size: 1.1rem;
-        font-weight: 600;
-        letter-spacing: 1px;
-        opacity: .4;
-        position: relative;
-        padding: 6px 10px;
-        transition:all ease 0.2s;
-    }
-    
-    #showFollowBox .followMain .followNav .showF:hover{
-        opacity: .6;
-    }
-    
-    #showFollowBox .followMain .followNav .showF {
-        text-decoration: none;
-        color: #000;
-    }
-    
-    #showFollowBox .followMain .followNav .showF:after{
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 3.5px;
-        width: 0%;
-        border-radius: 10px;
-        background-color: #000;
-        transition: all ease 0.4s;
-    }
-    
-    #showFollowBox .followMain .followNav .showF:hover:after{
-        width: 40%;
-    }
-    
-    #showFollowBox .followMain .followNav .showF.active{
-        opacity: 1;
-    }
-    
-    #showFollowBox .followMain .followNav .showF.active:after{
-        width: 100%;
-    }
-    
-    #showFollowBox .followMain .followListBox{
-        position: relative;
-        width: 100%;
-        height: 90%;
-        /* background-color: red; */
-        overflow: hidden;
+        font-size: 1.2rem;
     }
     
     #showFollowBox .followMain .followListBox .inputField{
-        height: 13%;
-        width: 100%;
-        /* background-color: rgb(235, 235, 243); */
-        background-image: var(--background);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    #showFollowBox .followMain .followListBox .inputField input{
-        height: 60%;
-        width: 90%;
-        border: none;
-        outline: none;
-        border-radius: 10px;
-        padding: 0 20px;
-        font-size: 1rem;
+        display: none;
     }
     
     #showFollowBox .followMain .followListBox .followList{
-        position: absolute;
-        bottom: 0;
-        height: 87%;
-        width: 100%;
+        height: 100%;
         /* background-color: red; */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        list-style: none;
-        padding: 10px 0;
-        gap: 10px;
-        overflow-y: scroll;
-        transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-    
-    #showFollowBox .followMain .followListBox #following {
-        left: 0;
-    }
-    
-    #showFollowBox .followMain .followListBox #followers {
-        left: 100%;
+        padding: 1.5vmax 0;
+        gap: 1.5vmax;
+        transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
     }
     
     #showFollowBox .followMain .followListBox li{
-        width: 90%;
-        height: 70px;
-        background-image: var(--background);
-        display: flex;
-        align-items: center;
+        height: 8vmax;
+        border-radius: 1vmax;
     }
     
     #showFollowBox .followMain .followListBox li a{
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        text-decoration: none;
-        color: var(--textColor);
-        font-size: 1.3rem;
-        padding: 15px;
-    }
-    
-    
-    #showFollowBox .followMain .followListBox li a .followProfilePic{
-        height: 50px;
-        width: 50px;
-        background-color: red;
-        border-radius: 50%;
-    }
-    
-    #showFollowBox .followMain .followListBox li a .followProfilePic img{
-        height: 100%;
-        width: 100%;
-        border-radius: 50%;
-        object-fit: cover;
+        gap: 2vmax;
+        padding: 2vmax;
+        font-size: 1.2rem;
     }
     
     /* ----------------------------------------------------------------- */
