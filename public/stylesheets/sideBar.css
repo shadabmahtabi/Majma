@@ -54,6 +54,14 @@
   /* background-color: rgb(216, 146, 146); */
 }
 
+#uploadBox .uploadForm form #uploadCrossBtn2 {
+  display: none;
+}
+
+#uploadImgBox {
+  display: none;
+}
+
 #uploadBox .uploadForm form .inputField {
   min-height: 0%;
   width: 90%;
@@ -72,6 +80,7 @@
   height: 20%;
   /* display: none; */
   opacity: 0;
+  pointer-events: none;
 }
 
 #uploadBox .uploadForm .formBtns {
@@ -101,13 +110,7 @@
 }
 
 #uploadBox .uploadForm form .imgName {
-  height: 5vmin;
-  width: 90%;
-  border: 0.1vw solid #000;
-  border-radius: 1vmin;
-  display: flex;
-  align-items: center;
-  padding-left: 1vw;
+  display: none;
 }
 
 #uploadBox .uploadForm form #desc {
@@ -400,129 +403,119 @@
 /* ----------------------- Responsive ----------------------- */
 
 @media only screen and (max-width: 500px) {
+
+  /* -------------------------------------------------- */
+  
   #main #uploadBox {
     position: absolute;
-    top: 0%;
-    left: 0%;
-    height: 100%;
-    width: 100%;
-    background-color: #00000046 transparent;
-    backdrop-filter: blur(5px);
-    z-index: 99999999999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s;
-    display: none;
+    top: -91vmax;
+    height: 100vmax;
+    user-select: initial;
+    /* opacity: 0; */
   }
 
   #uploadBox .uploadForm {
-    position: relative;
-    height: 60vmin;
-    width: 60vmin;
-    background-color: #fff;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 85vmax;
+    width: 100%;
+    background-color: transparent;
   }
 
   #uploadBox .uploadForm #uploadCrossBtn {
+    height: 6vmax;
+    width: 6vmax;
+    font-size: 2.5vmax;
+    display: none;
+  }
+
+  #uploadBox .uploadForm form {
+    min-height: 45vmax;
+    max-height: 90vmax;
+    width: 100%;
+    gap: 3vmax;
+    border-radius: 0;
+    padding: 5vmax 0;
+    background-color: rgb(255, 255, 255);
+    backdrop-filter: blur(5px);
+  }
+
+  #uploadBox .uploadForm form #uploadCrossBtn2 {
     position: absolute;
     top: 0;
     right: 0;
-    height: 4vmax;
-    width: 4vmax;
+    height: 6vmax;
+    width: 6vmax;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5vmax;
+    font-size: 2.5vmax;
     /* background-color: rgb(255, 218, 218); */
     cursor: pointer;
   }
 
-  #uploadBox .uploadForm form {
-    position: relative;
-    width: 90%;
+  #uploadBox .uploadForm form #uploadImgBox {
+    display: initial;
+    max-height: 50vmax;
+    /* height: 50vmax; */
+    width: 80%;
+    background-color: rgb(235, 235, 235);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3vmin;
+    /* border-radius: 1vmax; */
+    overflow: hidden;
+
+    .uploadImage {
+      max-height: 90%;
+      /* height: 90%; */
+      width: 100%;
+      /* background-color: blue; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* padding: 1vmax 0; */
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        display: none;
+      }
+    }
+  }
+
+  #uploadBox .uploadForm form .imgName {
+    /* height: 5vmin; */
+    width: 100%;
     border-radius: 1vmin;
-    padding: 15px 0;
-    /* background-color: rgb(216, 146, 146); */
+    display: flex;
+    align-items: center;
+    padding-left: 1vmax;
+    border: none;
+
   }
 
   #uploadBox .uploadForm form .inputField {
-    min-height: 0%;
-    width: 90%;
-    /* background-color: teal; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2vmin;
+    /* background-color: rgb(188, 254, 254); */
+    gap: 2vmax;
     /* justify-content: center; */
   }
 
-  #uploadBox .uploadForm form input {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 20%;
-    /* display: none; */
-    opacity: 0;
-  }
-
   #uploadBox .uploadForm .formBtns {
-    height: 7vmin;
-    width: 90%;
-    /* background-color: red; */
-    display: flex;
-    justify-content: space-between;
+    height: 5vmax;
   }
 
   #uploadBox .uploadForm form .browseBtn,
   #uploadBox .uploadForm form button {
-    height: 100%;
-    width: 49%;
-    color: var(--btnTextColor);
-    /* background-image: linear-gradient(90deg,rgb(177, 209, 229), rgb(65, 137, 225)); */
-    background-color: var(--btnColor);
-    border-radius: 1vmin;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;
-    border: none;
-    /* display: none; */
-  }
-
-  #uploadBox .uploadForm form .imgName {
-    height: 5vmin;
-    width: 90%;
-    border: 0.1vw solid #000;
-    border-radius: 1vmin;
-    display: flex;
-    align-items: center;
-    padding-left: 1vw;
+    border-radius: 3vmax;
   }
 
   #uploadBox .uploadForm form #desc {
-    height: 15vmin;
-    width: 90%;
-    border: 2px solid var(--btnColor);
-    resize: none;
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 1vmin;
-    outline: none;
+    height: 10vmax;
+    border: 1.5px solid var(--btnColor);
+    border-radius: 1vmax;
   }
+
+  /* --------------------------------------------------------- */
 
   #sideBar {
     position: absolute;
@@ -614,7 +607,7 @@
     background-image: var(--background);
     z-index: 999;
     overflow: hidden;
-    transition: cubic-bezier(0.165, 0.84, 0.44, 1) .5s;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s;
     padding: 6vmax 0 2vmax 0;
     display: flex;
     flex-direction: column;
@@ -682,7 +675,7 @@
     overflow: auto;
   }
 
-   #searchBox2 .searchList2 li {
+  #searchBox2 .searchList2 li {
     height: 7vmax;
     width: 100%;
     background-color: #fff;

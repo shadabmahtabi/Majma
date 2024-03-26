@@ -86,25 +86,55 @@ document.addEventListener("DOMContentLoaded", () => {
   // console.log(formatter.format(num));
 
   //  ------------------------- upload picture  -------------------------
-  document.querySelector("#upload").addEventListener("click", () => {
-    // console.log("click");
-    document.querySelector("#uploadBox").style.opacity = 1;
-    document.querySelector("#uploadBox").style.pointerEvents = "initial";
-  });
 
-  document.querySelector("#uploadCrossBtn").addEventListener("click", () => {
-    // console.log("click");
-    document.querySelector("#uploadBox").style.pointerEvents = "none";
-    document.querySelector("#uploadBox").style.opacity = 0;
-  });
+  let uploadBtn = document.querySelector("#upload");
+  let uploadCrossBtn = document.querySelector("#uploadCrossBtn");
+  let uploadCrossBtn2 = document.querySelector("#uploadCrossBtn2");
+
+  if (window.innerWidth > 500) {
+    if (uploadBtn) {
+      uploadBtn.addEventListener("click", () => {
+        // console.log("click");
+        document.querySelector("#uploadBox").style.opacity = 1;
+        document.querySelector("#uploadBox").style.pointerEvents = "initial";
+      });
+      
+      uploadCrossBtn.addEventListener("click", () => {
+          // console.log("click");
+          document.querySelector("#uploadBox").style.pointerEvents = "none";
+          document.querySelector("#uploadBox").style.opacity = 0;
+        });
+    }
+  } else {
+    if (uploadBtn) {
+      uploadBtn.addEventListener("click", () => {
+        // console.log("click");
+        document.querySelector("#uploadBox").style.opacity = 1;
+        document.querySelector("#uploadBox").style.pointerEvents = "initial";
+      });
+
+      uploadCrossBtn2.addEventListener("click", () => {
+          // console.log("click");
+          document.querySelector("#uploadBox").style.pointerEvents = "none";
+          document.querySelector("#uploadBox").style.opacity = 0;
+        });
+    }
+  }
+
+  let fileInput = document.querySelector("#input");
 
   document.querySelector("#btn").addEventListener("click", () => {
-    document.querySelector("#input").click();
-    if (document.querySelector("#input").value) {
-      document.querySelector(".imgName").innerHTML =
-        document.querySelector("#input").value;
-    }
+    fileInput.click();
+    fileInput.addEventListener("change", function(e) {
+      document.querySelector("#imgU").style.display = "initial";
+      document.querySelector("#imgU").setAttribute("src", URL.createObjectURL(e.target.files[0]));
+      console.log(e.target.files[0].name);
+      document.querySelector(".imgName").innerHTML = `${e.target.files[0].name}`;
+      document.querySelector(".imgName").style.padding = '2vmax 2vmax';
+    });
   });
+
+  // --------------------------------------------------------------
 
   let options = document.querySelectorAll(".options");
   let optionDiv = document.querySelector(".optionDiv");

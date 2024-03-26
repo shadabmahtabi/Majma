@@ -29,7 +29,14 @@
                 <div class="uploadForm">
                     <div id="uploadCrossBtn">❌</div>
                     <form action="/upload" method="post" enctype="multipart/form-data">
+                        <div id="uploadCrossBtn2">❌</div>
                         <h1>Upload Image</h1>
+                        <div id="uploadImgBox">
+                            <div class="uploadImage">
+                              <img id="imgU" src="" alt="Image Not Found">
+                            </div>
+                            <div class="imgName"></div>
+                        </div>
                         <div class="inputField">
                             <textarea name="desc" id="desc" placeholder="Enter something about the post..."></textarea>
                             <!-- <div class="imgName"></div> -->
@@ -70,11 +77,6 @@
                     </a>
                 </div>
                 <div class="link">
-                    <a href="/settings" class="alink"><div class="icon">
-                      <ion-icon name="settings-outline"></ion-icon>
-                    </div><span>  Settings</span></a>
-                </div>
-                <div class="link">
                     <div class="linkDiv" id="upload">
                         <div class="icon">
                             <!-- <ion-icon name="compass-outline"></ion-icon> -->
@@ -95,10 +97,15 @@
                     </a>
                 </div> -->
                 <div class="link">
+                    <a href="/settings" class="alink"><div class="icon">
+                      <ion-icon name="settings-outline"></ion-icon>
+                    </div><span>  Settings</span></a>
+                </div>
+                <!-- <div class="link">
                     <a href="/profile/<%= loggedInUser._id %>" class="alink">
                         <div class="icon">
                       <div class="profilePic"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></div></div><span> Profile</span></a>
-                </div>
+                </div> -->
                 <div class="link">
                     <a href="/logout" class="alink">
                         <div class="icon">

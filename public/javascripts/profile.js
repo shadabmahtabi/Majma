@@ -74,26 +74,6 @@ document.querySelector("#imgInput").addEventListener("change", (e) => {
     .setAttribute("src", URL.createObjectURL(e.target.files[0]));
 });
 
-//  ------------------------- upload picture  -------------------------
-// document.querySelector('#upload').addEventListener('click', ()=>{
-//     console.log('click');
-//     document.querySelector('#uploadBox').style.opacity = 1;
-//     document.querySelector('#uploadBox').style.pointerEvents = 'initial';
-// })
-
-// document.querySelector('#uploadCrossBtn').addEventListener('click', () => {
-//     // console.log('click');
-//     document.querySelector('#uploadBox').style.pointerEvents = 'none';
-//     document.querySelector('#uploadBox').style.opacity = 0;
-// })
-
-// document.querySelector('#btn').addEventListener('click', () => {
-//     document.querySelector('#input').click();
-//     if (document.querySelector('#input').value) {
-//         document.querySelector('.imgName').innerHTML = document.querySelector('#input').value;
-//     }
-// })
-
 //  ------------------------- Follow Div -------------------------
 
 let followDivMobile = document.querySelector("#followDivMobile");

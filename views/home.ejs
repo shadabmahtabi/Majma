@@ -27,10 +27,16 @@
           <div class="uploadForm">
             <div id="uploadCrossBtn">❌</div>
             <form action="/upload" method="post" enctype="multipart/form-data">
+              <div id="uploadCrossBtn2">❌</div>
               <h1>Upload Image</h1>
+              <div id="uploadImgBox">
+                <div class="uploadImage">
+                  <img id="imgU" src="" alt="Image Not Found">
+                </div>
+                <div class="imgName"></div>
+              </div>
               <div class="inputField">
                 <textarea name="desc" id="desc" placeholder="Enter something about the post..."></textarea>
-                <!-- <div class="imgName"></div> -->
                 <input type="file" id="input" name="image" required>
                 <div class="formBtns">
                   <div id="btn" class="browseBtn">Browse</div>
