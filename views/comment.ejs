@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1">
     <title>
         <%= title %>
     </title>
@@ -41,10 +41,12 @@
             </ul>
         </div>
         <div id="commentBox" class="commentBox">
-            <div id="commentCrossBtn">
-                <!-- <i class="ri-arrow-left-line"></i> -->
-                <ion-icon name="arrow-back-outline"></ion-icon>
-            </div>
+            <a href="/">
+                <div id="commentCrossBtn">
+                    <!-- <i class="ri-arrow-left-line"></i> -->
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </div>
+            </a>
             <div class="commentForm">
                 <div class="postImg">
                     <% if( post.blog ){ %>
@@ -76,7 +78,7 @@
                     <div class="inputCommentField">
                         <form action="/comment/<%= post.id %>" method="post">
                             <input type="text" name="comment" placeholder="Comment..." autocomplete="off" required>
-                            <button id="commentBtn">Post</button>
+                            <button id="commentBtn"></button>
                         </form>
                     </div>
                 </div>

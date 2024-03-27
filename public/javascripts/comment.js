@@ -1,7 +1,7 @@
-let backBtn = document.querySelector('#commentCrossBtn');
-backBtn.addEventListener('click', () => {
-  history.back()
-})
+// let backBtn = document.querySelector('#commentCrossBtn');
+// backBtn.addEventListener('click', () => {
+//   history.back()
+// })
 
 let optionBtn = document.querySelector(".options");
 let optionBox = document.querySelector("#optionDiv");
@@ -25,3 +25,17 @@ function scrollToBottom() {
 window.addEventListener("load", () => {
   scrollToBottom();
 });
+
+let commentBtn = document.querySelector("#commentBtn");
+
+console.log(window.innerWidth)
+
+if (window.innerWidth > 500) {
+  if (commentBtn) {
+    commentBtn.innerHTML = "Post";
+  }
+} else {
+  if (commentBtn) {
+    commentBtn.innerHTML = `<ion-icon name="send"></ion-icon>`;
+  }
+}
