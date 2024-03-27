@@ -98,12 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#uploadBox").style.opacity = 1;
         document.querySelector("#uploadBox").style.pointerEvents = "initial";
       });
-      
+
       uploadCrossBtn.addEventListener("click", () => {
-          // console.log("click");
-          document.querySelector("#uploadBox").style.pointerEvents = "none";
-          document.querySelector("#uploadBox").style.opacity = 0;
-        });
+        // console.log("click");
+        document.querySelector("#uploadBox").style.pointerEvents = "none";
+        document.querySelector("#uploadBox").style.opacity = 0;
+      });
     }
   } else {
     if (uploadBtn) {
@@ -114,25 +114,32 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       uploadCrossBtn2.addEventListener("click", () => {
-          // console.log("click");
-          document.querySelector("#uploadBox").style.pointerEvents = "none";
-          document.querySelector("#uploadBox").style.opacity = 0;
-        });
+        // console.log("click");
+        document.querySelector("#uploadBox").style.pointerEvents = "none";
+        document.querySelector("#uploadBox").style.opacity = 0;
+      });
     }
   }
 
   let fileInput = document.querySelector("#input");
+  let fileInputBtn = document.querySelector("#btn");
 
-  document.querySelector("#btn").addEventListener("click", () => {
-    fileInput.click();
-    fileInput.addEventListener("change", function(e) {
-      document.querySelector("#imgU").style.display = "initial";
-      document.querySelector("#imgU").setAttribute("src", URL.createObjectURL(e.target.files[0]));
-      console.log(e.target.files[0].name);
-      document.querySelector(".imgName").innerHTML = `${e.target.files[0].name}`;
-      document.querySelector(".imgName").style.padding = '2vmax 2vmax';
+  if (fileInputBtn) {
+    fileInputBtn.addEventListener("click", () => {
+      fileInput.click();
+      fileInput.addEventListener("change", function (e) {
+        document.querySelector("#imgU").style.display = "initial";
+        document
+          .querySelector("#imgU")
+          .setAttribute("src", URL.createObjectURL(e.target.files[0]));
+        console.log(e.target.files[0].name);
+        document.querySelector(
+          ".imgName"
+        ).innerHTML = `${e.target.files[0].name}`;
+        document.querySelector(".imgName").style.padding = "2vmax 2vmax";
+      });
     });
-  });
+  }
 
   // --------------------------------------------------------------
 

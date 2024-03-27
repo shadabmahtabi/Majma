@@ -1,78 +1,75 @@
 @import url("https://fonts.googleapis.com/css2?family=Caudex&display=swap");
 
 ::selection {
-  color: var(--btnTextColor);
-  background: var(--btnColor);
+    color: var(--btnTextColor);
+    background: var(--btnColor);
 }
 
 ::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 :root {
-  --textColor: #eeeeeeba;
-  --background: linear-gradient(90deg, #42454f, #4a4e5b, #373b46);
-  --btnTextColor: rgb(239, 240, 245);
-  --btnColor: #2bc5b4;
-  --darkBackground: #2a2d36;
-  --inputBackground: #eeeeee;
-  /* --background: linear-gradient(90deg, rgb(80, 80, 80), rgb(70, 70, 70), rgb(60, 60, 60)); */
-  /* --background: #ffdada; */
-  /* --textColor: #000000ca; */
-  /* --background: linear-gradient(90deg, rgb(240, 240, 240), rgb(238, 238, 238), rgb(236, 236, 236)); */
+    --textColor: #eeeeeeba;
+    --background: linear-gradient(90deg, #42454f, #4a4e5b, #373b46);
+    --btnTextColor: rgb(239, 240, 245);
+    --btnColor: #2BC5B4;
+    --darkBackground: #2A2D36;
+    --inputBackground: #eeeeee;
+    /* --background: linear-gradient(90deg, rgb(80, 80, 80), rgb(70, 70, 70), rgb(60, 60, 60)); */
+    /* --background: #ffdada; */
+    /* --textColor: #000000ca; */
+    /* --background: linear-gradient(90deg, rgb(240, 240, 240), rgb(238, 238, 238), rgb(236, 236, 236)); */
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /* font-family: gilroy; */
-  font-family: "Caudex", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: gilroy; */
+    font-family: "Caudex", sans-serif;
 }
 
 html,
 body {
-  height: 100%;
-  width: 100%;
-  background-color: #000000;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
 }
 
 #main #loader {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #000000;
-  z-index: 999999999999999999999999999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    z-index: 999999999999999999999999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #main #loader img {
-  height: 90%;
-  border-radius: 50%;
+    height: 90%;
+    border-radius: 50%;
+
 }
 
 /* ---------------------- Responsive ---------------------- */
 
 @media only screen and (max-width: 500px) {
-  :root {
-    --textColor: #fff;
-  }
 
-  html,
-  body {
-    height: -webkit-fill-available;
-    width: 100%;
-  }
+    :root {
+        --textColor: #fff;
+    }
+    
+    #main #loader {
+        align-items: center;
+    }
+    
+    #main #loader img {
+        height: 40%;
+    }
 
-  #main #loader {
-    align-items: center;
-  }
-
-  #main #loader img {
-    height: 40%;
-  }
 }
