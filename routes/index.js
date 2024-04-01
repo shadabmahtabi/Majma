@@ -63,6 +63,7 @@ router.get("/moreDetails", function (req, res, next) {
 // ------------------ Passport Login Starts Here ------------------
 
 var localStrategy = require("passport-local");
+const ErrorHandler = require("../utils/ErrorHandler.js");
 // const { url } = require('inspector');
 passport.use(new localStrategy(userModel.authenticate()));
 
@@ -83,17 +84,51 @@ router.post(
   function (req, res, next) {}
 );
 
+// router.post("/register", function (req, res, next) {
+//   var newUser = new userModel({
+//     username: req.body.username,
+//     name: req.body.name,
+//     email: req.body.email,
+//   });
+//   userModel.register(newUser, req.body.password).then((registeredUser) => {
+//     passport.authenticate("local")(req, res, () => {
+//       res.redirect("/");
+//     });
+//   });
+// });
+
 router.post("/register", function (req, res, next) {
   var newUser = new userModel({
     username: req.body.username,
     name: req.body.name,
     email: req.body.email,
   });
-  userModel.register(newUser, req.body.password).then((registeredUser) => {
-    passport.authenticate("local")(req, res, () => {
-      res.redirect("/");
-    });
-  });
+
+  userModel.register(
+    newUser,
+    req.body.password,
+    function (err, registeredUser) {
+      if (err) {
+        // Check if the error is due to a duplicate username
+        // if (err.name === "UserExistsError") {
+        //   return res
+        //     .status(400)
+        //     .json({
+        //       error: "Username already exists, please choose another one",
+        //     });
+        // } else {
+        //   // For other types of errors, send a generic error response
+        //   return res.status(500).json({ error: "Error registering user" });
+        // }
+        return next(new ErrorHandler(`${err.message}`, 400))
+      }
+
+      // If registration is successful, authenticate the user
+      passport.authenticate("local")(req, res, () => {
+        res.redirect("/");
+      });
+    }
+  );
 });
 
 router.get("/logout", function (req, res) {
