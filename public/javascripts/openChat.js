@@ -51,3 +51,10 @@ function appendMessage(msg, type) {
 function scrollToBottom() {
     chatList.scrollTop = chatList.scrollHeight;
 }
+
+// ------------------------------------------------------
+const sideBar = document.querySelector('#sideBar');
+
+if(window.innerWidth < 500) {
+    sideBar.style.display = "none";
+}

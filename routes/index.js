@@ -68,7 +68,6 @@ const ErrorHandler = require("../utils/ErrorHandler.js");
 passport.use(new localStrategy(userModel.authenticate()));
 
 router.get("/login", function (req, res, next) {
-  console.log(req.user)
   if (!req.user) {
     return res.render("login", { title: "Majma | Login Page" });
   }

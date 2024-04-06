@@ -28,6 +28,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 1.5vw;
+
+    #backBtn {
+        display: none;
+    }
 }
 
 .chatSection .chatNav a{
@@ -166,4 +170,135 @@
     align-items: center;
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+}
+
+/* ----------------- Responsive --------------------- */
+@media only screen and (max-width: 500px) {
+    #main .chatSection {
+        height: 100%;
+        width: 100%;
+        gap: 0vmin;
+        padding: 0;
+        /* background-color: red; */
+    }
+    
+    .chatSection .chatNav{
+        position: relative;
+        height: 11vmax;
+        width: 100%;
+        background: none;
+        border-radius: 0;
+        box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 2vmax 2vmax;
+
+        h2 {
+            font-size: 2.5vmax;
+        }
+
+        #backBtn {
+            display: initial;
+            position: absolute;
+            top: 15%;
+            left: 3%;
+            font-size: 3.5vmax;
+        }
+    }
+    
+    .chatSection .chatNav a h3{
+        padding: 1vmax;
+        border: 1px solid #e1e1e1;
+        border-radius: 50%;
+
+        #username {
+            display: none;
+        }
+    }
+    
+    .chatSection .chatBox{
+        position: relative;
+        height: 89vmax;
+        width: 100%;
+        background: none;
+        box-shadow: 0;
+        border-radius: 0;
+    }
+    
+    .chatSection .chatBox .chatList{
+        height: 90%;
+        background: none;
+        border-radius: 0;
+        padding: 1vmax 1vmax;
+
+        p {
+            width: 100%;
+            text-align: center;
+            border-bottom: .3px solid #e1e1e1;
+            padding-bottom: 1vmax;
+        }
+    }
+    
+    .chatSection .chatBox .chatList .incomingMsg, 
+    .chatSection .chatBox .chatList .outgoingMsg{
+        min-height: 6vmax;
+        width: fit-content;
+        max-width: 90%;
+        /* max-width: 60%; */
+        border-radius: 0;
+        padding-bottom: 1vmax;
+    }
+    
+    .chatSection .chatBox .chatList .outgoingMsg h3{
+        background-color: var(--btnColor);
+        border-radius: 1vmax;
+        padding: 1vmax;
+        white-space: wrap;
+        overflow: hidden;
+    }
+    
+    .chatSection .chatBox .chatList .outgoingMsg h5, .chatSection .chatBox .chatList .incomingMsg h5{
+        padding: .3vmax 0 .1vmax .5vmax;
+    }
+
+    .chatSection .chatBox .chatList .outgoingMsg h5 {
+        width: 100%;
+        text-align: right;
+    }
+    
+    .chatSection .chatBox .chatList .incomingMsg h3{
+        padding: 1vmax;
+        border-radius: 1vmax;
+        white-space: wrap;
+        overflow: hidden;
+    }
+    
+    .chatSection .chatBox .chatInput{
+        height: 10%;
+        /* background: var(--background); */
+        border-top: 0;
+        box-shadow: rgba(0, 0, 0, 0.154) 0px -4px 12px;
+        backdrop-filter: none;
+    }
+    
+    .chatSection .chatBox .chatInput .chatInpField{
+        height: 70%;
+        width: 95%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 1vmax;
+    }
+    
+    .chatSection .chatBox .chatInput .chatInpField #chatMsg{
+        width: 82%;
+        border-radius: 1vmax;
+        padding: 1vmax 1.5vmax;
+        font-size: 1.8vmax;
+        box-shadow: none;
+    }
+    
+    .chatSection .chatBox .chatInput .chatInpField .chatBtn{
+        width: 16%;
+        box-shadow: none;
+    }
 }
