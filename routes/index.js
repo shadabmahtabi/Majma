@@ -429,10 +429,10 @@ router.get("/delete/:id", isLoggedIn, async (req, res) => {
     // Delete the image from GridFS and delete the post
     await gridFsBucket.delete(new mongoose.Types.ObjectId(post.imageId));
     await postModel.findOneAndDelete({ _id: postId }, { new: true });
-    return res.redirect(`/profile/${user._id}`);
+    return res.redirect(`/profile/${user.username}`);
   }
 
-  // res.redirect(`/profile/${user._id}`);
+  // res.redirect(`/profile/${user.username}`);
   res.redirect("back");
 });
 
@@ -515,9 +515,9 @@ router.get("/progress", function (req, res, next) {
   res.render("progress");
 });
 
-router.get("/profile/:id", isLoggedIn, async function (req, res, next) {
+router.get("/profile/:username", isLoggedIn, async function (req, res, next) {
   var user = await userModel
-    .findOne({ _id: req.params.id })
+    .findOne({ username: req.params.username })
     .populate("posts")
     .populate({
       path: "following",
@@ -602,10 +602,17 @@ router.get("/modeChanger/:n", isLoggedIn, async (req, res) => {
   // console.log(user);
 });
 
+router.get("/openChat", isLoggedIn, async (req, res) => {
+  // var loggedInUser = await userModel.findOne({ username: req.params.username });
+  var loggedInUser = req.user;
+  // console.log(loggedInUser);
+  res.render("openChat", { title: "Majma | OpenChat Page", loggedInUser });
+});
+
 router.get("/openChat/:username", isLoggedIn, async (req, res) => {
   var loggedInUser = await userModel.findOne({ username: req.params.username });
   // console.log(loggedInUser);
-  res.render("openChat", { title: "Majma | OpenChat Page", loggedInUser });
+  // res.render("openChat", { title: "Majma | OpenChat Page", loggedInUser });
 });
 
 // ------------------ GET routes ------------------

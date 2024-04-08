@@ -88,6 +88,11 @@
 .chatSection .chatBox .chatList .outgoingMsg h5,
 .chatSection .chatBox .chatList .incomingMsg h5 {
   padding: 0.3vw 0 0.1vw 0.5vw;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .chatSection .chatBox .chatList .incomingMsg {
@@ -264,7 +269,7 @@
   }
 
   .chatSection .chatBox .chatList .incomingMsg {
-    padding-bottom: 1vmax;
+    padding-top: 1vmax;
 
     h3 {
       padding: 1vmax;

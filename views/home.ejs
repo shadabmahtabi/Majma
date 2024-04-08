@@ -106,7 +106,7 @@
             </div>
           </div>
           <div class="link chat">
-            <a href="/openChat/<%= loggedInUser.username %>" class="alink"><div class="icon">
+            <a href="/openChat" class="alink"><div class="icon">
               <i class="ri-chat-3-line"></i>
               <!-- <div class="count">5</div> --></div><span> Open Chat</span></a>
           </div>
@@ -126,7 +126,7 @@
             </div><span> Settings</span></a>
           </div>
           <div class="link">
-            <a href="/profile/<%= loggedInUser._id %>" class="alink"><div class="icon">
+            <a href="/profile/<%= loggedInUser.username %>" class="alink"><div class="icon">
               <div class="profilePic"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></div></div><span> Profile</span></a>
           </div>
         </div>
@@ -139,7 +139,7 @@
             </a>
           </div>
           <div class="link">
-            <a href="/profile/<%= loggedInUser._id %>" class="alink">
+            <a href="/profile/<%= loggedInUser.username %>" class="alink">
               <div class="icon">
                 <div class="profilePic">
                   <img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic">
@@ -163,7 +163,7 @@
             <a href="#">
               <div><i class="ri-notification-3-line"></i></div>
             </a>
-            <a href="/openChat/<%= loggedInUser.username %>">
+            <a href="/openChat">
               <div><i class="ri-chat-3-line"></i></div>
             </a>
           </div>
@@ -172,10 +172,10 @@
           <form action="/createBlog" method="post">
             <div class="rows">
               <div class="formUserPic">
-                <a href="/profile/<%= loggedInUser._id %>"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></a>
+                <a href="/profile/<%= loggedInUser.username %>"><img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic"></a>
               </div>
               <div class="formUser">
-                <h4><a href="/profile/<%= loggedInUser._id %>" class="n"><%= loggedInUser.name %></a></h4>
+                <h4><a href="/profile/<%= loggedInUser.username %>" class="n"><%= loggedInUser.name %></a></h4>
                 <!-- <h5><a href="/progress" class="bio">Full Stack Web Developer</a></h5> -->
               </div>
             </div>
@@ -198,8 +198,8 @@
                     <div class="post">
                       <nav class="postNav">
                         <div class="postUser">
-                          <div class="postUserPic"><a href="/profile/<%= post.user._id %>"><img src="/images/<%= post.user.profilePic %>" alt="Proflie Pic"></a></div>
-                          <div class="postUserName"><a href="/profile/<%= post.user._id %>"><h3><%= post.user.name %></h3></a></div>
+                          <div class="postUserPic"><a href="/profile/<%= post.user.username %>"><img src="/images/<%= post.user.profilePic %>" alt="Proflie Pic"></a></div>
+                          <div class="postUserName"><a href="/profile/<%= post.user.username %>"><h3><%= post.user.name %></h3></a></div>
                         </div>
                         <div class="options"><i class="ri-more-fill"></i></div>
                         <div class="optionDiv">
@@ -291,15 +291,15 @@
         <div class="profileBox">
           <div class="userInfo">
             <div class="bg">
-              <a href="/profile/<%= loggedInUser._id %>">
+              <a href="/profile/<%= loggedInUser.username %>">
                 <div class="profileImg">
                   <img src="/images/<%= loggedInUser.profilePic %>" alt="Proflie Pic">
                 </div>
               </a>
             </div>
             <div class="detailsBox">
-              <h3><a href="/profile/<%= loggedInUser._id %>"><%= loggedInUser.name %></a></h3>
-              <h4><a href="/profile/<%= loggedInUser._id %>"><%= loggedInUser.username %></a></h4>
+              <h3><a href="/profile/<%= loggedInUser.username %>"><%= loggedInUser.name %></a></h3>
+              <h4><a href="/profile/<%= loggedInUser.username %>"><%= loggedInUser.username %></a></h4>
               <p><%= loggedInUser.bio %></p>
               <div class="followInfo">
                 <div class="f">
@@ -323,20 +323,20 @@
               <% if( user.email != loggedInUser.email ){ %>
                 <% if( loggedInUser.following.indexOf(user._id) != -1 ){ %>
                   <li class="items">
-                    <a href="/profile/<%= user._id %>" class="userPic">
+                    <a href="/profile/<%= user.username %>" class="userPic">
                       <img src="/images/<%= user.profilePic %>" alt="Profile Image">
                     </a>
-                    <a href="/profile/<%= user._id %>"class="userBox">
+                    <a href="/profile/<%= user.username %>"class="userBox">
                       <div><%= user.name %></div>
                     </a>
                     <a href="/follow/<%= user._id %>" class="followBtn" style="background-color: rgba(228, 49, 49, 0.931);"><div>Unfollow</div></a>
                   </li>
                 <% }else{ %>
                   <li class="items">
-                    <a href="/profile/<%= user._id %>" class="userPic">
+                    <a href="/profile/<%= user.username %>" class="userPic">
                       <img src="/images/<%= user.profilePic %>" alt="Profile Image">
                     </a>
-                    <a href="/profile/<%= user._id %>"class="userBox">
+                    <a href="/profile/<%= user.username %>"class="userBox">
                       <div><%= user.name %></div>
                     </a>
                     <a href="/follow/<%= user._id %>" class="followBtn"><div>Follow</div></a>

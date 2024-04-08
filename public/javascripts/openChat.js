@@ -43,7 +43,7 @@ function appendMessage(msg, type) {
       <h3>${msg.messages}</h3>
   `
       : `
-    <h5>${msg.username}</h5>
+    <h5><a href="/profile/${msg.username}">${msg.username}</a></h5>
     <h3>${msg.messages}</h3>
 `,
   ];
