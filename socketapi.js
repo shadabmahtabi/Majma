@@ -7,7 +7,7 @@ let usersId = [];
 let usersUsername = [];
 
 io.on( "connection", function( socket ) {
-    console.log( "A user connected with " + socket.id );
+    // console.log( "A user connected with " + socket.id );
 
     socket.on("disconnect", d =>{
         usersId.splice(usersId.indexOf(socket.id),1);
@@ -19,14 +19,14 @@ io.on( "connection", function( socket ) {
     socket.on('username', username =>{
         usersId.push(socket.id);
         usersUsername.push(username);
-        console.log(username);
-        console.log(usersId);
-        console.log(usersUsername);
+        // console.log(username);
+        // console.log(usersId);
+        // console.log(usersUsername);
     })
 
     socket.on('messages', data =>{
         socket.broadcast.emit('messages', data);
-        console.log(data);
+        // console.log(data);
     })
 });
 

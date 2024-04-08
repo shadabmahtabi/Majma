@@ -82,6 +82,7 @@
     padding: .5vw;
     color: var(--btnTextColor);
     font-weight: 100;
+    margin-top: 1vmax;
 }
 
 .chatSection .chatBox .chatList .outgoingMsg h5, .chatSection .chatBox .chatList .incomingMsg h5{
