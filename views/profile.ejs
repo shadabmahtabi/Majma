@@ -159,7 +159,7 @@
                             <li><a href="#"><h4 style="width: 100%; text-align: center;">No Following</h4></a></li>
                         <% } else { %>
                             <% user.following.forEach( user => { %>
-                                <li><a href="/profile/<%= user._id %>"><div class="followProfilePic"><img src="/images/<%= user.profilePic %>" alt=""></div><h4><%= user.name %></h4></a></li>
+                                <li><a href="/profile/<%= user.username %>"><div class="followProfilePic"><img src="/images/<%= user.profilePic %>" alt=""></div><h4><%= user.name %></h4></a></li>
                             <% }) %>
                         <% } %>
                     </ul>
@@ -168,7 +168,7 @@
                             <li><a href="#"><h4>No Followers</h4></a></li>
                         <% } else { %>
                             <% user.followers.forEach( user => { %>
-                                <li><a href="/profile/<%= user._id %>"><div class="followProfilePic"><img src="/images/<%= user.profilePic %>" alt=""></div><h4><%= user.name %></h4></a></li>
+                                <li><a href="/profile/<%= user.username %>"><div class="followProfilePic"><img src="/images/<%= user.profilePic %>" alt=""></div><h4><%= user.name %></h4></a></li>
                             <% }) %>
                         <% } %>
                     </ul>
