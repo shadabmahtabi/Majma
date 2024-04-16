@@ -29,3 +29,10 @@ sets.forEach( opt => {
         }
     })
 })
+
+// ------------------------------------------------------
+const sideBar = document.querySelector("#sideBar");
+
+if (window.innerWidth < 500) {
+  sideBar.style.display = "none";
+}
