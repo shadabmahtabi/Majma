@@ -123,34 +123,35 @@
             </nav>
             <div class="formSection">
                 <div class="profileForm">
+                    <div class="closeBtn">❌</div>
                     <form action="/edit" method="post">
                         <h2>Personal Information</h2>
-                        <input type="text" name="name" placeholder="Name"  autocomplete="off" required />
-                        <input type="text" name="username" placeholder="Username"  autocomplete="off" required />
+                        <input type="text" name="name" placeholder="Name" value="<%= loggedInUser.name %>" autocomplete="off" required />
+                        <input type="text" name="username" placeholder="Username" value="<%= loggedInUser.username %>"  autocomplete="off" required />
                         <button>Update</button>
                     </form>
                     <form action="/edit" method="post">
                         <h2>Contact Information</h2>
-                        <input type="text" name="email" placeholder="Email"  autocomplete="off" required />
-                        <input type="text" name="mobileNumber" placeholder="Mobile Number"  autocomplete="off" required />
+                        <input type="text" name="email" placeholder="Email" value="<%= loggedInUser.email %>" autocomplete="off" required />
+                        <input type="text" name="mobileNumber" placeholder="Mobile Number" value="<%= loggedInUser.mobileNumber %>"  autocomplete="off" required />
                         <button>Update</button>
                     </form>
                 </div>
                 <div class="passwordForm">
+                    <div class="closeBtn">❌</div>
                     <form action="/changepassword" method="post">
-                        <h2>Change Password Section</h2>
-                        <input type="password" name="oldPassword" placeholder="Enter your old password" autocomplete="off" required>
-                        <input type="password" name="newPassword" placeholder="Enter your new password" autocomplete="off" required>
-                        <button>Change</button>
+                        <h2>Change Password</h2>
+                        <input type="password" name="password" placeholder="Enter your password" autocomplete="off" required>
+                        <!-- <input type="password" name="newPassword" placeholder="Enter your new password" autocomplete="off" required> -->
+                        <button id="otp">Get Link</button>
                     </form>
                 </div>
                 <div class="deleteForm">
+                    <div class="closeBtn">❌</div>
                     <form action="/comparepassword" method="post">
                         <h2>Account Deletion</h2>
                         <input type="password" name="password" placeholder="Enter password" autocomplete="off" required>
-                        <button type="submit" id="otp">Get OTP</button>
-                    </form>
-                    <form action="#" method="post">
+                        <div id="otp">Get OTP</div>
                         <input type="password" name="otp" placeholder="Enter OTP" autocomplete="off" required>
                         <button type="submit">Delete</button>
                     </form>
@@ -166,14 +167,14 @@
                     </a>
                 </div>
                 <ul class="settingsOptions">
-                    <li><i class="ri-user-settings-line"></i> Profile Settings</li>
+                    <li class="listitems"><i class="ri-user-settings-line"></i> Profile Settings</li>
                     <% if( loggedInUser.isDark === "0"){ %>
                         <li><a href="/modeChanger/1"><i class="ri-sun-line"></i> Dark Mode</a></li>
                     <% }else{ %>
                         <li><a href="/modeChanger/0"><i class="ri-moon-line"></i> Light Mode</a></li>
                     <% } %>
-                    <li><i class="ri-lock-unlock-line"></i> Change Password</li>
-                    <li><i class="ri-user-unfollow-line"></i> Delete Account</li>
+                    <li class="listitems"><i class="ri-lock-unlock-line"></i> Change Password</li>
+                    <li class="listitems"><i class="ri-user-unfollow-line"></i> Delete Account</li>
                     <li><a href="/logout"><ion-icon name="log-out-outline"></ion-icon> Logout</a></li>
                 </ul>
             </div>

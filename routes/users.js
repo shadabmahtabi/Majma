@@ -25,6 +25,7 @@ var userSchema = mongoose.Schema({
   age: {
     type: String
   },
+  mobileNumber: Number,
   cardNumber: {
     type: String,
     default: "XXXX XXXX XXXX"
