@@ -133,7 +133,7 @@
                     <form action="/edit" method="post">
                         <h2>Contact Information</h2>
                         <input type="text" name="email" placeholder="Email" value="<%= loggedInUser.email %>" autocomplete="off" required />
-                        <input type="text" name="mobileNumber" placeholder="Mobile Number" value="<%= loggedInUser.mobileNumber %>"  autocomplete="off" required />
+                        <input type="text" id="mobileNumber" pattern="[0-9]{10}" name="mobileNumber" placeholder="Mobile Number" value="<%= loggedInUser.mobileNumber %>"  autocomplete="off" required />
                         <button>Update</button>
                     </form>
                 </div>

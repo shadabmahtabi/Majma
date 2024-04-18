@@ -119,7 +119,7 @@ router.post("/register", function (req, res, next) {
         //   // For other types of errors, send a generic error response
         //   return res.status(500).json({ error: "Error registering user" });
         // }
-        return next(new ErrorHandler(`${err.message}`, 400))
+        return next(new ErrorHandler(`${err.message}`, 400));
       }
 
       // If registration is successful, authenticate the user
@@ -277,24 +277,22 @@ router.post("/getUsers", isLoggedIn, async (req, res, next) => {
 // ajax call ends
 
 router.post("/edit", async (req, res, next) => {
-  let name = req.body.name.trim();
-  let bio = req.body.bio.trim();
-  let gender = req.body.gender.trim();
-  let age = req.body.age.trim();
-  if (name) {
-    req.user.name = name;
+  try {
+    const { name, bio, gender, age, email, mobileNumber, username } = req.body;
+
+    if (name) req.user.name = name.trim();
+    if (bio) req.user.bio = bio.trim();
+    if (gender) req.user.gender = gender.trim();
+    if (age) req.user.age = age.trim();
+    if (username) req.user.username = username.trim();
+    if (mobileNumber && mobileNumber.length === 10) req.user.mobileNumber = mobileNumber.trim();
+    if (email) req.user.email = email.trim();
+
+    await req.user.save();
+    res.redirect("back");
+  } catch (error) {
+    return next(new ErrorHandler(`${error.message}`, 500))
   }
-  if (bio) {
-    req.user.bio = bio;
-  }
-  if (gender) {
-    req.user.gender = gender;
-  }
-  if (age) {
-    req.user.age = age;
-  }
-  await req.user.save();
-  res.redirect("back");
 });
 
 router.post("/likeUnlike", (req, res, next) => {
@@ -394,7 +392,10 @@ router.post("/changepassword", async function (req, res) {
 // ------------------ GET routes ------------------
 
 router.get("/settings", isLoggedIn, (req, res) => {
-  res.render("settings", { loggedInUser: req.user });
+  let { name, username, email, mobileNumber, isDark, profilePic } = req.user;
+  res.render("settings", {
+    loggedInUser: { name, username, email, mobileNumber, isDark, profilePic },
+  });
 });
 
 // Delete a post by ID

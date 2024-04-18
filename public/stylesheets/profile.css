@@ -1013,7 +1013,7 @@
             .profilePic {
                 height: 13vmax;
                 width: 15vmax;
-                background-image: none;
+                background-image: var(--background);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
