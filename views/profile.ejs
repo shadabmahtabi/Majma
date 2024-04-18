@@ -179,7 +179,11 @@
             <div class="userDetailsSection">
                 <div class="userDetails">
                     <div class="bg">
-                        <div class="profilePic" id="editProfileDiv"><img src="/images/<%= user.profilePic %>" alt="Profile Pic"></div>
+                        <% if(user.email===loggedInUser.email) { %>
+                            <div class="profilePic" id="editProfileDiv"><img src="/images/<%= user.profilePic %>" alt="Profile Pic"></div>
+                        <% } else { %>
+                            <div class="profilePic"><img src="/images/<%= user.profilePic %>" alt="Profile Pic"></div>
+                        <% } %>
                     </div>
                     <div class="userDetailsBox">
                         <div class="details">
@@ -276,9 +280,11 @@
                 <div class="userDetailsForMobile">
                     <div class="username"><%= user.username %></div>
                     <div class="profileData">
-                        <div class="profilePic" id="editProfileDiv2">
-                            <img src="/images/<%= user.profilePic %>" alt="Profile Pic">
-                        </div>
+                        <% if(user.email===loggedInUser.email) { %>
+                            <div class="profilePic" id="editProfileDiv2"><img src="/images/<%= user.profilePic %>" alt="Profile Pic"></div>
+                        <% } else { %>
+                            <div class="profilePic"><img src="/images/<%= user.profilePic %>" alt="Profile Pic"></div>
+                        <% } %>
                         <div class="followDiv" id="followDivMobile">
                             <div class="followParts">
                                 <div><%= user.following.length %></div>
