@@ -13,10 +13,12 @@ var userSchema = mongoose.Schema({
     default: 0
   },
   following: [{
-    type: mongoose.Schema.Types.ObjectId
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   }],
   followers: [{
-    type: mongoose.Schema.Types.ObjectId
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   }],
   profilePic: {
     type: String,

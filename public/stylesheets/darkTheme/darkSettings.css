@@ -53,6 +53,10 @@
   .settingsOptions {
     display: none;
   }
+
+  .closeBtn {
+    display: none;
+  }
 }
 
 .settingsSection .formSection .profileForm {
@@ -193,7 +197,7 @@
 }
 
 .deleteForm form {
-  height: 35%;
+  height: 70%;
   width: 50%;
   /* background-color: rgb(255, 255, 255); */
   background-color: rgb(200, 200, 200);
@@ -203,20 +207,7 @@
   justify-content: center;
   gap: 1vmax;
   padding: 0 2vmax 2vmax 2vmax;
-}
-
-.deleteForm form:first-child {
-  padding: 2vmax 2vmax 0 2vmax;
-  height: 45%;
-  border-radius: 1vmin 1vmin 0 0;
-  /* background-color: red; */
-}
-
-.deleteForm form:last-child {
-  padding: 2vmax 2vmax 0 2vmax;
-  height: 45%;
-  border-radius: 0 0 1vmin 1vmin;
-  /* background-color: red; */
+  border-radius: 1vmin;
 }
 
 .deleteForm form h2 {
@@ -226,7 +217,7 @@
 }
 
 .deleteForm form input {
-  height: 3vmax;
+  height: 13%;
   width: 65%;
   border-radius: 2vmax;
   padding: 0 1.5vw;
@@ -236,7 +227,7 @@
   border: none;
 }
 
-.deleteForm form #otp {
+/* .deleteForm form #otp {
   padding: 0.5vmax 1.5vmax;
   border-radius: 30px;
   font-size: 0.8vmax;
@@ -245,9 +236,10 @@
   background-color: var(--btnColor);
   color: var(--btnTextColor);
   cursor: pointer;
-}
+} */
 
-.deleteForm form button {
+.deleteForm form button,
+#otp {
   padding: 0.8vmax 2.4vmax;
   border-radius: 30px;
   font-size: 1rem;
@@ -299,7 +291,7 @@
   }
 
   #main .settingsSection .formSection {
-    position: initial;
+    position: relative;
     height: 90%;
     width: 100%;
     /* background-color: red; */
@@ -370,7 +362,7 @@
         align-items: center;
         gap: 1vmax;
         padding-left: 2vmax;
-        font-size: 2vmax;
+        font-size: 2.3vmax;
         color: var(--textColor);
 
         a {
@@ -384,202 +376,170 @@
         }
       }
     }
-  }
 
-  .settingsSection .formSection .profileForm {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    height: 100%;
-    width: 100%;
-    background-image: var(--background);
-    display: flex;
-    justify-content: space-between;
-    padding: 2vmax;
-    border-radius: 1vmin;
-    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    display: none;
-  }
+    .closeBtn {
+      top: 0;
+      right: 0;
+      height: 7vmax;
+      width: 7vmax;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgb(0, 0, 0);
+      margin-left: auto;
+      font-size: 2.5vmax;
+    }
 
-  .profileForm form {
-    height: 100%;
-    width: 49%;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5vmax;
-    border-radius: 1vmin;
-  }
+    .profileForm {
+      flex-direction: column;
+      justify-content: center;
+      padding: 0vmax;
+      border-radius: 0;
+      box-shadow: none;
+      background-image: none;
+      background-color: #000000;
+      opacity: 0;
+      pointer-events: none;
 
-  .profileForm form h2 {
-    font-size: 1.5vmax;
-    color: var(--textColor);
-    margin-bottom: 1vmax;
-  }
+      form:first-child {
+        justify-content: flex-end;
+        padding-bottom: 5vmax;
+      }
 
-  .profileForm form input {
-    height: 10%;
-    width: 65%;
-    border-radius: 2vmax;
-    padding: 0 1.5vw;
-    display: none;
-    background-image: var(--background);
-    font-size: 1rem;
-    outline: none;
-    border: none;
-  }
+      form:last-child {
+        justify-content: flex-start;
+        padding-top: 5vmax;
+      }
 
-  .profileForm form button {
-    padding: 0.8vmax 2.4vmax;
-    border-radius: 2vmax;
-    font-size: 1rem;
-    border: none;
-    outline: none;
-    background-color: var(--btnColor);
-    color: var(--btnTextColor);
-  }
+      form {
+        height: 45%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5vmax;
+        border-radius: 0;
+        background-color: #000000;
 
-  #main .settingsSection .formSection .passwordForm {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    height: 100%;
-    width: 100%;
-    /* background-color: red; */
-    background-image: var(--background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 0;
-    border-radius: 1vmin;
-    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    display: none;
-  }
+        h2 {
+          font-size: 2.7vmax;
+          color: #fff;
+        }
 
-  .passwordForm form {
-    height: 70%;
-    width: 50%;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1vmax;
-    border-radius: 1vmin;
-  }
+        input {
+          height: 15%;
+          width: 75%;
+          border-radius: 3vmax;
+          padding: 0 2.5vmax;
+        }
 
-  .passwordForm form h2 {
-    /* font-size: 1.2rem; */
-    color: var(--textColor);
-    margin-bottom: 1vmax;
-  }
+        button {
+          padding: 0;
+          height: 5vmax;
+          width: 15vmax;
+          border-radius: 3vmax;
+        }
+      }
+    }
 
-  .passwordForm form input {
-    height: 13%;
-    width: 65%;
-    border-radius: 2vmax;
-    padding: 0 1.5vw;
-    background-image: var(--background);
-    font-size: 1rem;
-    outline: none;
-    border: none;
-  }
+    .passwordForm {
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background-image: none;
+      background-color: #000000;
+      opacity: 0;
+      pointer-events: none;
 
-  .passwordForm form button {
-    padding: 0.8vmax 2.4vmax;
-    border-radius: 30px;
-    font-size: 1rem;
-    border: none;
-    outline: none;
-    background-color: var(--btnColor);
-    color: var(--btnTextColor);
-    cursor: pointer;
-  }
+      form {
+        height: 80%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2vmax;
+        border-radius: 0;
+        background-color: rgb(0, 0, 0);
 
-  #main .settingsSection .formSection .deleteForm {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-    /* background-color: red; */
-    background-image: var(--background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2vmax 0;
-    border-radius: 1vmin;
-    box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    display: none;
-  }
+        h2 {
+          font-size: 3vmax;
+          color: #fff;
+        }
 
-  .deleteForm form {
-    height: 35%;
-    width: 50%;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1vmax;
-    border-radius: 1vmin;
-    padding: 0 2vmax 2vmax 2vmax;
-  }
-  .deleteForm form:first-child {
-    padding: 2vmax 2vmax 0 2vmax;
-    height: 45%;
-    /* background-color: red; */
-  }
+        input {
+          height: 9%;
+          width: 75%;
+          border-radius: 3vmax;
+          padding: 0 2.5vmax;
+        }
 
-  .deleteForm form h2 {
-    /* font-size: 1.2rem; */
-    color: var(--textColor);
-    margin-bottom: 1vmax;
-  }
+        button {
+          padding: 0;
+          height: 5vmax;
+          width: 15vmax;
+          border-radius: 3vmax;
+        }
+      }
+    }
 
-  .deleteForm form input {
-    height: 3vmax;
-    width: 65%;
-    border-radius: 2vmax;
-    padding: 0 1.5vw;
-    background-image: var(--background);
-    font-size: 1rem;
-    outline: none;
-    border: none;
-  }
+    .deleteForm {
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background-image: none;
+      background-color: #000000;
+      opacity: 0;
+      pointer-events: none;
 
-  .deleteForm form #otp {
-    padding: 0.5vmax 1.5vmax;
-    border-radius: 30px;
-    font-size: 0.8vmax;
-    border: none;
-    outline: none;
-    background-color: var(--btnColor);
-    color: var(--btnTextColor);
-    cursor: pointer;
-  }
+      form {
+        height: 80%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2vmax;
+        border-radius: 0;
+        padding: 0;
+        background-color: #000000;
 
-  .deleteForm form button {
-    padding: 0.8vmax 2.4vmax;
-    border-radius: 30px;
-    font-size: 1rem;
-    border: none;
-    outline: none;
-    background-color: var(--btnColor);
-    color: var(--btnTextColor);
-    cursor: pointer;
+        h2 {
+          font-size: 3vmax;
+          color: #fff;
+        }
+
+        input {
+          height: 9%;
+          width: 75%;
+          border-radius: 3vmax;
+          padding: 0 2.5vmax;
+        }
+
+        button,
+        #otp {
+          padding: 0;
+          height: 5vmax;
+          width: 15vmax;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 3vmax;
+        }
+      }
+    }
   }
 }

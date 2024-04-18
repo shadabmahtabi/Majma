@@ -522,12 +522,12 @@ router.get("/profile/:username", isLoggedIn, async function (req, res, next) {
     .populate({
       path: "following",
       model: "User",
-      select: ["name", "_id", "profilePic"],
+      select: ["name", "_id", "profilePic", "username"],
     })
     .populate({
       path: "followers",
       model: "User",
-      select: ["name", "_id", "profilePic"],
+      select: ["name", "_id", "profilePic", "username"],
     });
   // var {following} = await userModel.findOne({ _id: req.params.id }).populate("following");
   // var user = await userModel.findOne({ _id: req.params.id }).populate("posts");
