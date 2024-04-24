@@ -153,9 +153,30 @@
   margin-bottom: 1vmax;
 }
 
-.passwordForm form input {
+.inputField {
+  position: relative;
   height: 13%;
   width: 65%;
+
+  .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 15%;
+    background-color: rgb(222, 222, 222);
+    border-radius: 2vmax;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+}
+
+.passwordForm form .inputField input {
+  height: 100%;
+  width: 100%;
   border-radius: 2vmax;
   padding: 0 1.5vw;
   background-image: var(--background);
@@ -211,6 +232,17 @@
   /* font-size: 1.2rem; */
   color: var(--textColor);
   margin-bottom: 1vmax;
+}
+
+.deleteForm form .inputField input {
+  height: 100%;
+  width: 100%;
+  border-radius: 2vmax;
+  padding: 0 1.5vw;
+  background-image: var(--background);
+  font-size: 1rem;
+  outline: none;
+  border: none;
 }
 
 .deleteForm form input {
@@ -466,11 +498,25 @@
           font-size: 3vmax;
         }
 
-        input {
+        .inputField {
           height: 9%;
           width: 75%;
-          border-radius: 3vmax;
-          padding: 0 2.5vmax;
+          overflow: hidden;
+
+          .icon {
+            position: absolute;
+            top: 0;
+            right: 2%;
+            background-color: rgba(222, 222, 222, 0);
+            font-size: 1.2rem;
+          }
+
+          input {
+            height: 100%;
+            width: 100%;
+            border-radius: 3vmax;
+            padding: 0 2.5vmax;
+          }
         }
 
         button {
@@ -512,6 +558,27 @@
           font-size: 3vmax;
         }
 
+        .inputField {
+          height: 9%;
+          width: 75%;
+          overflow: hidden;
+
+          input {
+            height: 100%;
+            width: 100%;
+            border-radius: 3vmax;
+            padding: 0 2.5vmax;
+          }
+
+          .icon {
+            position: absolute;
+            top: 0;
+            right: 2%;
+            background-color: rgba(222, 222, 222, 0);
+            font-size: 1.2rem;
+          }
+        }
+
         input {
           height: 9%;
           width: 75%;
@@ -519,7 +586,8 @@
           padding: 0 2.5vmax;
         }
 
-        button, #otp {
+        button,
+        #otp {
           padding: 0;
           height: 5vmax;
           width: 15vmax;

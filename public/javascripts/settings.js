@@ -75,9 +75,30 @@ document.addEventListener("DOMContentLoaded", () => {
   // -----------------------------------------------------------------
   document.getElementById("mobileNumber").addEventListener("input", (e) => {
     e.target.setCustomValidity(
-      e.target.value.match(/^\d{10}$/)
-        ? ""
-        : "Please enter a 10-digit number"
+      e.target.value.match(/^\d{10}$/) ? "" : "Please enter a 10-digit number"
     );
   });
+
+  // -----------------------------------------------------------------
+  let icon = document.querySelectorAll("#eye");
+  let input = document.querySelectorAll(".inputField > input");
+  let flg = 0;
+
+  if (icon && input) {
+    icon.forEach(itm => {
+      itm.addEventListener("click", () => {
+        const actions = ["ri-eye-line", "ri-eye-off-line"];
+  
+        itm.classList.toggle(actions[flg], true);
+        itm.classList.toggle(actions[1 - flg], false);
+  
+        input.forEach(inp => {
+          inp.setAttribute("type", flg ? "text" : "password");
+        })
+        flg ^= 1;
+      });
+    })
+  } else {
+    console.error("Required elements not found");
+  }
 });

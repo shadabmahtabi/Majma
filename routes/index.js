@@ -388,6 +388,23 @@ router.post("/changepassword", async function (req, res) {
   }
 });
 
+/**
+ * @method  POST
+ * @route /sendmail
+ * @access  Public
+ * @desc  This route is used to send a mail to the user
+ */
+router.post('/sendmail/:type', async (req, res, next) => {
+  try {
+    
+    
+    console.log({type: req.params.type, email: req.user.email, password: req.body.password})
+
+  } catch (error) {
+    return next(`${error.message}`, 500)
+  }
+})
+
 // ------------------ POST routes ------------------
 // ------------------ GET routes ------------------
 
