@@ -85,20 +85,47 @@ document.addEventListener("DOMContentLoaded", () => {
   let flg = 0;
 
   if (icon && input) {
-    icon.forEach(itm => {
+    icon.forEach((itm) => {
       itm.addEventListener("click", () => {
         const actions = ["ri-eye-line", "ri-eye-off-line"];
-  
+
         itm.classList.toggle(actions[flg], true);
         itm.classList.toggle(actions[1 - flg], false);
-  
-        input.forEach(inp => {
+
+        input.forEach((inp) => {
           inp.setAttribute("type", flg ? "text" : "password");
-        })
+        });
         flg ^= 1;
       });
-    })
+    });
   } else {
     console.error("Required elements not found");
   }
+
+  // --------------------- Get OTP ---------------------
+  const getOTP = document.querySelectorAll("#otp");
+  let show_response = document.querySelector("#response");
+  let mailData;
+
+  getOTP.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      let { data } = await axios.get("http://localhost:3000/sendmail");
+      console.log(data);
+      mailData = data
+      show_response.style.display = "initial";
+      show_response.innerText = data.message;
+    });
+  });
+
+  // var response;
+  // if(mailData) {
+  //   setTimeout(async () => {
+  //     response = await axios.post('/delete-otp', {id: mailData.id});
+  //   }, 6000);
+  // }
+
+  // if(response) {
+  //   show_response.style.display = "initial";
+  //   show_response.innerText = response.data.message;
+  // }
 });

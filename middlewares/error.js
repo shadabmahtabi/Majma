@@ -4,7 +4,8 @@ exports.generatedErrors = (err, req, res, next) => {
 
     res.status(statusCode).json({
         message: err.message,
-        error: err.name
+        error: err.name,
+        // stack: err.stack
     })
 
 }

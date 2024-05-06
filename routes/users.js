@@ -6,7 +6,10 @@ var userSchema = mongoose.Schema({
   email: String,
   bio: String,
   username: String,
-  password: String,
+  password: {
+    type: String,
+    select: false
+  },
   gender: String,
   isDark: {
     type: String,

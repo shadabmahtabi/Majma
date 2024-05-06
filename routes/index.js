@@ -64,8 +64,21 @@ router.get("/moreDetails", function (req, res, next) {
 
 var localStrategy = require("passport-local");
 const ErrorHandler = require("../utils/ErrorHandler.js");
+const { sendmail } = require("../utils/nodemailer.js");
 // const { url } = require('inspector');
-passport.use(new localStrategy(userModel.authenticate()));
+passport.use(
+  new localStrategy(function (username, password, done) {
+    userModel.authenticate()(username, password, function (err, user, info) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Incorrect username or password" });
+      }
+      return done(null, user);
+    });
+  })
+);
 
 router.get("/login", function (req, res, next) {
   if (!req.user) {
@@ -285,13 +298,14 @@ router.post("/edit", async (req, res, next) => {
     if (gender) req.user.gender = gender.trim();
     if (age) req.user.age = age.trim();
     if (username) req.user.username = username.trim();
-    if (mobileNumber && mobileNumber.length === 10) req.user.mobileNumber = mobileNumber.trim();
+    if (mobileNumber && mobileNumber.length === 10)
+      req.user.mobileNumber = mobileNumber.trim();
     if (email) req.user.email = email.trim();
 
     await req.user.save();
     res.redirect("back");
   } catch (error) {
-    return next(new ErrorHandler(`${error.message}`, 500))
+    return next(new ErrorHandler(error.message, 500));
   }
 });
 
@@ -351,59 +365,41 @@ router.post("/createBlog", isLoggedIn, async (req, res) => {
   res.redirect("back");
 });
 
-router.post("/changepassword", async function (req, res) {
-  let oldpassword = req.body.oldPassword.trim();
-  let newpassword = req.body.newPassword.trim();
-  if (oldpassword === "" || newpassword === "") {
-    res.redirect("back");
-  } else {
-    // console.log(oldpassword);
-    // console.log(newpassword);
-
-    let loggedInUser = await userModel.findOne({
-      username: req.session.passport.user,
-    });
-    await loggedInUser.setPassword(newpassword);
-    userModel.findOneAndUpdate(
-      { _id: loggedInUser._id },
-      { hash: loggedInUser.hash, salt: loggedInUser.salt }
-    );
-    res.redirect("/");
-
-    // userModel.findOne({ username: req.session.passport.user }).then((err, user) => {
-    //   if (err) {
-    //     res.send(err);
-    //   } else {
-    //     user.changePassword( oldpassword, newpassword, function (err) {
-    //         if (err) {
-    //           res.send(err);
-    //         } else {
-    //           // res.send('successfully change password')
-    //           console.log('successfully change password')
-    //           res.redirect('/login')
-    //         }
-    //     });
-    //   }
-    // });
-  }
-});
-
 /**
  * @method  POST
- * @route /sendmail
+ * @route /changepassword
  * @access  Public
- * @desc  This route is used to send a mail to the user
+ * @desc  This route is used to verify otp and change password
  */
-router.post('/sendmail/:type', async (req, res, next) => {
+router.post("/changepassword", async (req, res, next) => {
   try {
-    
-    
-    console.log({type: req.params.type, email: req.user.email, password: req.body.password})
+    // Extract oldPassword and newPassword from request body
+    const { oldPassword, newPassword } = req.body;
 
+    // Check if the user is authenticated and request contains necessary data
+    if (!req.isAuthenticated || !oldPassword || !newPassword) {
+      throw new ErrorHandler("Invalid request", 400);
+    }
+
+    // Authenticate user with old password
+    req.user.authenticate(oldPassword, async (err, model, passwordError) => {
+      // Handle authentication errors
+      if (passwordError)
+        return next(new ErrorHandler("Incorrect password", 401));
+
+      // Change password if authentication successful
+      req.user.changePassword(oldPassword, newPassword, (err) => {
+        // Handle changePassword errors
+        return err
+          ? next(new ErrorHandler(err.message, 500))
+          : res.status(200).redirect('back');
+      });
+    });
   } catch (error) {
-    return next(`${error.message}`, 500)
+    // Handle general errors
+    return next(new ErrorHandler(error.message), 500);
   }
-})
+});
 
 // ------------------ POST routes ------------------
 // ------------------ GET routes ------------------
@@ -631,6 +627,62 @@ router.get("/openChat/:username", isLoggedIn, async (req, res) => {
   var loggedInUser = await userModel.findOne({ username: req.params.username });
   // console.log(loggedInUser);
   // res.render("openChat", { title: "Majma | OpenChat Page", loggedInUser });
+});
+
+/**
+ * @method  GET
+ * @route /sendmail
+ * @access  Public
+ * @desc  This route is used to send a mail to the user
+ */
+router.get("/sendmail", async (req, res, next) => {
+  try {
+    sendmail(req.user.email, res, next);
+
+    // bcrypt.compareSync(req.body.password, req.user.password, (err, isMatch) => {
+    //   if (err) return next(new ErrorHandler(`${err.message}`, 500))
+
+    //   if (!isMatch) {
+    //     return next(new ErrorHandler('Password is incorrect', 400))
+    //   }
+
+    //   res.status(200).json({message: "matched"})
+    // })
+    // if (req.params.type === 'change_password') {}
+    // console.log({type: req.params.type, email: req.user.email, password: req.body.password})
+    // let user = await userModel
+    //   .findOne({ username: req.user.username })
+    //   .select("+password")
+    //   .exec();
+
+    // console.log(user.password);
+
+    // -------------------------------------------------
+    // let user = req.user;
+    // if (req.isAuthenticated) {
+    //   if (req.body.password) {
+    //     user.authenticate(
+    //       req.body.password,
+    //       function (err, model, passwordError) {
+    //         if (passwordError) {
+    //           return next(new ErrorHandler("The given password is incorrect!!", 401));
+    //         } else if (model) {
+    //           if (req.params.type === 'change_password') {
+
+    //           }
+    //         }
+    //       }
+    //     );
+    //   } else {
+    //     return next(new ErrorHandler("Please input your account password!!", 404));
+    //   }
+    // } else {
+    //   return next(new ErrorHandler("You are not authorized for this request", 401));
+    // }
+    // -------------------------------------------------
+  } catch (error) {
+    return next(new ErrorHandler(error.message), 500);
+  }
 });
 
 // ------------------ GET routes ------------------

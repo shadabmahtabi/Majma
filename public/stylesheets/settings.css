@@ -128,7 +128,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px 0;
+  /* padding: 30px 0; */
   border-radius: 1vmin;
   /* box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px; */
   overflow: hidden;
@@ -151,6 +151,15 @@
   /* font-size: 1.2rem; */
   color: var(--textColor);
   margin-bottom: 1vmax;
+}
+
+form #response {
+  display: none;
+  font-size: .9rem;
+  color: red;
+  text-align: center;
+  width: 100%;
+  padding: 0 1vmax;
 }
 
 .inputField {
@@ -185,7 +194,19 @@
   border: none;
 }
 
-.passwordForm form button {
+.passwordForm form input {
+  height: 13%;
+  width: 65%;
+  border-radius: 2vmax;
+  padding: 0 1.5vw;
+  background-image: var(--background);
+  font-size: 1rem;
+  outline: none;
+  border: none;
+}
+
+.passwordForm form button,
+#otp {
   padding: 0.8vmax 2.4vmax;
   border-radius: 30px;
   font-size: 1rem;
@@ -225,7 +246,6 @@
   justify-content: center;
   gap: 1vmax;
   border-radius: 1vmin;
-  padding: 0 2vmax 2vmax 2vmax;
 }
 
 .deleteForm form h2 {
@@ -269,7 +289,7 @@
 
 .deleteForm form button,
 #otp {
-  padding: 0.6vmax 1.8vmax;
+  padding: 0.8vmax 2.4vmax;
   border-radius: 30px;
   font-size: 1rem;
   border: none;
@@ -519,10 +539,20 @@
           }
         }
 
-        button {
+        input {
+          height: 9%;
+          width: 75%;
+          border-radius: 3vmax;
+          padding: 0 2.5vmax;
+        }
+
+        button, #otp {
           padding: 0;
           height: 5vmax;
           width: 15vmax;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           border-radius: 3vmax;
         }
       }
