@@ -140,6 +140,11 @@
 form h3 {
   font-weight: 600;
   color: #000000ba;
+
+  a {
+    font-weight: 200;
+    font-size: 1rem;
+  }
 }
 
 /* ------------------------- Responsive ------------------------- */

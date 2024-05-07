@@ -117,15 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // var response;
-  // if(mailData) {
-  //   setTimeout(async () => {
-  //     response = await axios.post('/delete-otp', {id: mailData.id});
-  //   }, 6000);
-  // }
-
-  // if(response) {
-  //   show_response.style.display = "initial";
-  //   show_response.innerText = response.data.message;
-  // }
+  passwordForm.children[1].addEventListener('submit', (e) => {
+    if(!mailData) {
+      e.preventDefault()
+      console.log(e);
+      alert("Please Get a valid OTP")
+    }
+  })
 });

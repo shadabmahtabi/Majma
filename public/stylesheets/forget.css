@@ -1,0 +1,138 @@
+#main {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* color: var(--textColor); */
+}
+
+#backBtn {
+  text-decoration: none;
+  position: absolute;
+  top: 6%;
+  left: 3%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--textColor);
+  font-size: 2.5rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#forgetForm {
+  max-height: 70%;
+  width: 50%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1vmax;
+  box-shadow: rgba(0, 0, 0, 0.154) 0px 4px 12px;
+  padding: 2vmax 0;
+  border-radius: 1vmax;
+
+  h1 {
+    margin-bottom: 2vmax;
+  }
+
+  input {
+    height: 3.5vmax;
+    width: 60%;
+    border-radius: 2vmax;
+    padding: 0 1.5vw;
+    background-image: var(--background);
+    font-size: 1rem;
+    outline: none;
+    border: none;
+  }
+
+  #otp:focus:not(:placeholder-shown):valid {
+    color: green;
+    outline: 2px solid green;
+  }
+  #otp:focus:not(:placeholder-shown):invalid {
+    color: red;
+    outline: 2px solid red;
+  }
+
+  button,
+  #check {
+    padding: 0.8vmax 2.4vmax;
+    border-radius: 30px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: var(--btnColor);
+    color: var(--btnTextColor);
+    cursor: pointer;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  #afterOtp {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vmax;
+    display: none;
+
+    input {
+      width: 100%;
+    }
+  }
+}
+
+/* ---------------------------- Responsive ---------------------------- */
+
+@media only screen and (max-width: 500px) {
+  #backBtn {
+    left: 5%;
+    height: 50px;
+    width: 50px;
+    font-size: 2.3rem;
+  }
+
+  #forgetForm {
+    max-height: 100%;
+    width: 100%;
+    gap: 2vmax;
+    box-shadow: none;
+
+    h1 {
+      margin-bottom: 2vmax;
+      text-align: center;
+    }
+
+    input {
+      height: 6vmax;
+      width: 75%;
+      border-radius: 3vmax;
+      padding: 0 2.5vmax;
+    }
+
+    button,
+    #check {
+      padding: 0;
+      height: 5vmax;
+      width: 15vmax;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3vmax;
+    }
+
+    #afterOtp {
+      width: 75%;
+      gap: 2vmax;
+    }
+  }
+}

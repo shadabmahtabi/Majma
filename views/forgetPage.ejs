@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/boilerPlate.css">
+    <link rel="stylesheet" href="/stylesheets/forget.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="loader">
+            <img src="/images/loader1.gif" alt="loader">
+        </div>
+        <a href="/" id="backBtn"><ion-icon name="arrow-back-outline"></ion-icon></a>
+        <form method="post" id="forgetForm">
+            <h1>Ohh!! forget password, Don't Worry😎😎</h1>
+            <input type="text" name="credentials" placeholder="Username / Email" required>
+            <div id="check">Check</div>
+            <div id="afterOtp">
+                <input type="text" name="otp" id="otp" placeholder="Enter OTP" maxlength="4" pattern="\d{4}" required>
+                <button type="submit">Change</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascripts/loader.js"></script>
+    <script src="/javascripts/forget.js"></script>
+</body>
+
+</html>

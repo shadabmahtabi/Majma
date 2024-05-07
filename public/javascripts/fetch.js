@@ -30,7 +30,7 @@ function sendData(e, id) {
           user.forEach((item, index) => {
             // console.log(item.name);
             if (item._id !== id) {
-              list.innerHTML += `<li><a href="/profile/${item._id}" id="userLink"><div class="userProfilePic"><img src="/images/${item.profilePic}" alt="profile pic"></div>${item.name}</a></li>`;
+              list.innerHTML += `<li><a href="/profile/${item.username}" id="userLink"><div class="userProfilePic"><img src="/images/${item.profilePic}" alt="profile pic"></div>${item.name}</a></li>`;
             }
           });
           return;
@@ -44,7 +44,7 @@ function sendData(e, id) {
           user.forEach((item, index) => {
             // console.log(item.name);
             if (item._id !== id) {
-              list2.innerHTML += `<li><a href="/profile/${item._id}" id="userLink"><div class="userProfilePic"><img src="/images/${item.profilePic}" alt="profile pic"></div>${item.name}</a></li>`;
+              list2.innerHTML += `<li><a href="/profile/${item.username}" id="userLink"><div class="userProfilePic"><img src="/images/${item.profilePic}" alt="profile pic"></div>${item.name}</a></li>`;
             }
           });
           return;

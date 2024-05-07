@@ -15,6 +15,13 @@ const { GridFsStorage } = require("multer-gridfs-storage");
 const mongoose = require("mongoose");
 // for GridFs
 
+//  ------------------- Email Validation -------------------
+const checkEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+
 // ------------------ Sign In With Google Starts Here ------------------
 
 var GoogleStrategy = require("passport-google-oidc");
@@ -65,6 +72,7 @@ router.get("/moreDetails", function (req, res, next) {
 var localStrategy = require("passport-local");
 const ErrorHandler = require("../utils/ErrorHandler.js");
 const { sendmail } = require("../utils/nodemailer.js");
+const otpModel = require("./otpModel.js");
 // const { url } = require('inspector');
 passport.use(
   new localStrategy(function (username, password, done) {
@@ -374,10 +382,10 @@ router.post("/createBlog", isLoggedIn, async (req, res) => {
 router.post("/changepassword", async (req, res, next) => {
   try {
     // Extract oldPassword and newPassword from request body
-    const { oldPassword, newPassword } = req.body;
+    const { oldPassword, newPassword, otp } = req.body;
 
     // Check if the user is authenticated and request contains necessary data
-    if (!req.isAuthenticated || !oldPassword || !newPassword) {
+    if (!req.isAuthenticated || !oldPassword || !newPassword || !otp) {
       throw new ErrorHandler("Invalid request", 400);
     }
 
@@ -387,17 +395,105 @@ router.post("/changepassword", async (req, res, next) => {
       if (passwordError)
         return next(new ErrorHandler("Incorrect password", 401));
 
-      // Change password if authentication successful
-      req.user.changePassword(oldPassword, newPassword, (err) => {
-        // Handle changePassword errors
-        return err
-          ? next(new ErrorHandler(err.message, 500))
-          : res.status(200).redirect('back');
-      });
+      // Check if otp is valid
+      if ((await otpModel.findOne({ email: model.email }).otp) === otp) {
+        // Change password if authentication successful
+        req.user.changePassword(oldPassword, newPassword, (err) => {
+          // Handle changePassword errors
+          return err
+            ? next(new ErrorHandler(err.message, 500))
+            : res.status(200).redirect("back");
+        });
+      } else {
+        return next(new ErrorHandler("Invalid OTP", 401));
+      }
     });
   } catch (error) {
     // Handle general errors
     return next(new ErrorHandler(error.message), 500);
+  }
+});
+
+/**
+ * @method  POST
+ * @route /changepassword
+ * @access  Public
+ * @desc  This route is used to verify email, search user and send mail with OTP
+ */
+router.post("/checkUser", async (req, res, next) => {
+  try {
+    const { credentials } = req.body;
+
+    let user;
+
+    // Check if email
+    if (checkEmail(credentials)) {
+      // Check if user exists
+      user = await userModel
+        .findOne({ email: credentials })
+        .select("email")
+        .exec();
+    } else {
+      user = await userModel
+        .findOne({ username: credentials })
+        .select("email")
+        .exec();
+    }
+
+    if (user) {
+      let otp = await otpModel.findOne({email: user.email})
+      console.log(otp)
+      if (otp === null) {
+        // send mail with OTP
+        sendmail(user.email, res, next);
+      }
+
+      return res.status(200).json({
+        message:
+          "OTP has already been sent to the provided username or email.",
+      });
+    } else {
+      return res.status(204).json({
+        message: "User not found with provided username or email",
+      });
+    }
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
+/**
+ * @method  POST
+ * @route /forgotPassword
+ * @access  Public
+ * @desc  This route is used to reset password
+ */
+router.post("/forgotPassword", async (req, res, next) => {
+  try {
+    const { credentials, otp } = req.body;
+
+    // let user;
+
+    // // Check if email
+    // if (checkEmail(credentials)) {
+    //   // Check if user exists
+    //   user = await userModel.findOne({ email: credentials }).exec();
+    // } else {
+    //   user = await userModel.findOne({ username: credentials }).exec();
+    // }
+
+    // if (!user) {
+    //   return next(
+    //     new ErrorHandler("User not found with provided username or email", 204)
+    //   );
+    // }
+
+    let otpFromDB = await otpModel.findOne({ email: credentials }).select("otp").exec();
+
+    console.log(otpFromDB.otp, typeof otpFromDB.otp, otp, typeof otp)
+
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
   }
 });
 
@@ -638,51 +734,19 @@ router.get("/openChat/:username", isLoggedIn, async (req, res) => {
 router.get("/sendmail", async (req, res, next) => {
   try {
     sendmail(req.user.email, res, next);
-
-    // bcrypt.compareSync(req.body.password, req.user.password, (err, isMatch) => {
-    //   if (err) return next(new ErrorHandler(`${err.message}`, 500))
-
-    //   if (!isMatch) {
-    //     return next(new ErrorHandler('Password is incorrect', 400))
-    //   }
-
-    //   res.status(200).json({message: "matched"})
-    // })
-    // if (req.params.type === 'change_password') {}
-    // console.log({type: req.params.type, email: req.user.email, password: req.body.password})
-    // let user = await userModel
-    //   .findOne({ username: req.user.username })
-    //   .select("+password")
-    //   .exec();
-
-    // console.log(user.password);
-
-    // -------------------------------------------------
-    // let user = req.user;
-    // if (req.isAuthenticated) {
-    //   if (req.body.password) {
-    //     user.authenticate(
-    //       req.body.password,
-    //       function (err, model, passwordError) {
-    //         if (passwordError) {
-    //           return next(new ErrorHandler("The given password is incorrect!!", 401));
-    //         } else if (model) {
-    //           if (req.params.type === 'change_password') {
-
-    //           }
-    //         }
-    //       }
-    //     );
-    //   } else {
-    //     return next(new ErrorHandler("Please input your account password!!", 404));
-    //   }
-    // } else {
-    //   return next(new ErrorHandler("You are not authorized for this request", 401));
-    // }
-    // -------------------------------------------------
   } catch (error) {
     return next(new ErrorHandler(error.message), 500);
   }
+});
+
+/**
+ * @method  GET
+ * @route /forgotPassword
+ * @access  Public
+ * @desc  This route is used to show forget password page
+ */
+router.get("/forgotPassword", (req, res, next) => {
+  res.render("forgetPage", { title: "Majma | Forgot Password Page" });
 });
 
 // ------------------ GET routes ------------------
