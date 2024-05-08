@@ -18,7 +18,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
 // Passport Code Starts Here
 app.use(expressSession({
   resave: false,
@@ -38,11 +37,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // google code start
-app.use(expressSession({
-  secret: 'keyboard cat', 
-  resave: false,
-  saveUninitialized: false,
-}));
+// app.use(expressSession({
+//   secret: 'keyboard cat', 
+//   resave: false,
+//   saveUninitialized: false,
+// }));
 app.use(passport.authenticate('session'));
 
 passport.serializeUser(function(user, cb) {

@@ -109,19 +109,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   getOTP.forEach((btn) => {
     btn.addEventListener("click", async () => {
-      let { data } = await axios.get("http://localhost:3000/sendmail");
-      console.log(data);
-      mailData = data
-      show_response.style.display = "initial";
-      show_response.innerText = data.message;
+      try {
+        let { data } = await axios.get("http://localhost:3000/sendmail");
+        console.log(data);
+        mailData = data;
+        if (data.success) {
+          show_response.style.display = "initial";
+          show_response.innerText = data.message;
+        } else {
+          // Throw error if status is not handled
+          alert("Something went wrong!");
+        }
+      } catch (error) {
+        handleErrorResponse(error);
+      }
     });
   });
 
-  passwordForm.children[1].addEventListener('submit', (e) => {
-    if(!mailData) {
-      e.preventDefault()
+  passwordForm.children[1].addEventListener("submit", (e) => {
+    if (!mailData) {
+      e.preventDefault();
       console.log(e);
-      alert("Please Get a valid OTP")
+      alert("Please Get a valid OTP");
     }
-  })
+  });
+
+  // Function to handle errors during request
+  function handleErrorResponse(error) {
+    // Check if the error response status is 409 (Conflict)
+    if (error.response && error.response.status === 409) {
+      alert("An OTP has already been sent to this email or username.");
+      // Update form and button after OTP is already sent
+      updateFormAndButton();
+    } else {
+      // Log the error to console and show a generic error message
+      console.error("Error:", error);
+      alert("Something went wrong!");
+    }
+  }
 });
