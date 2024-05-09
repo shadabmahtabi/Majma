@@ -277,6 +277,7 @@ router.post("/edit", async (req, res, next) => {
   try {
     const { name, bio, gender, age, email, mobileNumber, username } = req.body;
 
+    gender.charAt(0).toUpperCase() + gender.slice(1);
     if (name) req.user.name = name.trim();
     if (bio) req.user.bio = bio.trim();
     if (gender) req.user.gender = gender.trim();
@@ -402,38 +403,25 @@ router.post("/changepassword", async (req, res, next) => {
 router.post("/checkUser", async (req, res, next) => {
   try {
     const { credentials } = req.body;
-
-    let user;
-
-    // Check if email
-    if (checkEmail(credentials)) {
-      // Check if user exists
-      user = await userModel
-        .findOne({ email: credentials })
-        .select("email")
-        .exec();
-    } else {
-      user = await userModel
-        .findOne({ username: credentials })
-        .select("email")
-        .exec();
-    }
+    const user = await userModel
+      .findOne({ $or: [{ email: credentials }, { username: credentials }] })
+      .select("email")
+      .exec();
 
     if (user) {
-      let otp = await otpModel.findOne({ email: user.email });
-      console.log(otp);
-      if (otp === null) {
-        // send mail with OTP
+      const otp = await otpModel.findOne({ email: user.email });
+      if (!otp) {
         sendmail(user.email, res, next);
+      } else {
+        return res.status(400).json({
+          message:
+            "OTP has already been sent to the provided username or email.",
+        });
       }
-
-      return res.status(400).json({
-        message: "OTP has already been sent to the provided username or email.",
-      });
     } else {
-      return res.status(204).json({
-        message: "User not found with provided username or email",
-      });
+      return res
+        .status(204)
+        .json({ message: "User not found with provided username or email" });
     }
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
@@ -448,52 +436,49 @@ router.post("/checkUser", async (req, res, next) => {
  */
 router.post("/forgetPassword", async (req, res, next) => {
   try {
+    // Destructure the request body
     const { credentials, otp, newPassword } = req.body;
 
-    let user;
+    // Find the user by email or username
+    const user = await userModel
+      .findOne({ $or: [{ email: credentials }, { username: credentials }] })
+      .exec();
 
-    // Check if email
-    if (checkEmail(credentials)) {
-      // Check if user exists
-      user = await userModel.findOne({ email: credentials }).exec();
-    } else {
-      user = await userModel.findOne({ username: credentials }).exec();
-    }
-
-    if (user) {
-      let otpFromDB = await otpModel.findOne({ email: user.email }).exec();
-
-      if (otpFromDB) {
-        if (otpFromDB.otp === otp) {
-          // OTP is valid
-          user.setPassword(newPassword, async (err) => {
-            if (err) {
-              return next(new ErrorHandler(err.message, 500));
-            }
-
-            // Save the user object to persist the changes
-            await user.save();
-
-            // console.log()
-            await otpFromDB.deleteOne();
-
-            return res
-              .status(200)
-              .redirect("/login");
-          });
-        }
-      } else {
-        return res.status(410).json({
-          success: true,
-          message: "Otp expired!",
-        });
-      }
-    } else {
+    // If user not found, throw 404 error
+    if (!user) {
       return next(
-        new ErrorHandler("User not found with provided username or email", 204)
+        new ErrorHandler("User not found with provided username or email", 404)
       );
     }
+
+    // Find the OTP for the user's email
+    const otpFromDB = await otpModel.findOne({ email: user.email }).exec();
+
+    // If OTP not found, return 410 error
+    if (!otpFromDB) {
+      return res.status(410).json({ message: "OTP expired!" });
+    }
+
+    // If OTP does not match, return 400 error
+    if (otpFromDB.otp !== otp) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    // Set the new password for the user
+    user.setPassword(newPassword, async (err) => {
+      // Handle setPassword error
+      if (err) {
+        return next(new ErrorHandler(err.message, 500));
+      }
+
+      // Save the user and delete the OTP
+      await Promise.all([user.save(), otpFromDB.deleteOne()]);
+
+      // Redirect to login page upon successful password change
+      return res.status(200).redirect("/login");
+    });
   } catch (error) {
+    // Pass the error to the error handler middleware
     return next(new ErrorHandler(error.message, 500));
   }
 });
