@@ -22,7 +22,7 @@ const MongoDBStore = require('connect-mongodb-session')(expressSession);
 
 // Use MongoDBStore to create a new instance of MongoStore
 const store = new MongoDBStore({
-  uri: process.env.MONGODB_URI, // MongoDB connection URI
+  uri: process.env.MONGODB_URL, // MongoDB connection URI
   databaseName: 'majmaDatabase', // MongoDB database name
   collection: 'sessions' // Collection to store sessions
 });
