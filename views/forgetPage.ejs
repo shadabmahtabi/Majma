@@ -17,12 +17,13 @@
             <img src="/images/loader1.gif" alt="loader">
         </div>
         <a href="/" id="backBtn"><ion-icon name="arrow-back-outline"></ion-icon></a>
-        <form method="post" id="forgetForm">
+        <form action="/forgetPassword" method="post" id="forgetForm">
             <h1>Ohh!! forget password, Don't Worry😎😎</h1>
             <input type="text" name="credentials" placeholder="Username / Email" required>
             <div id="check">Check</div>
             <div id="afterOtp">
-                <input type="text" name="otp" id="otp" placeholder="Enter OTP" maxlength="4" pattern="\d{4}" required>
+                <input type="password" name="newPassword" placeholder="Enter new password" required>
+                <input type="text" name="otp" class="otp" placeholder="Enter OTP" maxlength="4" pattern="\d{4}" required>
                 <button type="submit">Change</button>
             </div>
         </form>

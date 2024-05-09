@@ -137,10 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to handle errors during request
   function handleErrorResponse(error) {
     // Check if the error response status is 409 (Conflict)
-    if (error.response && error.response.status === 409) {
+    if (error.response && error.response.status === 409 || error.response.status === 400) {
       alert("An OTP has already been sent to this email or username.");
-      // Update form and button after OTP is already sent
-      updateFormAndButton();
     } else {
       // Log the error to console and show a generic error message
       console.error("Error:", error);

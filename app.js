@@ -18,11 +18,25 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+const MongoDBStore = require('connect-mongodb-session')(expressSession);
+
+// Use MongoDBStore to create a new instance of MongoStore
+const store = new MongoDBStore({
+  uri: process.env.MONGODB_URI, // MongoDB connection URI
+  databaseName: 'majmaDatabase', // MongoDB database name
+  collection: 'sessions' // Collection to store sessions
+});
+
 // Passport Code Starts Here
 app.use(expressSession({
+  name: "Majma_session",
   resave: false,
   saveUninitialized: false,
-  secret: "pass pass"
+  secret: process.env.EXPRESS_SESSION_SECRET,
+  cookie: {
+    maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days in milliseconds
+  },
+  store: store
 }));
 app.use(passport.initialize());
 app.use(passport.session());

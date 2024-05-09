@@ -106,9 +106,9 @@ router.post(
 
 router.post("/register", function (req, res, next) {
   var newUser = new userModel({
-    username: req.body.username,
-    name: req.body.name,
-    email: req.body.email,
+    username: req.body.username.trim(),
+    name: req.body.name.trim(),
+    email: req.body.email.toLowerCase().trim(),
   });
 
   userModel.register(
@@ -371,7 +371,7 @@ router.post("/changepassword", async (req, res, next) => {
       if (passwordError)
         return next(new ErrorHandler("Incorrect password", 401));
 
-      let otpFromdb = await otpModel.findOne({ email: model.email })
+      let otpFromdb = await otpModel.findOne({ email: model.email });
       // Check if otp is valid
       if (otpFromdb.otp === otp) {
         // Delete otp from db
@@ -420,16 +420,15 @@ router.post("/checkUser", async (req, res, next) => {
     }
 
     if (user) {
-      let otp = await otpModel.findOne({email: user.email})
-      console.log(otp)
+      let otp = await otpModel.findOne({ email: user.email });
+      console.log(otp);
       if (otp === null) {
         // send mail with OTP
         sendmail(user.email, res, next);
       }
 
-      return res.status(200).json({
-        message:
-          "OTP has already been sent to the provided username or email.",
+      return res.status(400).json({
+        message: "OTP has already been sent to the provided username or email.",
       });
     } else {
       return res.status(204).json({
@@ -447,30 +446,53 @@ router.post("/checkUser", async (req, res, next) => {
  * @access  Public
  * @desc  This route is used to reset password
  */
-router.post("/forgotPassword", async (req, res, next) => {
+router.post("/forgetPassword", async (req, res, next) => {
   try {
-    const { credentials, otp } = req.body;
+    const { credentials, otp, newPassword } = req.body;
 
-    // let user;
+    let user;
 
-    // // Check if email
-    // if (checkEmail(credentials)) {
-    //   // Check if user exists
-    //   user = await userModel.findOne({ email: credentials }).exec();
-    // } else {
-    //   user = await userModel.findOne({ username: credentials }).exec();
-    // }
+    // Check if email
+    if (checkEmail(credentials)) {
+      // Check if user exists
+      user = await userModel.findOne({ email: credentials }).exec();
+    } else {
+      user = await userModel.findOne({ username: credentials }).exec();
+    }
 
-    // if (!user) {
-    //   return next(
-    //     new ErrorHandler("User not found with provided username or email", 204)
-    //   );
-    // }
+    if (user) {
+      let otpFromDB = await otpModel.findOne({ email: user.email }).exec();
 
-    let otpFromDB = await otpModel.findOne({ email: credentials }).select("otp").exec();
+      if (otpFromDB) {
+        if (otpFromDB.otp === otp) {
+          // OTP is valid
+          user.setPassword(newPassword, async (err) => {
+            if (err) {
+              return next(new ErrorHandler(err.message, 500));
+            }
 
-    console.log(otpFromDB.otp, typeof otpFromDB.otp, otp, typeof otp)
+            // Save the user object to persist the changes
+            await user.save();
 
+            // console.log()
+            await otpFromDB.deleteOne();
+
+            return res
+              .status(200)
+              .redirect("/login");
+          });
+        }
+      } else {
+        return res.status(410).json({
+          success: true,
+          message: "Otp expired!",
+        });
+      }
+    } else {
+      return next(
+        new ErrorHandler("User not found with provided username or email", 204)
+      );
+    }
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }

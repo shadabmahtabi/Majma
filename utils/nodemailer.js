@@ -29,7 +29,7 @@ exports.sendmail = async (email, res, next) => {
     let otp = Math.floor(1000 + Math.random() * 9000);
 
     const mailOptions = {
-      from: process.env.MAIL_EMAIL_ADDRESS,
+      from: "Majma Inc",
       to: email,
       subject: "Reset Password",
       html: `<h1>Your verification code is ${otp}.</h1>
