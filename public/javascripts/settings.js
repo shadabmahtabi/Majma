@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   getOTP.forEach((btn) => {
     btn.addEventListener("click", async () => {
       try {
-        let { data } = await axios.get("http://localhost:3000/sendmail");
+        let { data } = await axios.get("/sendmail");
         console.log(data);
         mailData = data;
         if (data.success) {
