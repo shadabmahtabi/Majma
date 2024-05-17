@@ -359,10 +359,10 @@ router.post("/createBlog", isLoggedIn, async (req, res) => {
 router.post("/changepassword", async (req, res, next) => {
   try {
     // Extract oldPassword and newPassword from request body
-    const { oldPassword, newPassword, otp } = req.body;
+    const { oldPassword, newPassword } = req.body;
 
     // Check if the user is authenticated and request contains necessary data
-    if (!req.isAuthenticated || !oldPassword || !newPassword || !otp) {
+    if (!req.isAuthenticated || !oldPassword || !newPassword) {
       throw new ErrorHandler("Invalid request", 400);
     }
 
@@ -372,25 +372,17 @@ router.post("/changepassword", async (req, res, next) => {
       if (passwordError)
         return next(new ErrorHandler("Incorrect password", 401));
 
-      let otpFromdb = await otpModel.findOne({ email: model.email });
-      // Check if otp is valid
-      if (otpFromdb.otp === otp) {
-        // Delete otp from db
-        await otpModel.deleteOne({ email: model.email });
-        // Change password if authentication successful
-        req.user.changePassword(oldPassword, newPassword, (err) => {
-          // Handle changePassword errors
-          return err
-            ? next(new ErrorHandler(err.message, 500))
-            : res.status(200).redirect("back");
-        });
-      } else {
-        return next(new ErrorHandler("Invalid OTP", 401));
-      }
+      // Change password if authentication successful
+      req.user.changePassword(oldPassword, newPassword, (err) => {
+        // Handle changePassword errors
+        return err
+          ? next(new ErrorHandler(err.message, 500))
+          : res.status(200).redirect("back");
+      });
     });
   } catch (error) {
     // Handle general errors
-    return next(new ErrorHandler(error.message), 500);
+    return next(new ErrorHandler(error.message, 500));
   }
 });
 
@@ -400,18 +392,44 @@ router.post("/changepassword", async (req, res, next) => {
  * @access  Public
  * @desc  This route is used to verify email, search user and send mail with OTP
  */
-router.post("/checkUser", async (req, res, next) => {
+router.post("/checkUser/:type", async (req, res, next) => {
   try {
     const { credentials } = req.body;
-    const user = await userModel
-      .findOne({ $or: [{ email: credentials }, { username: credentials }] })
-      .select("email")
-      .exec();
+    let user;
 
+    if (req.params.type === "deleteAccount") {
+      await new Promise((resolve, reject) => {
+        req.user.authenticate(credentials, (err, model, passwordError) => {
+          if (err) {
+            // reject(new ErrorHandler(err.message, 500));
+          } else if (passwordError) {
+            return next(new ErrorHandler(passwordError.message, 401));
+          } else if (model) {
+            user = {
+              _id: model._id,
+              email: model.email,
+            };
+            resolve();
+          } else {
+            reject(new ErrorHandler("User not found", 204));
+          }
+        });
+      });
+    } else {
+      user = await userModel
+        .findOne({ $or: [{ email: credentials }, { username: credentials }] })
+        .select("email")
+        .exec();
+    }
+
+    console.log(user);
     if (user) {
       const otp = await otpModel.findOne({ email: user.email });
+      // console.log(otp.type, otp.type === req.params.type);
       if (!otp) {
-        sendmail(user.email, res, next);
+        sendmail(user.email, req, res, next);
+      } else if (otp.type != req.params.type) {
+        sendmail(user.email, req, res, next);
       } else {
         return res.status(400).json({
           message:
@@ -419,9 +437,9 @@ router.post("/checkUser", async (req, res, next) => {
         });
       }
     } else {
-      return res
-        .status(204)
-        .json({ message: "User not found with provided username or email" });
+      return res.status(204).json({
+        message: "User not found with provided username or email",
+      });
     }
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
@@ -719,7 +737,7 @@ router.get("/openChat/:username", isLoggedIn, async (req, res) => {
  */
 router.get("/sendmail", async (req, res, next) => {
   try {
-    sendmail(req.user.email, res, next);
+    sendmail(req.user.email, req, res, next);
   } catch (error) {
     return next(new ErrorHandler(error.message), 500);
   }

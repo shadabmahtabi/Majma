@@ -3,51 +3,8 @@ const checkBtn = document.querySelector("#check");
 const forgetForm = document.querySelector("#forgetForm");
 const afterOtp = document.querySelector("#afterOtp");
 
-// Adding click event listener to the check button
-checkBtn.addEventListener(
-  "click",
-  async () => {
-    // Get the value of the input field and trim whitespace
-    const inputValue = forgetForm.children[1].value.trim();
-    // Check if the input value is empty
-    if (!inputValue) return alert("Please enter your email or username");
-
-    try {
-      // Modify button style to indicate loading
-      setButtonStyle(true);
-      // Send a POST request to check user status
-      const { status } = await axios.post("/checkUser", {
-        credentials: inputValue,
-      });
-      // Handle different response statuses
-      if ([200, 250].includes(status)) {
-        alert("OTP sent successfully.");
-        // Update form and button after successful request
-        updateFormAndButton();
-      } else if (status === 204) {
-        alert("User not found with provided username or email");
-      } else if (status === 409) {
-        alert("An OTP has already been sent to this email or username.");
-        // Update form and button after OTP is already sent
-        updateFormAndButton();
-      } else {
-        // Throw error if status is not handled
-        throw new Error("Something went wrong!");
-      }
-    } catch (error) {
-      // Handle errors during request
-      handleErrorResponse(error);
-    } finally {
-      // Reset button style after request completion
-      setButtonStyle(false);
-    }
-  },
-  { once: true }
-); // Make sure the event listener is triggered only once
-
 // Function to modify button style based on loading status
 function setButtonStyle(loading) {
-  // Set button size and padding based on loading status and window width
   checkBtn.style.height = loading
     ? window.innerWidth <= 500
       ? "15vmax"
@@ -63,17 +20,15 @@ function setButtonStyle(loading) {
     ? "15vmax"
     : "initial";
   checkBtn.style.padding = loading
-    ? window.innerWidth <= 500
-      ? "0"
-      : "0"
+    ? "0"
     : window.innerWidth <= 500
     ? "0"
     : "0.8vmax 2.4vmax";
   // Set button background color and content based on loading status
-  checkBtn.style.backgroundColor = loading ? "transparent" : "var(--btnColor)";
+  checkBtn.style.backgroundColor = loading ? "transparent" : "#76d6ca";
   checkBtn.innerHTML = loading
     ? `<img src="/images/loader2.gif" alt="">`
-    : "Check";
+    : "OTP Sent";
 }
 
 // Function to update form and button after successful request
@@ -84,13 +39,11 @@ function updateFormAndButton() {
 
 // Function to handle errors during request
 function handleErrorResponse(error) {
-  // Check if the error response status is 409 (Conflict)
   if (
     (error.response && error.response.status === 409) ||
     error.response.status === 400
   ) {
     alert("An OTP has already been sent to this email or username.");
-    // Update form and button after OTP is already sent
     updateFormAndButton();
   } else if (error.response && error.response.status === 204) {
     alert("User not found with provided username or email");
@@ -99,8 +52,53 @@ function handleErrorResponse(error) {
     alert("OTP Expired!");
     updateFormAndButton();
   } else {
-    // Log the error to console and show a generic error message
     console.error("Error:", error);
     alert("Something went wrong!");
   }
 }
+
+// Function to handle button click
+async function handleClick() {
+  const inputValue = forgetForm.children[1].value.trim();
+  if (!inputValue) return alert("Please enter your email or username");
+
+  try {
+    setButtonStyle(true);
+    const { status } = await axios.post("/checkUser/forgetForm", {
+      credentials: inputValue,
+    });
+
+    if ([200, 250].includes(status)) {
+      alert("OTP sent successfully.");
+      updateFormAndButton();
+    } else if (status === 204) {
+      alert("User not found with provided username or email");
+    } else if (status === 409) {
+      alert("An OTP has already been sent to this email or username.");
+      updateFormAndButton();
+    } else {
+      throw new Error("Something went wrong!");
+    }
+  } catch (error) {
+    handleErrorResponse(error);
+  } finally {
+    setButtonStyle(false);
+  }
+}
+
+// Function to attach the click event listener with { once: true }
+function attachClickListener() {
+  checkBtn.addEventListener("click", handleClick, { once: true });
+}
+
+// Initial attachment of click event listener
+attachClickListener();
+
+// Add input event listener to reset the click event listener
+forgetForm.children[1].addEventListener("input", () => {
+  checkBtn.style.backgroundColor = "var(--btnColor)";
+  // Remove the existing click event listener
+  checkBtn.removeEventListener("click", handleClick);
+  // Re-attach the click event listener with { once: true }
+  attachClickListener();
+});

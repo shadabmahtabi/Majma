@@ -2,12 +2,12 @@ const nodemailer = require("nodemailer");
 const ErrorHandler = require("./ErrorHandler");
 const otpModel = require("../routes/otpModel");
 
-exports.sendmail = async (email, res, next) => {
+exports.sendmail = async (email, req, res, next) => {
   try {
-    const existingOTP = await otpModel.findOne({ email });
+    const existingOTP = await otpModel.findOne({ email, type: req.params.type });
     if (existingOTP)
       return res
-        .status(200)
+        .status(400)
         .json({
           success: false,
           message: "OTP already sent for this email address.",
@@ -32,7 +32,7 @@ exports.sendmail = async (email, res, next) => {
     };
 
     const info = await transport.sendMail(mailOptions);
-    let response = await new otpModel({ email, otp }).save();
+    let response = await new otpModel({ email, otp, type: req.params.type }).save();
 
     return res
       .status(200)
