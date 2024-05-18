@@ -395,47 +395,32 @@ router.post("/changepassword", async (req, res, next) => {
 router.post("/checkUser/:type", async (req, res, next) => {
   try {
     const { credentials } = req.body;
+    const type = req.params.type;
     let user;
 
-    if (req.params.type === "deleteAccount") {
+    if (type === "deleteAccount") {
       await new Promise((resolve, reject) => {
         req.user.authenticate(credentials, (err, model, passwordError) => {
           if (err) {
-            // reject(new ErrorHandler(err.message, 500));
+            return reject(new ErrorHandler(err.message, 500));
           } else if (passwordError) {
             return next(new ErrorHandler(passwordError.message, 401));
           } else if (model) {
-            user = {
-              _id: model._id,
-              email: model.email,
-            };
+            user = { _id: model._id, email: model.email };
             resolve();
           } else {
-            reject(new ErrorHandler("User not found", 204));
+            return reject(new ErrorHandler("User not found", 204));
           }
         });
       });
     } else {
-      user = await userModel
-        .findOne({ $or: [{ email: credentials }, { username: credentials }] })
-        .select("email")
-        .exec();
+      user = await userModel.findOne({
+        $or: [{ email: credentials }, { username: credentials }]
+      }).select("email").exec();
     }
 
-    console.log(user);
     if (user) {
-      const otp = await otpModel.findOne({ email: user.email });
-      // console.log(otp.type, otp.type === req.params.type);
-      if (!otp) {
-        sendmail(user.email, req, res, next);
-      } else if (otp.type != req.params.type) {
-        sendmail(user.email, req, res, next);
-      } else {
-        return res.status(400).json({
-          message:
-            "OTP has already been sent to the provided username or email.",
-        });
-      }
+      await sendmail(user.email, type, res, next);
     } else {
       return res.status(204).json({
         message: "User not found with provided username or email",
@@ -470,7 +455,7 @@ router.post("/forgetPassword", async (req, res, next) => {
     }
 
     // Find the OTP for the user's email
-    const otpFromDB = await otpModel.findOne({ email: user.email }).exec();
+    const otpFromDB = await otpModel.findOne({ email: user.email, type: 'forgetForm' }).exec();
 
     // If OTP not found, return 410 error
     if (!otpFromDB) {
@@ -500,6 +485,22 @@ router.post("/forgetPassword", async (req, res, next) => {
     return next(new ErrorHandler(error.message, 500));
   }
 });
+
+/**
+ * @method  POST
+ * @route /deleteAccount
+ * @access  Public
+ * @desc  This route is used to delete account
+ */
+router.post('/deleteAccount', async (req, res, next) => {
+  try {
+    // Get the user from the request body
+    const {} = req.body;
+    
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500))
+  }
+})
 
 // ------------------ POST routes ------------------
 // ------------------ GET routes ------------------

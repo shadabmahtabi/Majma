@@ -70,7 +70,7 @@
                         <ul class="commentList">
                             <% comments.forEach( comment => { %>
                                 <% if( post.id === comment.postId.id){ %>
-                                    <li><a href="/profile/<%= comment.userId.id %>" class="userComment"><%= comment.userId.username %></a> <p><%= comment.data %></p></li>
+                                    <li><a href="/profile/<%= comment.userId.username %>" class="userComment"><%= comment.userId.username %></a> <p><%= comment.data %></p></li>
                                 <%}%>
                             <% }) %>
                         </ul>

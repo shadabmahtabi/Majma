@@ -130,9 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : window.innerWidth <= 500
       ? "0"
       : "0.8vmax 2.4vmax";
-    checkBtn.style.backgroundColor = loading
-      ? "transparent"
-      : "#76d6ca";
+    checkBtn.style.backgroundColor = loading ? "transparent" : "#76d6ca";
     checkBtn.innerHTML = loading
       ? `<img src="/images/loader2.gif" alt="">`
       : "OTP Sent";

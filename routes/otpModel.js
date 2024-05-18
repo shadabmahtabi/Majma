@@ -20,4 +20,7 @@ const otpSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Create a compound unique index on email and type
+otpSchema.index({ email: 1, type: 1 }, { unique: true });
+
 module.exports = mongoose.model("Otp", otpSchema);
