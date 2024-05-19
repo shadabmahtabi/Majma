@@ -161,19 +161,100 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // let commentBtns = document.querySelectorAll('#comments');
-  // for(let i = 0; i < commentBtns.length; i++){
-  //     commentBtns[i].addEventListener('click', ()=>{
-  //         document.querySelector('#commentBox'+i).style.opacity = 1;
-  //         document.querySelector('#commentBox'+i).style.pointerEvents = 'initial';
-  //     });
-  // }
+  // -------------------- Load More ----------------------------
+  let page = 1;
+  const limit = 10;
+  const postSection = document.querySelector(".posts");
+  const loadMoreBtn = document.getElementById("loadMoreBtn");
+  const loggedInUser = JSON.parse(document.getElementById("loggedInUser").value); // Assuming you pass loggedInUser as a JSON string in a hidden input field
 
-  // let commentCrossBtns = document.querySelectorAll('#commentCrossBtn');
-  // for(let i = 0; i < commentCrossBtns.length; i++){
-  //     commentCrossBtns[i].addEventListener('click', ()=>{
-  //         document.querySelector('#commentBox'+i).style.opacity = 0;
-  //         document.querySelector('#commentBox'+i).style.pointerEvents = 'none';
-  //     });
-  // }
+  // Function to create HTML structure for a post
+  function createPostHTML(post, loggedInUser) {
+    if (!post || !post.user) return ''; // Return empty string if post or post.user is undefined
+    return `
+      <div class="post">
+        <nav class="postNav">
+          <div class="postUser">
+            <div class="postUserPic"><a href="/profile/${post.user.username}"><img src="/images/${post.user.profilePic}" alt="Profile Pic"></a></div>
+            <div class="postUserName"><a href="/profile/${post.user.username}"><h3>${post.user.name}</h3></a></div>
+          </div>
+          <div class="options"><i class="ri-more-fill"></i></div>
+          <div class="optionDiv">
+            <ul class="optionBox">
+              ${
+                loggedInUser.following.indexOf(post.user._id) != -1
+                  ? `<li><a href="/follow/${post.user._id}" class="followBtn"><div>Unfollow</div></a></li>`
+                  : `<li><a href="/follow/${post.user._id}">Follow</a></li>`
+              }
+              <li><a href="#" class="reportBtn">Report</a></li>
+              <li id="closeOption">Cancel</li>
+            </ul>
+          </div>
+        </nav>
+        <div class="descBox">${post.desc}</div>
+        <div class="postPic">
+          ${
+            post.blog
+              ? `<p class="blog">${post.blog}</p>`
+              : `<img src="/images/${post.image}" alt="">`
+          }
+        </div>
+        <div class="postReaction">
+          <div class="icons">
+            <div id="likes" onclick="likeUnlike('${post._id}', '${loggedInUser._id}')"><i class="ri-heart-2-line"></i></div>
+            <div id="comments"><a href="/comment/${post._id}"><i class="ri-chat-1-line"></i></a></div>
+            <div id="send"><a href="/progress"><i class="ri-send-plane-line"></i></a></div>
+          </div>
+          <div class="icons">
+            <div id="save"><a href="/progress"><i class="ri-bookmark-line"></i></a></div>
+          </div>
+        </div>
+        <div class="likesCommentDiv">
+          <h4 id="totalLikes">${post.likes.length} likes</h4> • <h4>${post.comments.length} comments</h4>
+        </div>
+      </div>
+    `;
+  }
+
+  // Function to load more posts
+  async function loadMorePosts() {
+    try {
+      const response = await axios.get(`/loadMorePosts?page=${page}&limit=${limit}`);
+      const newPosts = response.data;
+
+      if (newPosts.length === 0) {
+        loadMoreBtn.style.display = "none"; // Hide the button if no more posts are loaded
+        return; // Exit the function if no more posts are loaded
+      }
+
+      newPosts.forEach((post) => {
+        const postHTML = createPostHTML(post, loggedInUser);
+        if (postHTML) {
+          postSection.insertAdjacentHTML("beforeend", postHTML);
+        }
+      });
+
+      page++;
+    } catch (error) {
+      console.error("Error loading more posts:", error);
+    }
+  }
+
+  // Initial load
+  loadMoreBtn.style.display = "block";
+
+  // Load more posts on button click
+  loadMoreBtn.addEventListener("click", loadMorePosts);
+
+  // Show the "Load More" button when scrolling to the bottom
+  // window.addEventListener("scroll", () => {
+  //   if (
+  //     window.innerHeight + window.scrollY >=
+  //     document.body.offsetHeight - 100
+  //   ) {
+  //     loadMoreBtn.style.display = "block";
+  //   } else {
+  //     loadMoreBtn.style.display = "none";
+  //   }
+  // });
 });

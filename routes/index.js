@@ -414,9 +414,12 @@ router.post("/checkUser/:type", async (req, res, next) => {
         });
       });
     } else {
-      user = await userModel.findOne({
-        $or: [{ email: credentials }, { username: credentials }]
-      }).select("email").exec();
+      user = await userModel
+        .findOne({
+          $or: [{ email: credentials }, { username: credentials }],
+        })
+        .select("email")
+        .exec();
     }
 
     if (user) {
@@ -455,7 +458,9 @@ router.post("/forgetPassword", async (req, res, next) => {
     }
 
     // Find the OTP for the user's email
-    const otpFromDB = await otpModel.findOne({ email: user.email, type: 'forgetForm' }).exec();
+    const otpFromDB = await otpModel
+      .findOne({ email: user.email, type: "forgetForm" })
+      .exec();
 
     // If OTP not found, return 410 error
     if (!otpFromDB) {
@@ -492,15 +497,14 @@ router.post("/forgetPassword", async (req, res, next) => {
  * @access  Public
  * @desc  This route is used to delete account
  */
-router.post('/deleteAccount', async (req, res, next) => {
+router.post("/deleteAccount", async (req, res, next) => {
   try {
     // Get the user from the request body
     const {} = req.body;
-    
   } catch (error) {
-    return next(new ErrorHandler(error.message, 500))
+    return next(new ErrorHandler(error.message, 500));
   }
-})
+});
 
 // ------------------ POST routes ------------------
 // ------------------ GET routes ------------------
@@ -578,52 +582,79 @@ router.get("/images/:filename", async (req, res) => {
   });
 });
 
-router.get("/", isLoggedIn, function (req, res, next) {
-  userModel.find().then((allUsers) => {
-    postModel
-      .find()
+// --------------- shuffle function ---------------
+const shuffle = (arr) => {
+  let currentIndex = arr.length,
+    randomIndex;
+
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [arr[currentIndex], arr[randomIndex]] = [
+      arr[randomIndex],
+      arr[currentIndex],
+    ];
+  }
+
+  return arr;
+};
+// ------------------------------------------------
+
+/**
+ * @method  GET
+ * @route /
+ * @access  Public
+ * @desc  This route is used to show posts. This is Home Page.
+ */
+router.get("/", isLoggedIn, async (req, res, next) => {
+  try {
+    const { _id: loggedInUserId } = req.user;
+
+    const allUsers = await userModel.find().exec();
+    const posts = await postModel
+      .find({ user: { $ne: loggedInUserId } })
       .populate("user")
-      .then((posts) => {
-        commnentModel
-          .find()
-          .populate("userId")
-          .then((comments) => {
-            function shuffle(arr) {
-              let currentIndex = arr.length,
-                randomIndex;
+      .limit(10)
+      .exec();
+    const comments = await commnentModel.find().populate("userId").exec();
 
-              // While there remain elements to shuffle.
-              while (currentIndex != 0) {
-                // Pick a remaining element.
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex--;
+    const shuffledUsers = shuffle(allUsers.reverse());
+    const shuffledPosts = shuffle(posts.reverse());
 
-                // And swap it with the current element.
-                [arr[currentIndex], arr[randomIndex]] = [
-                  arr[randomIndex],
-                  arr[currentIndex],
-                ];
-              }
+    res.render("home", {
+      title: "Majma | Home Page",
+      loggedInUser: req.user,
+      allUsers: shuffledUsers,
+      posts: shuffledPosts,
+      comments,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 
-              return arr;
-            }
+/**
+ * @method  GET
+ * @route /loadMorePosts
+ * @access  Public
+ * @desc  This route is used to load more posts.
+ */
+router.get("/loadMorePosts", isLoggedIn, async (req, res, next) => {
+  try {
+    const { _id: loggedInUserId } = req.user;
+    const { page = 1, limit = 10 } = req.query; // Default to first page and 10 posts per page
 
-            posts.reverse();
-            allUsers.reverse();
-            allUsers = shuffle(allUsers);
-            posts = shuffle(posts);
-            // console.log(comments);
+    const posts = await postModel
+      .find({ user: { $ne: loggedInUserId } })
+      .populate("user")
+      .limit(Number(limit)) // Convert limit to number
+      .skip((page - 1) * limit)
+      .exec();
 
-            res.render("home", {
-              title: "Majma | Home Page",
-              loggedInUser: req.user,
-              allUsers,
-              posts,
-              comments,
-            });
-          });
-      });
-  });
+    res.json(posts);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get("/progress", function (req, res, next) {
