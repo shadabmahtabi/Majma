@@ -611,21 +611,21 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     const { _id: loggedInUserId } = req.user;
 
     const allUsers = await userModel.find().exec();
-    const posts = await postModel
-      .find({ user: { $ne: loggedInUserId } })
-      .populate("user")
-      .limit(10)
-      .exec();
+    // const posts = await postModel
+    //   .find({ user: { $ne: loggedInUserId } })
+    //   .populate("user")
+    //   .limit(10)
+    //   .exec();
     const comments = await commnentModel.find().populate("userId").exec();
 
     const shuffledUsers = shuffle(allUsers.reverse());
-    const shuffledPosts = shuffle(posts.reverse());
+    // const shuffledPosts = shuffle(posts.reverse());
 
     res.render("home", {
       title: "Majma | Home Page",
       loggedInUser: req.user,
       allUsers: shuffledUsers,
-      posts: shuffledPosts,
+      // posts: shuffledPosts,
       comments,
     });
   } catch (error) {
@@ -650,8 +650,10 @@ router.get("/loadMorePosts", isLoggedIn, async (req, res, next) => {
       .limit(Number(limit)) // Convert limit to number
       .skip((page - 1) * limit)
       .exec();
+    
+    const shuffledPosts = shuffle(posts.reverse());
 
-    res.json(posts);
+    res.json(shuffledPosts);
   } catch (error) {
     next(error);
   }

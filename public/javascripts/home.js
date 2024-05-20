@@ -168,6 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadMoreBtn = document.getElementById("loadMoreBtn");
   const loggedInUser = JSON.parse(document.getElementById("loggedInUser").value); // Assuming you pass loggedInUser as a JSON string in a hidden input field
 
+  // Set to track loaded post IDs to avoid duplicates
+  const loadedPostIds = new Set();
+
   // Function to create HTML structure for a post
   function createPostHTML(post, loggedInUser) {
     if (!post || !post.user) return ''; // Return empty string if post or post.user is undefined
@@ -228,9 +231,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       newPosts.forEach((post) => {
-        const postHTML = createPostHTML(post, loggedInUser);
-        if (postHTML) {
-          postSection.insertAdjacentHTML("beforeend", postHTML);
+        if (!loadedPostIds.has(post._id)) { // Check if the post is already loaded
+          loadedPostIds.add(post._id); // Add the post ID to the set
+          const postHTML = createPostHTML(post, loggedInUser);
+          if (postHTML) {
+            postSection.insertAdjacentHTML("beforeend", postHTML);
+          }
         }
       });
 
@@ -239,6 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error loading more posts:", error);
     }
   }
+
+  // Initial load
+  loadMorePosts();
 
   // Initial load
   loadMoreBtn.style.display = "block";
