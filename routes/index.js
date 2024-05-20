@@ -639,20 +639,22 @@ router.get("/", isLoggedIn, async (req, res, next) => {
  * @access  Public
  * @desc  This route is used to load more posts.
  */
+let l = 1;
 router.get("/loadMorePosts", isLoggedIn, async (req, res, next) => {
   try {
     const { _id: loggedInUserId } = req.user;
     const { page = 1, limit = 10 } = req.query; // Default to first page and 10 posts per page
-
+    
     const posts = await postModel
-      .find({ user: { $ne: loggedInUserId } })
-      .populate("user")
-      .limit(Number(limit)) // Convert limit to number
-      .skip((page - 1) * limit)
-      .exec();
+    .find({ user: { $ne: loggedInUserId } })
+    .populate("user")
+    .limit(Number(limit)) // Convert limit to number
+    .skip((page - 1) * limit)
+    .exec();
     
     const shuffledPosts = shuffle(posts.reverse());
-
+    console.log(l)
+    l++;
     res.json(shuffledPosts);
   } catch (error) {
     next(error);

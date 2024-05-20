@@ -170,10 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Set to track loaded post IDs to avoid duplicates
   const loadedPostIds = new Set();
+  let isLoading = false;
+  let allPostsLoaded = false;
 
   // Function to create HTML structure for a post
   function createPostHTML(post, loggedInUser) {
-    if (!post || !post.user) return ''; // Return empty string if post or post.user is undefined
+    if (!post || !post.user) return ''; 
+
     return `
       <div class="post">
         <nav class="postNav">
@@ -194,12 +197,14 @@ document.addEventListener("DOMContentLoaded", () => {
             </ul>
           </div>
         </nav>
-        <div class="descBox">${post.desc}</div>
+        <div class="descBox">${post.desc || ''}</div>
         <div class="postPic">
           ${
             post.blog
               ? `<p class="blog">${post.blog}</p>`
-              : `<img src="/images/${post.image}" alt="">`
+              : post.image
+                ? `<img src="/images/${post.image}" alt="">`
+                : ''
           }
         </div>
         <div class="postReaction">
@@ -221,11 +226,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to load more posts
   async function loadMorePosts() {
+    if (isLoading || allPostsLoaded) return;
+    isLoading = true;
     try {
       const response = await axios.get(`/loadMorePosts?page=${page}&limit=${limit}`);
       const newPosts = response.data;
 
       if (newPosts.length === 0) {
+        allPostsLoaded = true;
         loadMoreBtn.style.display = "none"; // Hide the button if no more posts are loaded
         return; // Exit the function if no more posts are loaded
       }
@@ -243,27 +251,25 @@ document.addEventListener("DOMContentLoaded", () => {
       page++;
     } catch (error) {
       console.error("Error loading more posts:", error);
+    } finally {
+      isLoading = false;
     }
   }
 
   // Initial load
   loadMorePosts();
-
-  // Initial load
   loadMoreBtn.style.display = "block";
 
   // Load more posts on button click
   loadMoreBtn.addEventListener("click", loadMorePosts);
 
   // Show the "Load More" button when scrolling to the bottom
-  // window.addEventListener("scroll", () => {
-  //   if (
-  //     window.innerHeight + window.scrollY >=
-  //     document.body.offsetHeight - 100
-  //   ) {
-  //     loadMoreBtn.style.display = "block";
-  //   } else {
-  //     loadMoreBtn.style.display = "none";
-  //   }
-  // });
+  document.getElementById('postSection').addEventListener("scroll", () => {
+    if (isLoading || allPostsLoaded) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = document.getElementById('postSection');
+    if (scrollHeight - scrollTop <= clientHeight + 1) {
+      loadMorePosts();
+    }
+  });
 });
