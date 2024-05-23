@@ -209,9 +209,9 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="postReaction">
           <div class="icons">
-            <div id="likes" onclick="likeUnlike('${post._id}', '${loggedInUser._id}')"><i class="ri-heart-2-line"></i></div>
+            <div id="likes" onclick="likeUnlike('${post._id}', '${loggedInUser._id}')"><i class="ri-heart-3-line"></i></div>
             <div id="comments"><a href="/comment/${post._id}"><i class="ri-chat-1-line"></i></a></div>
-            <div id="send"><a href="/progress"><i class="ri-send-plane-line"></i></a></div>
+            <!-- <div id="send"><a href="/progress"><i class="ri-send-plane-line"></i></a></div> -->
           </div>
           <div class="icons">
             <div id="save"><a href="/progress"><i class="ri-bookmark-line"></i></a></div>

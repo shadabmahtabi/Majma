@@ -889,6 +889,12 @@ button {
     padding: 1vmax 0 15vmax 0;
   }
 
+  #loadMoreBtn {
+    padding: .8vmax 2.4vmax;
+    font-size: 1rem;
+    letter-spacing: 0.05vmax;
+  } 
+
   /* ----------------------------------------------------------------------- */
   #infoSection {
     display: none;

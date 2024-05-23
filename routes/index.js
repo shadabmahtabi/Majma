@@ -296,17 +296,18 @@ router.post("/edit", async (req, res, next) => {
 
 router.post("/likeUnlike", (req, res, next) => {
   postModel.findOne({ _id: req.body.postId }).then((post) => {
-    if (post.likes.indexOf(req.user._id) != -1) {
-      post.likes.splice(post.likes.indexOf(req.user._id), 1);
-      post.save().then(() => {
-        res.send({ post });
-      });
+    if (post.likes.includes(req.user._id)) {
+      post.likes.pull(req.user._id);
     } else {
       post.likes.push(req.user._id);
-      post.save().then(() => {
-        res.send({ post });
-      });
     }
+    post.save().then(() => {
+      res.send({ liked: post.likes.includes(req.user._id) });
+    }).catch(err => {
+      res.status(500).json({ error: 'Internal server error' });
+    });
+  }).catch(err => {
+    res.status(404).json({ error: 'Post not found' });
   });
 });
 
