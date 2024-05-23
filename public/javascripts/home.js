@@ -231,6 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const response = await axios.get(`/loadMorePosts?page=${page}&limit=${limit}`);
       const newPosts = response.data;
+      console.log(newPosts)
 
       if (newPosts.length === 0) {
         allPostsLoaded = true;

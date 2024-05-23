@@ -277,10 +277,10 @@ router.post("/edit", async (req, res, next) => {
   try {
     const { name, bio, gender, age, email, mobileNumber, username } = req.body;
 
-    gender.charAt(0).toUpperCase() + gender.slice(1);
+    // gender.charAt(0).toUpperCase() + gender.slice(1);
     if (name) req.user.name = name.trim();
     if (bio) req.user.bio = bio.trim();
-    if (gender) req.user.gender = gender.trim();
+    if (gender) req.user.gender = gender.trim().toLowerCase();
     if (age) req.user.age = age.trim();
     if (username) req.user.username = username.trim();
     if (mobileNumber && mobileNumber.length === 10)
@@ -295,20 +295,26 @@ router.post("/edit", async (req, res, next) => {
 });
 
 router.post("/likeUnlike", (req, res, next) => {
-  postModel.findOne({ _id: req.body.postId }).then((post) => {
-    if (post.likes.includes(req.user._id)) {
-      post.likes.pull(req.user._id);
-    } else {
-      post.likes.push(req.user._id);
-    }
-    post.save().then(() => {
-      res.send({ liked: post.likes.includes(req.user._id) });
-    }).catch(err => {
-      res.status(500).json({ error: 'Internal server error' });
+  postModel
+    .findOne({ _id: req.body.postId })
+    .then((post) => {
+      if (post.likes.includes(req.user._id)) {
+        post.likes.pull(req.user._id);
+      } else {
+        post.likes.push(req.user._id);
+      }
+      post
+        .save()
+        .then(() => {
+          res.send({ liked: post.likes.includes(req.user._id) });
+        })
+        .catch((err) => {
+          res.status(500).json({ error: "Internal server error" });
+        });
+    })
+    .catch((err) => {
+      res.status(404).json({ error: "Post not found" });
     });
-  }).catch(err => {
-    res.status(404).json({ error: 'Post not found' });
-  });
 });
 
 router.post("/comment/:id", async (req, res, next) => {
@@ -609,25 +615,9 @@ const shuffle = (arr) => {
  */
 router.get("/", isLoggedIn, async (req, res, next) => {
   try {
-    const { _id: loggedInUserId } = req.user;
-
-    const allUsers = await userModel.find().exec();
-    // const posts = await postModel
-    //   .find({ user: { $ne: loggedInUserId } })
-    //   .populate("user")
-    //   .limit(10)
-    //   .exec();
-    const comments = await commnentModel.find().populate("userId").exec();
-
-    const shuffledUsers = shuffle(allUsers.reverse());
-    // const shuffledPosts = shuffle(posts.reverse());
-
     res.render("home", {
       title: "Majma | Home Page",
       loggedInUser: req.user,
-      allUsers: shuffledUsers,
-      // posts: shuffledPosts,
-      comments,
     });
   } catch (error) {
     next(error);
@@ -645,16 +635,16 @@ router.get("/loadMorePosts", isLoggedIn, async (req, res, next) => {
   try {
     const { _id: loggedInUserId } = req.user;
     const { page = 1, limit = 10 } = req.query; // Default to first page and 10 posts per page
-    
+
     const posts = await postModel
-    .find({ user: { $ne: loggedInUserId } })
-    .populate("user")
-    .limit(Number(limit)) // Convert limit to number
-    .skip((page - 1) * limit)
-    .exec();
-    
+      .find({ user: { $ne: loggedInUserId } })
+      .populate({ path: "user", select: "_id name username profilePic" })
+      .limit(Number(limit)) // Convert limit to number
+      .skip((page - 1) * limit)
+      .exec();
+
     const shuffledPosts = shuffle(posts.reverse());
-    console.log(l)
+    console.log(l);
     l++;
     res.json(shuffledPosts);
   } catch (error) {

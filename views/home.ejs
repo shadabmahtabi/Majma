@@ -222,11 +222,6 @@
       <div id="postSection">
         <div class="posts"></div>
         <button id="loadMoreBtn">Loading...</button>
-        <div class="copyright">
-          <h4>&#169;copyright 2023 Majma.Inc. All Rights Reserved.</h4>
-          <h4><a href="/progress">About</a>•<a href="/progress">Privacy</a>•<a
-              href="/progress">Terms</a></h4>
-        </div>
       </div>
     </div>
     <div id="infoSection">
@@ -267,45 +262,11 @@
         </div>
       </div>
       <div class="otherUsersBox">
-        <div class="mightKnowNav">
-          <h3>Explore more peoples</h3>
+        <div class="copyright">
+          <h4>&#169;copyright 2023 Majma.Inc. All Rights Reserved.</h4>
+          <h4><a href="/progress">About</a>•<a href="/progress">Privacy</a>•<a
+              href="/progress">Terms</a></h4>
         </div>
-        <ul class="mightKnowList">
-          <% allUsers.forEach( user=>{ %>
-            <% if( user.email !=loggedInUser.email ){ %>
-              <% if( loggedInUser.following.indexOf(user._id) !=-1 ){ %>
-                <li class="items">
-                  <a href="/profile/<%= user.username %>" class="userPic">
-                    <img src="/images/<%= user.profilePic %>" alt="Profile Image">
-                  </a>
-                  <a href="/profile/<%= user.username %>" class="userBox">
-                    <div>
-                      <%= user.name %>
-                    </div>
-                  </a>
-                  <a href="/follow/<%= user._id %>" class="followBtn"
-                    style="background-color: rgba(228, 49, 49, 0.931);">
-                    <div>Unfollow</div>
-                  </a>
-                </li>
-                <% }else{ %>
-                  <li class="items">
-                    <a href="/profile/<%= user.username %>" class="userPic">
-                      <img src="/images/<%= user.profilePic %>" alt="Profile Image">
-                    </a>
-                    <a href="/profile/<%= user.username %>" class="userBox">
-                      <div>
-                        <%= user.name %>
-                      </div>
-                    </a>
-                    <a href="/follow/<%= user._id %>" class="followBtn">
-                      <div>Follow</div>
-                    </a>
-                  </li>
-                  <% } %>
-                    <% } %>
-                      <% }) %>
-        </ul>
       </div>
     </div>
   </div>
@@ -316,6 +277,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
     integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/javascripts/fetch.js"></script>
   <script src="/javascripts/home.js"></script>
   <script src="/javascripts/loader.js"></script>
 </body>
