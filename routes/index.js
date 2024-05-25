@@ -294,27 +294,34 @@ router.post("/edit", async (req, res, next) => {
   }
 });
 
-router.post("/likeUnlike", (req, res, next) => {
-  postModel
-    .findOne({ _id: req.body.postId })
-    .then((post) => {
-      if (post.likes.includes(req.user._id)) {
-        post.likes.pull(req.user._id);
-      } else {
-        post.likes.push(req.user._id);
-      }
-      post
-        .save()
-        .then(() => {
-          res.send({ liked: post.likes.includes(req.user._id) });
-        })
-        .catch((err) => {
-          res.status(500).json({ error: "Internal server error" });
-        });
-    })
-    .catch((err) => {
-      res.status(404).json({ error: "Post not found" });
-    });
+router.post("/likeUnlike/:postId", isLoggedIn, async (req, res, next) => {
+  try {
+    const { postId } = req.params;
+    const { _id: userId } = req.user;
+
+    const post = await postModel.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    // Check if the user already liked the post
+    const hasLiked = post.likes.includes(userId);
+
+    if (hasLiked) {
+      // Unlike the post
+      post.likes = post.likes.filter(
+        (id) => id.toString() !== userId.toString()
+      );
+    } else {
+      // Like the post
+      post.likes.push(userId);
+    }
+
+    await post.save();
+    res.json({ success: true, likes: post.likes.length });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post("/comment/:id", async (req, res, next) => {

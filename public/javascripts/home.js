@@ -141,23 +141,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --------------------------------------------------------------
+  // ---------------- attach event listeners ----------------
 
-  let options = document.querySelectorAll(".options");
-  let optionDiv = document.querySelector(".optionDiv");
-  let closeOption = document.querySelector("#closeOption");
+  // Function to attach event listeners to dynamically loaded elements
+  function attachEventListeners() {
+    const options = document.querySelectorAll(".options");
+    const closeOptions = document.querySelectorAll("#closeOption");
 
-  options.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      optionDiv.style.opacity = "1";
-      optionDiv.style.pointerEvents = "initial";
+    options.forEach((item) => {
+      item.addEventListener("click", () => {
+        const optionDiv = item.nextElementSibling; // Select the corresponding optionDiv
+        optionDiv.style.opacity = "1";
+        optionDiv.style.pointerEvents = "initial";
+      });
     });
-  });
 
-  if (closeOption) {
-    closeOption.addEventListener("click", () => {
-      optionDiv.style.opacity = "0";
-      optionDiv.style.pointerEvents = "none";
+    closeOptions.forEach((item) => {
+      item.addEventListener("click", () => {
+        const optionDiv = item.closest(".optionDiv"); // Select the closest optionDiv
+        optionDiv.style.opacity = "0";
+        optionDiv.style.pointerEvents = "none";
+      });
+    });
+
+    const likeButtons = document.querySelectorAll(".like-btn");
+    likeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const postId = button.getAttribute("data-post-id");
+        likeUnlike(postId, loggedInUser._id);
+      });
     });
   }
 
@@ -166,7 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const limit = 10;
   const postSection = document.querySelector(".posts");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
-  const loggedInUser = JSON.parse(document.getElementById("loggedInUser").value); // Assuming you pass loggedInUser as a JSON string in a hidden input field
+  const loggedInUser = JSON.parse(
+    document.getElementById("loggedInUser").value
+  ); // Assuming you pass loggedInUser as a JSON string in a hidden input field
 
   // Set to track loaded post IDs to avoid duplicates
   const loadedPostIds = new Set();
@@ -175,20 +189,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to create HTML structure for a post
   function createPostHTML(post, loggedInUser) {
-    if (!post || !post.user) return ''; 
+    if (!post || !post.user) return "";
+
+    const isLiked = post.likes.includes(loggedInUser._id);
+    const likeIconClass = isLiked ? "ri-heart-3-fill" : "ri-heart-3-line";
 
     return `
-      <div class="post">
+      <div class="post" id="post-${post._id}">
         <nav class="postNav">
           <div class="postUser">
-            <div class="postUserPic"><a href="/profile/${post.user.username}"><img src="/images/${post.user.profilePic}" alt="Profile Pic"></a></div>
-            <div class="postUserName"><a href="/profile/${post.user.username}"><h3>${post.user.name}</h3></a></div>
+            <div class="postUserPic"><a href="/profile/${
+              post.user.username
+            }"><img src="/images/${
+      post.user.profilePic
+    }" alt="Profile Pic"></a></div>
+            <div class="postUserName"><a href="/profile/${
+              post.user.username
+            }"><h3>${post.user.name}</h3></a></div>
           </div>
           <div class="options"><i class="ri-more-fill"></i></div>
           <div class="optionDiv">
             <ul class="optionBox">
               ${
-                loggedInUser.following.indexOf(post.user._id) != -1
+                loggedInUser.following.includes(post.user._id)
                   ? `<li><a href="/follow/${post.user._id}" class="followBtn"><div>Unfollow</div></a></li>`
                   : `<li><a href="/follow/${post.user._id}">Follow</a></li>`
               }
@@ -197,41 +220,52 @@ document.addEventListener("DOMContentLoaded", () => {
             </ul>
           </div>
         </nav>
-        <div class="descBox">${post.desc || ''}</div>
+        <div class="descBox">${post.desc || ""}</div>
         <div class="postPic">
           ${
             post.blog
               ? `<p class="blog">${post.blog}</p>`
               : post.image
-                ? `<img src="/images/${post.image}" alt="">`
-                : ''
+              ? `<img src="/images/${post.image}" alt="">`
+              : ""
           }
         </div>
         <div class="postReaction">
           <div class="icons">
-            <div id="likes" onclick="likeUnlike('${post._id}', '${loggedInUser._id}')"><i class="ri-heart-3-line"></i></div>
-            <div id="comments"><a href="/comment/${post._id}"><i class="ri-chat-1-line"></i></a></div>
-            <!-- <div id="send"><a href="/progress"><i class="ri-send-plane-line"></i></a></div> -->
+            <div id="likes" class="like-btn" data-post-id="${post._id}">
+              <i class="${likeIconClass}"></i>
+            </div>
+            <div id="comments"><a href="/comment/${
+              post._id
+            }"><i class="ri-chat-1-line"></i></a></div>
           </div>
           <div class="icons">
             <div id="save"><a href="/progress"><i class="ri-bookmark-line"></i></a></div>
           </div>
         </div>
         <div class="likesCommentDiv">
-          <h4 id="totalLikes">${post.likes.length} likes</h4> • <h4>${post.comments.length} comments</h4>
+          <h4 id="totalLikes">${post.likes.length} likes</h4> • <h4>${
+      post.comments.length
+    } comments</h4>
         </div>
       </div>
     `;
   }
+
+  // onclick="likeUnlike('${post._id}', '${
+  //   loggedInUser._id
+  // }')"
 
   // Function to load more posts
   async function loadMorePosts() {
     if (isLoading || allPostsLoaded) return;
     isLoading = true;
     try {
-      const response = await axios.get(`/loadMorePosts?page=${page}&limit=${limit}`);
+      const response = await axios.get(
+        `/loadMorePosts?page=${page}&limit=${limit}`
+      );
       const newPosts = response.data;
-      console.log(newPosts)
+      // console.log(newPosts)
 
       if (newPosts.length === 0) {
         allPostsLoaded = true;
@@ -240,7 +274,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       newPosts.forEach((post) => {
-        if (!loadedPostIds.has(post._id)) { // Check if the post is already loaded
+        if (!loadedPostIds.has(post._id)) {
+          // Check if the post is already loaded
           loadedPostIds.add(post._id); // Add the post ID to the set
           const postHTML = createPostHTML(post, loggedInUser);
           if (postHTML) {
@@ -248,6 +283,9 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }
       });
+
+      // Reattach event listeners to newly added posts
+      attachEventListeners();
 
       page++;
     } catch (error) {
@@ -257,6 +295,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  async function likeUnlike(postId, userId) {
+    try {
+      const response = await axios.post(`/likeUnlike/${postId}`);
+      if (response.data.success) {
+        const postElement = document.getElementById(`post-${postId}`);
+        const likesCountElement = postElement.querySelector("#totalLikes");
+        const likeIconElement = postElement.querySelector("#likes i");
+
+        likesCountElement.textContent = `${response.data.likes} likes`;
+
+        if (likeIconElement.classList.contains("ri-heart-3-line")) {
+          likeIconElement.classList.remove("ri-heart-3-line");
+          likeIconElement.classList.add("ri-heart-3-fill");
+        } else {
+          likeIconElement.classList.remove("ri-heart-3-fill");
+          likeIconElement.classList.add("ri-heart-3-line");
+        }
+      }
+    } catch (error) {
+      console.error("Error liking/unliking post:", error);
+    }
+  }
+
+  // Initial attachment of event listeners
+  attachEventListeners();
+
   // Initial load
   loadMorePosts();
   loadMoreBtn.style.display = "block";
@@ -265,10 +329,11 @@ document.addEventListener("DOMContentLoaded", () => {
   loadMoreBtn.addEventListener("click", loadMorePosts);
 
   // Show the "Load More" button when scrolling to the bottom
-  document.getElementById('postSection').addEventListener("scroll", () => {
+  document.getElementById("postSection").addEventListener("scroll", () => {
     if (isLoading || allPostsLoaded) return;
 
-    const { scrollTop, scrollHeight, clientHeight } = document.getElementById('postSection');
+    const { scrollTop, scrollHeight, clientHeight } =
+      document.getElementById("postSection");
     if (scrollHeight - scrollTop <= clientHeight + 1) {
       loadMorePosts();
     }

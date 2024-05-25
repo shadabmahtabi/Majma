@@ -432,6 +432,10 @@ button {
     color: #000;
 } */
 
+.ri-heart-3-fill {
+  color: red;
+}
+
 .post .likesCommentDiv {
   height: 3vh;
   width: 100%;
