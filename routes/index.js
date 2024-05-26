@@ -644,18 +644,48 @@ router.get("/loadMorePosts", isLoggedIn, async (req, res, next) => {
     const { page = 1, limit = 10 } = req.query; // Default to first page and 10 posts per page
 
     const posts = await postModel
-      .find({ user: { $ne: loggedInUserId } })
+      .find({ user: { $ne: loggedInUserId }, likes: { $ne: loggedInUserId } })
+      .select("image user desc blog likes comments")
       .populate({ path: "user", select: "_id name username profilePic" })
       .limit(Number(limit)) // Convert limit to number
       .skip((page - 1) * limit)
       .exec();
 
-    const shuffledPosts = shuffle(posts.reverse());
-    console.log(l);
-    l++;
+    const transformedPosts = await Promise.all(
+      posts.map(async (post) => {
+        let likedUser = null;
+        let likesCount = post.likes.length;
+
+        // Find a user who liked the post and is followed by the logged-in user
+        for (let userId of post.likes) {
+          const user = await userModel
+            .findById(userId)
+            .select("_id name username profilePic")
+            .lean();
+          if (user && req.user.following.includes(userId)) {
+            likedUser = user;
+            likesCount--; // Exclude this user from the like count
+            break;
+          }
+        }
+
+        return {
+          _id: post._id,
+          user: post.user,
+          desc: post.desc || "",
+          blog: post.blog || "",
+          image: post.image || "",
+          likesCount: likedUser ? likesCount : post.likes.length,
+          likedUser: likedUser,
+          commentCount: post.comments.length
+        };
+      })
+    );
+
+    const shuffledPosts = shuffle(transformedPosts.reverse());
     res.json(shuffledPosts);
   } catch (error) {
-    next(error);
+    next(new ErrorHandler(error.message, 500));
   }
 });
 

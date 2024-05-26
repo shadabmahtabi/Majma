@@ -191,8 +191,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function createPostHTML(post, loggedInUser) {
     if (!post || !post.user) return "";
 
-    const isLiked = post.likes.includes(loggedInUser._id);
-    const likeIconClass = isLiked ? "ri-heart-3-fill" : "ri-heart-3-line";
+    const likeIconClass = "ri-heart-3-line"; // Assuming the post is not liked initially
+    var length
+    if (window.innerWidth <= 500) {
+      length = 15;
+    } else {
+      length = 40;
+    }
+
+    if (post.likedUser) {
+      var likedUserName = post.likedUser.name;
+      var trimmedlikedUserName =
+      likedUserName.length > length
+      ? likedUserName.substring(0, length - 3) + "..."
+      : likedUserName;
+    }
 
     return `
       <div class="post" id="post-${post._id}">
@@ -220,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </ul>
           </div>
         </nav>
-        <div class="descBox">${post.desc || ""}</div>
+        <div class="descBox">${post.desc}</div>
         <div class="postPic">
           ${
             post.blog
@@ -244,9 +257,22 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
         <div class="likesCommentDiv">
-          <h4 id="totalLikes">${post.likes.length} likes</h4> • <h4>${
-      post.comments.length
-    } comments</h4>
+          <h4 id="totalLikes">${
+            post.likedUser
+              ? `<div class="likedUserPic"><img src="/images/${
+                  post.likedUser.profilePic
+                }" alt="" /></div>&nbsp; Liked By &nbsp;<a href="/profile/${
+                  post.likedUser.username
+                }" style="color: inherit; text-decoration: none; font-weight: 500;">${trimmedlikedUserName}</a>&nbsp; ${
+                  post.likesCount === 0 ? "" : ` and ${post.likesCount} others`
+                }`
+              : `${post.likesCount} likes`
+          }</h4>
+          <h4>${
+            post.commentCount > 0
+              ? `<a href="/comment/${post._id}" style="color: inherit; text-decoration: none;">View all ${post.commentCount} comments</a>`
+              : "0 comments"
+          }</h4>
         </div>
       </div>
     `;

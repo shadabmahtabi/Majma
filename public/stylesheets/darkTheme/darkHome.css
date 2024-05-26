@@ -437,29 +437,43 @@ button {
 }
 
 .post .likesCommentDiv {
-  height: 3vh;
+  height: 3vmax;
   width: 100%;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  flex-direction: column;
+  justify-content: center;
   padding: 0 2vmax;
-  gap: 0.5vmax;
-  /* background-color: turquoise; */
   color: var(--textColor);
   margin-bottom: 1vh;
+
+  #totalLikes {
+    .likedUserPic {
+      height: 1.5vmax;
+      width: 1.5vmax;
+      border-radius: 50%;
+
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
 }
 
 .post .likesCommentDiv h4 {
-  height: 100%;
+  height: 50%;
   width: fit-content;
   /* background-color: yellow; */
   display: flex;
   /* align-items: center; */
   justify-content: center;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 #loadMoreBtn {
-  padding: .5vmax 2vmax;
+  padding: 0.5vmax 2vmax;
   /* background-color: #fff; */
   font-weight: 500;
   /* text-transform: uppercase; */
@@ -777,7 +791,7 @@ button {
   .post .postPic {
     border: none;
   }
-  
+
   .post .postPic h1 {
     height: 50vmax;
     font-size: 3vmax;
@@ -810,15 +824,25 @@ button {
     font-weight: 100;
   }
 
+  .post .likesCommentDiv {
+    height: 5vmax;
+    #totalLikes {
+      .likedUserPic {
+        height: 2.5vmax;
+        width: 2.5vmax;
+      }
+    }
+  }
+
   .copyright {
     padding: 1vmax 0 15vmax 0;
   }
-  
+
   #loadMoreBtn {
-    padding: .8vmax 2.4vmax;
+    padding: 0.8vmax 2.4vmax;
     font-size: 1rem;
     letter-spacing: 0.05vmax;
-  } 
+  }
 
   /* ----------------------------------------------------------------------- */
   #infoSection {
