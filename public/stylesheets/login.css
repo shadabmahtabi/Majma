@@ -4,6 +4,7 @@
   width: 100%;
   /* background-color: wheat; */
   display: flex;
+  flex-direction: row-reverse;
   gap: 1vmax;
   overflow: hidden;
 }
@@ -151,15 +152,15 @@ form h3 {
 
 @media only screen and (max-width: 500px) {
   #main {
-    flex-direction: column;
     justify-content: space-between;
+    /* flex-direction: column-reverse; */
     /* gap: 1vmax; */
     overflow: hidden;
   }
 
   #main #hider {
     position: absolute;
-    top: 52%;
+    top: 48%;
     right: 0%;
     z-index: 5;
     width: 100%;
@@ -198,25 +199,26 @@ form h3 {
     top: 50%;
     left: 50%;
     min-height: 0%;
-    height: 50%;
     width: 100%;
     justify-content: center;
     background-color: rgb(255, 255, 255);
     gap: 1.5vmax;
-}
+  }
 
-.parts .loginForm {
+  .parts .loginForm {
+    height: 40%;
     z-index: 2;
-    transform: translate(-50%, -20%);
-    /* opacity: 0; */
-}
-
-.parts .registerForm {
-    z-index: 1;
-    transform: translate(-50%, -80%);
+    transform: translate(-50%, -90%);
     opacity: 0;
     pointer-events: none;
-}
+  }
+  
+  .parts .registerForm {
+    height: 60%;
+    z-index: 1;
+    transform: translate(-50%, -20%);
+    /* opacity: 0; */
+  }
 
   .parts form h1 {
     font-size: 2.5rem;

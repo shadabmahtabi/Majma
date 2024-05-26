@@ -178,9 +178,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const limit = 10;
   const postSection = document.querySelector(".posts");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
-  const loggedInUser = JSON.parse(
-    document.getElementById("loggedInUser").value
-  ); // Assuming you pass loggedInUser as a JSON string in a hidden input field
+  if (document.getElementById("loggedInUser")) {
+    const loggedInUser = JSON.parse(
+      document.getElementById("loggedInUser").value
+    ); // Assuming you pass loggedInUser as a JSON string in a hidden input field
+  }
 
   // Set to track loaded post IDs to avoid duplicates
   const loadedPostIds = new Set();
@@ -223,10 +225,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="options"><i class="ri-more-fill"></i></div>
           <div class="optionDiv">
             <ul class="optionBox">
-              ${
+              ${loggedInUser.following ?
                 loggedInUser.following.includes(post.user._id)
                   ? `<li><a href="/follow/${post.user._id}" class="followBtn"><div>Unfollow</div></a></li>`
                   : `<li><a href="/follow/${post.user._id}">Follow</a></li>`
+                  : ""
               }
               <li><a href="#" class="reportBtn">Report</a></li>
               <li id="closeOption">Cancel</li>
