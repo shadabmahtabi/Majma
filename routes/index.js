@@ -157,7 +157,13 @@ function isLoggedIn(req, res, next) {
 const url = process.env.MONGODB_URL;
 
 mongoose
-  .connect(url)
+  .connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds if the server is unreachable
+    socketTimeoutMS: 45000, // Timeout for socket inactivity
+    maxPoolSize: 10, // Limit the number of simultaneous connections
+  })
   .then(() => {
     console.log("Connected to database!");
   })
@@ -197,6 +203,14 @@ const gridStorage = new GridFsStorage({
   },
 });
 
+gridStorage.on("connection", () => {
+  console.log("GridFS Storage connected successfully.");
+});
+
+gridStorage.on("connectionFailed", (err) => {
+  console.error("GridFS Storage connection failed:", err);
+});
+
 const maxSize = 5 * 1024 * 1024;
 
 const upload = multer({
@@ -232,40 +246,32 @@ const uploadHandler = (req, res, next) => {
 
 // ------------------ POST routes ------------------
 
-router.post(
-  "/upload",
-  uploadHandler,
-  upload.single("image"),
-  async function (req, res, next) {
+router.post("/upload", upload.single("image"), async function (req, res, next) {
+  try {
     let user = req.user;
     let file = req.file;
-    // console.log(file);
+
     if (!file || !file.id) {
       console.error("File upload failed or file ID is missing.");
       return res.status(500).send("File upload failed");
-    } else {
-      try {
-        let post = await postModel.create({
-          user: user._id,
-          image: file.filename,
-          imageId: file.id,
-          desc: req.body.desc,
-        });
-        await user.posts.push(post._id);
-        await user.save();
-        res.redirect("back");
-        // console.log(user);
-        // console.log(post);
-      } catch (err) {
-        console.error("Error creating post:", err);
-        return res.redirect("back");
-      }
     }
-    // else {
-    //   return res.redirect("back");
-    // }
+
+    console.log("File uploaded successfully:", file);
+    let post = await postModel.create({
+      user: user._id,
+      image: file.filename,
+      imageId: file.id,
+      desc: req.body.desc,
+    });
+    await user.posts.push(post._id);
+    await user.save();
+
+    res.redirect("back");
+  } catch (err) {
+    console.error("Error during file upload:", err);
+    return res.status(500).send("An error occurred while uploading the file.");
   }
-);
+});
 
 router.post("/editProfile", upload.single("file"), async (req, res, next) => {
   console.log("File object:", req.file); // Add this line for debugging
