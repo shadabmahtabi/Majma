@@ -157,11 +157,7 @@ function isLoggedIn(req, res, next) {
 const url = process.env.MONGODB_URL;
 
 mongoose
-  .connect(url, {
-    loggerLevel: "debug", // Enable detailed logging
-    connectTimeoutMS: 10000, // Timeout settings
-    socketTimeoutMS: 45000, // Socket timeout settings
-  })
+  .connect(url)
   .then(() => {
     console.log("Connected to database!");
   })
