@@ -122,3 +122,29 @@ document.querySelectorAll(".showF").forEach((itm) => {
     }
   });
 });
+
+// ---------------------------------------------
+if (document.getElementById("user")) {
+  var {bio} = JSON.parse(
+    document.getElementById("user").value
+  ); // Assuming you pass user as a JSON string in a hidden input field
+}
+
+function trimBio(bio) {
+  var length;
+  if (window.innerWidth <= 500) {
+    length = 80;
+  } else {
+    length = 160;
+  }
+  return bio.length > length ? bio.slice(0, length) + "..." : bio;
+}
+
+console.log(trimBio(bio))
+if (window.innerWidth <= 500) {
+  document.querySelector('.userBio').textContent = trimBio(bio);
+  document.querySelector('.userBio').style.padding = '0 1vmax 0 2vmax'
+} else {
+  document.querySelector('#userBio').textContent = trimBio(bio);
+}
+// ---------------------------------------------

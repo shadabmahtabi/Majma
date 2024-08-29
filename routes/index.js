@@ -27,12 +27,16 @@ const checkEmail = (email) => {
 var GoogleStrategy = require("passport-google-oidc");
 require("dotenv").config();
 
+const callbackURL = process.env.NODE_ENV === 'production' 
+  ? 'https://majma-np5q.onrender.com/oauth2/redirect/google' 
+  : 'http://localhost:3000/oauth2/redirect/google';
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env["GOOGLE_CLIENT_ID"],
       clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
-      callbackURL: "/oauth2/redirect/google",
+      callbackURL: callbackURL,
       scope: ["email", "profile"],
     },
     async function verify(issuer, profile, cb) {
@@ -318,7 +322,30 @@ router.post("/likeUnlike/:postId", isLoggedIn, async (req, res, next) => {
     }
 
     await post.save();
-    res.json({ success: true, likes: post.likes.length });
+
+    // --------------------------------------------
+    let likedUser = null;
+    let likesCount = post.likes.length;
+
+    // Find a user who liked the post and is followed by the logged-in user
+    for (let userId of post.likes) {
+      const user = await userModel
+        .findById(userId)
+        .select("_id name username profilePic")
+        .lean();
+      if (user && req.user.following.includes(userId)) {
+        likedUser = user;
+        likesCount--; // Exclude this user from the like count
+        break;
+      }
+    }
+    // --------------------------------------------
+
+    res.json({
+      success: true,
+      likesCount: likedUser ? likesCount : post.likes.length,
+      likedUser: likedUser,
+    });
   } catch (error) {
     next(error);
   }
@@ -677,7 +704,7 @@ router.get("/loadMorePosts", isLoggedIn, async (req, res, next) => {
           image: post.image || "",
           likesCount: likedUser ? likesCount : post.likes.length,
           likedUser: likedUser,
-          commentCount: post.comments.length
+          commentCount: post.comments.length,
         };
       })
     );

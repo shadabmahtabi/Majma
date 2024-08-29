@@ -192,21 +192,21 @@
                                     <h2><%= user.name %></h2>
                                     <h3><i class="ri-user-6-fill" style="color: rgb(255, 139, 197);"></i><%= user.username %></h3>
                                     <% if(user.bio){ %>
-                                        <h3><i class="ri-edit-fill" style="color: rgb(255, 139, 197);"></i>
-                                            <%= user.bio %>
+                                        <h3 id="userBio"><i class="ri-edit-fill" style="color: rgb(255, 139, 197);"></i>
+                                            <!-- <%= user.bio.length > 160 ? user.bio.slice(0, 160) + "..." : user.bio %> -->
                                         </h3>
                                     <% } %>
-                                    <h3><i class="ri-mail-fill" style="color: rgb(255, 139, 197);"></i>
+                                    <!-- <h3><i class="ri-mail-fill" style="color: rgb(255, 139, 197);"></i>
                                         <%= user.email %>
-                                    </h3>
-                                    <h3>
+                                    </h3> -->
+                                    <!-- <h3>
                                         <% if(user.gender){ %>
                                             <i class="ri-women-fill" style="color: rgb(255, 139, 197);"></i><%= user.gender %>
                                         <% } %>
                                         <% if(user.age){ %>
                                             | <%= user.age %> yrs
                                         <% } %>
-                                    </h3>
+                                    </h3> -->
                                 </div>
                                 <div class="followBox">
                                     <!-- <h3 class="social">Social: <a href="#" style="color: rgb(255, 139, 197);"><i class="ri-instagram-fill" style="color: rgb(255, 139, 197);"></i></a> <a href="#" style="color: rgb(255, 139, 197);"><i class="ri-facebook-box-fill" style="color: rgb(255, 139, 197);"></i></a> <a href="#" style="color: rgb(255, 139, 197);"><i class="ri-github-fill" style="color: rgb(255, 139, 197);"></i></a> <a href="#" style="color: rgb(255, 139, 197);"><i class="ri-snapchat-fill" style="color: rgb(255, 139, 197);"></i></a> <a href="#" style="color: rgb(255, 139, 197);"><i class="ri-twitter-fill" style="color: rgb(255, 139, 197);"></i></a> <a href="#" style="color: rgb(255, 139, 197);"><i class="ri-linkedin-box-fill" style="color: rgb(255, 139, 197);"></i></a></h3> -->
@@ -230,21 +230,21 @@
                                     <h3><i class="ri-user-6-fill"></i><%= user.username %>
                                     </h3>
                                     <% if(user.bio){ %>
-                                        <h3><i class="ri-edit-fill"></i>
-                                            <%= user.bio %>
+                                        <h3 id="userBio"><i class="ri-edit-fill"></i>
+                                            <!-- <%= user.bio.length > 160 ? user.bio.slice(0, 160) + "..." : user.bio %> -->
                                         </h3>
                                     <% } %>
-                                    <h3><i class="ri-mail-fill"></i>
+                                    <!-- <h3><i class="ri-mail-fill"></i>
                                         <%= user.email %>
-                                    </h3>
-                                    <h3>
-                                    <% if(user.gender){ %>
-                                        <i class="ri-men-line"></i><%= user.gender %>
-                                    <% } %>
-                                    <% if(user.age){ %>
-                                        | <%= user.age %> yrs
-                                            </h3>
-                                    <% } %>
+                                    </h3> -->
+                                    <!-- <h3>
+                                        <% if(user.gender){ %>
+                                            <i class="ri-men-line"></i><%= user.gender %>
+                                        <% } %>
+                                        <% if(user.age){ %>
+                                            | <%= user.age %> yrs
+                                        <% } %>
+                                    </h3> -->
                                 </div>
                                 <div class="followBox">
                                     <!-- <h3 class="social">Social: <a href="#"><i class="ri-instagram-fill"></i></a> <a href="#"><i class="ri-facebook-box-fill"></i></a> <a href="#"><i class="ri-github-fill"></i></a> <a href="#"><i class="ri-snapchat-fill"></i></a> <a href="#"><i
@@ -299,7 +299,11 @@
                     </div>
                     <div class="nameAndBio">
                         <div class="name"><%= user.name %></div>
-                        <div class="bio"><p><%= user.bio %></p></div>
+                        <div class="userBio">
+                            <!-- <p>
+                                <%= user.bio.length > 160 ? user.bio.slice(0, 160) + "..." : user.bio %>
+                            </p> -->
+                        </div>
                     </div>
                     <div class="btns">
                         <% if(user.email===loggedInUser.email ){ %>
@@ -321,9 +325,9 @@
             </div>
             <div class="userPostsSection">
                 <nav class="postNav">
-                    <h3><%= user.posts.length %> Posts</h3>
-                    <h3><%= totalLikes %> Likes</h3>
-                    <h3><%= totalComments %> Comments</h3>
+                    <h3>My Posts</h3>
+                    <h3>Liked Posts</h3>
+                    <h3>Saved Posts</h3>
                 </nav>
                 <div class="postDiv">
                     <% user.posts.reverse().forEach( post =>{ %>
@@ -348,6 +352,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="user" value='<%= JSON.stringify(user) %>' />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.1/axios.min.js"

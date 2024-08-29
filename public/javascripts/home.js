@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const postSection = document.querySelector(".posts");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
   if (document.getElementById("loggedInUser")) {
-    const loggedInUser = JSON.parse(
+    var loggedInUser = JSON.parse(
       document.getElementById("loggedInUser").value
     ); // Assuming you pass loggedInUser as a JSON string in a hidden input field
   }
@@ -189,24 +189,30 @@ document.addEventListener("DOMContentLoaded", () => {
   let isLoading = false;
   let allPostsLoaded = false;
 
-  // Function to create HTML structure for a post
-  function createPostHTML(post, loggedInUser) {
-    if (!post || !post.user) return "";
-
-    const likeIconClass = "ri-heart-3-line"; // Assuming the post is not liked initially
-    var length
+  function trimUsername(name) {
+    var length;
     if (window.innerWidth <= 500) {
       length = 15;
     } else {
       length = 40;
     }
+    return name.length > length ? name.slice(0, length) + "..." : name;
+  }
+
+  // Function to create HTML structure for a post
+  function createPostHTML(post, loggedInUser) {
+    if (!post || !post.user) return "";
+
+    const likeIconClass = "ri-heart-3-line"; // Assuming the post is not liked initially
+    
 
     if (post.likedUser) {
-      var likedUserName = post.likedUser.name;
-      var trimmedlikedUserName =
-      likedUserName.length > length
-      ? likedUserName.substring(0, length - 3) + "..."
-      : likedUserName;
+      // var likedUserName = post.likedUser.name;
+      // var trimmedlikedUserName =
+      //   likedUserName.length > length
+      //     ? likedUserName.substring(0, length - 3) + "..."
+      //     : likedUserName;
+      var trimmedlikedUserName = trimUsername(post.likedUser.name)
     }
 
     return `
@@ -225,10 +231,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="options"><i class="ri-more-fill"></i></div>
           <div class="optionDiv">
             <ul class="optionBox">
-              ${loggedInUser.following ?
-                loggedInUser.following.includes(post.user._id)
-                  ? `<li><a href="/follow/${post.user._id}" class="followBtn"><div>Unfollow</div></a></li>`
-                  : `<li><a href="/follow/${post.user._id}">Follow</a></li>`
+              ${
+                loggedInUser.following
+                  ? loggedInUser.following.includes(post.user._id)
+                    ? `<li><a href="/follow/${post.user._id}" class="followBtn"><div>Unfollow</div></a></li>`
+                    : `<li><a href="/follow/${post.user._id}">Follow</a></li>`
                   : ""
               }
               <li><a href="#" class="reportBtn">Report</a></li>
@@ -326,13 +333,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function likeUnlike(postId, userId) {
     try {
-      const response = await axios.post(`/likeUnlike/${postId}`);
-      if (response.data.success) {
+      const {data} = await axios.post(`/likeUnlike/${postId}`);
+      if (data.success) {
         const postElement = document.getElementById(`post-${postId}`);
         const likesCountElement = postElement.querySelector("#totalLikes");
         const likeIconElement = postElement.querySelector("#likes i");
 
-        likesCountElement.textContent = `${response.data.likes} likes`;
+        if (data.likedUser) {
+          var trimmedlikedUserName = trimUsername(data.likedUser.name)
+        }
+
+        // likesCountElement.textContent = `${data.likes} likes`;
+        likesCountElement.innerHTML = `${
+          data.likedUser
+            ? `<div class="likedUserPic"><img src="/images/${
+                data.likedUser.profilePic
+              }" alt="" /></div>&nbsp; Liked By &nbsp;<a href="/profile/${
+                data.likedUser.username
+              }" style="color: inherit; text-decoration: none; font-weight: 500;">${trimmedlikedUserName}</a>&nbsp; ${
+                data.likesCount === 0 ? "" : ` and ${data.likesCount} others`
+              }`
+            : `${data.likesCount} likes`
+        }`;
 
         if (likeIconElement.classList.contains("ri-heart-3-line")) {
           likeIconElement.classList.remove("ri-heart-3-line");
@@ -350,21 +372,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial attachment of event listeners
   attachEventListeners();
 
-  // Initial load
-  loadMorePosts();
-  loadMoreBtn.style.display = "block";
+  if (postSection) {
+    // Initial load
+    loadMorePosts();
+  }
 
-  // Load more posts on button click
-  loadMoreBtn.addEventListener("click", loadMorePosts);
+  if(loadMoreBtn) {
+    loadMoreBtn.style.display = "block";
 
-  // Show the "Load More" button when scrolling to the bottom
-  document.getElementById("postSection").addEventListener("scroll", () => {
-    if (isLoading || allPostsLoaded) return;
+    // Load more posts on button click
+    loadMoreBtn.addEventListener("click", loadMorePosts);
+  }
 
-    const { scrollTop, scrollHeight, clientHeight } =
-      document.getElementById("postSection");
-    if (scrollHeight - scrollTop <= clientHeight + 1) {
-      loadMorePosts();
-    }
-  });
+
+  if (document.getElementById("postSection")) {
+    // Show the "Load More" button when scrolling to the bottom
+    document.getElementById("postSection").addEventListener("scroll", () => {
+      if (isLoading || allPostsLoaded) return;
+  
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.getElementById("postSection");
+      if (scrollHeight - scrollTop <= clientHeight + 1) {
+        loadMorePosts();
+      }
+    });
+  }
 });
