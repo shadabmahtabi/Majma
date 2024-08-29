@@ -157,7 +157,11 @@ function isLoggedIn(req, res, next) {
 const url = process.env.MONGODB_URL;
 
 mongoose
-  .connect(url)
+  .connect(url, {
+    loggerLevel: "debug", // Enable detailed logging
+    connectTimeoutMS: 10000, // Timeout settings
+    socketTimeoutMS: 45000, // Socket timeout settings
+  })
   .then(() => {
     console.log("Connected to database!");
   })
@@ -220,33 +224,52 @@ const upload = multer({
 });
 
 // ------------------ upload Storage ends here ------------------
+
+const uploadHandler = (req, res, next) => {
+  if (!gfs || !gridFsBucket) {
+    console.error("GridFS is not initialized!");
+    return res.status(500).send("GridFS not initialized");
+  }
+  // Proceed with file upload
+  next();
+};
+
 // ------------------ POST routes ------------------
 
-router.post("/upload", upload.single("image"), async function (req, res, next) {
-  let user = req.user;
-  let file = req.file;
-  // console.log(file);
-  if (file) {
-    try {
-      let post = await postModel.create({
-        user: user._id,
-        image: file.filename,
-        imageId: file.id,
-        desc: req.body.desc,
-      });
-      await user.posts.push(post._id);
-      await user.save();
-      res.redirect("back");
-      // console.log(user);
-      // console.log(post);
-    } catch (err) {
-      console.error("Error creating post:", err);
-      return res.redirect("back");
+router.post(
+  "/upload",
+  uploadHandler,
+  upload.single("image"),
+  async function (req, res, next) {
+    let user = req.user;
+    let file = req.file;
+    // console.log(file);
+    if (!file || !file.id) {
+      console.error("File upload failed or file ID is missing.");
+      return res.status(500).send("File upload failed");
+    } else {
+      try {
+        let post = await postModel.create({
+          user: user._id,
+          image: file.filename,
+          imageId: file.id,
+          desc: req.body.desc,
+        });
+        await user.posts.push(post._id);
+        await user.save();
+        res.redirect("back");
+        // console.log(user);
+        // console.log(post);
+      } catch (err) {
+        console.error("Error creating post:", err);
+        return res.redirect("back");
+      }
     }
-  } else {
-    return res.redirect("back");
+    // else {
+    //   return res.redirect("back");
+    // }
   }
-});
+);
 
 router.post("/editProfile", upload.single("file"), async (req, res, next) => {
   console.log("File object:", req.file); // Add this line for debugging
