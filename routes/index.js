@@ -183,7 +183,7 @@ const gridStorage = new GridFsStorage({
     return new Promise((resolve, reject) => {
       crypto.randomBytes(12, (err, buf) => {
         if (err) {
-          console.error('Error generating filename:', err);
+          console.error("Error generating filename:", err);
           return reject(err);
         }
         const filename = buf.toString("hex") + path.extname(file.originalname);
@@ -222,6 +222,32 @@ const upload = multer({
 // ------------------ upload Storage ends here ------------------
 // ------------------ POST routes ------------------
 
+router.post("/upload", upload.single("image"), async function (req, res, next) {
+  let user = req.user;
+  let file = req.file;
+  // console.log(file);
+  if (file) {
+    try {
+      let post = await postModel.create({
+        user: user._id,
+        image: file.filename,
+        imageId: file.id,
+        desc: req.body.desc,
+      });
+      await user.posts.push(post._id);
+      await user.save();
+      res.redirect("back");
+      // console.log(user);
+      // console.log(post);
+    } catch (err) {
+      console.error("Error creating post:", err);
+      return res.redirect("back");
+    }
+  } else {
+    return res.redirect("back");
+  }
+});
+
 router.post("/editProfile", upload.single("file"), async (req, res, next) => {
   console.log("File object:", req.file); // Add this line for debugging
   let user = req.user;
@@ -242,37 +268,11 @@ router.post("/editProfile", upload.single("file"), async (req, res, next) => {
       await user.save();
       res.redirect("back");
     } catch (err) {
-      console.error('Error creating post:', err);
+      console.error("Error creating post:", err);
       return res.redirect("back");
     }
   } else {
     return res.redirect("back");
-  }
-});
-
-router.post("/editProfile", upload.single("file"), async (req, res, next) => {
-  try {
-    let user = req.user;
-    let file = req.file;
-    if (file) {
-      let post = await postModel.create({
-        user: user._id,
-        image: file.filename,
-        imageId: file.id,
-        desc: "Hey, I have changed my profile pic 😍😍",
-      });
-      await user.posts.push(post._id);
-      userModel.findOne({ username: req.session.passport.user }).then((u) => {
-        u.profilePic = file.filename;
-        u.save();
-      });
-      await user.save();
-      res.redirect("back");
-    } else {
-      return res.redirect("back");
-    }
-  } catch (error) {
-    console.log(error);
   }
 });
 
