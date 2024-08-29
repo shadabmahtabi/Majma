@@ -29,7 +29,7 @@ require("dotenv").config();
 
 const callbackURL =
   process.env.NODE_ENV === "production"
-    ? "https://majma-np5q.onrender.com/oauth2/redirect/google"
+    ? "https://majma-hx32.onrender.com/oauth2/redirect/google"
     : "http://localhost:3000/oauth2/redirect/google";
 
 passport.use(
