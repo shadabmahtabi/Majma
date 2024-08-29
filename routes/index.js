@@ -156,8 +156,11 @@ function isLoggedIn(req, res, next) {
 
 const url = process.env.MONGODB_URL;
 
+mongoose.set('debug', true);
 mongoose
   .connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds if the server is unreachable
@@ -176,11 +179,11 @@ let gfs;
 let gridFsBucket;
 
 conn.once("open", () => {
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection("majmaUploads");
   gridFsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
     bucketName: "majmaUploads",
   });
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection("majmaUploads");
 });
 
 const gridStorage = new GridFsStorage({
@@ -193,6 +196,7 @@ const gridStorage = new GridFsStorage({
           return reject(err);
         }
         const filename = buf.toString("hex") + path.extname(file.originalname);
+        console.log("Generated filename:", filename);
         const fileInfo = {
           filename: filename,
           bucketName: "majmaUploads",
